@@ -1,0 +1,35 @@
+ <%=liqpay_button @liqpay_request%>
+ <main role="main" class="responsive my-hm">
+		<div class="wrapper">
+
+			<div class="layout layout-eight">
+				<header class="page-header">
+					<h1 class="heading">Оплата заказа</h1>
+					<p class="text">
+						Вас перенаправит на страницу оплаты через <span id="timer">5</span>сек.
+					</p>
+					если этого не произошло, нажмите <a id="to_liqpay" href="">сюда</a>
+				</header>
+			</div>
+
+
+			<% content_for :javascript do %>
+			  <script type="text/javascript">
+			   $(document).ready(function () {
+			    	setInterval(NextSecond,1000)
+			    })
+			   var  timer = 5;
+			   function NextSecond(){
+			   		if (timer<=0) {
+			   			return false
+			   		}
+			   		timer-=1;
+			   		if (timer<=0){
+			   			$("input[type='submit']").click()
+			   		}
+			   	 	$("#timer").text(timer);
+			   }
+			  </script>
+			<% end %>
+		</div>
+	</main>

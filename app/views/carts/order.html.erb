@@ -1,0 +1,51 @@
+<main role="main" class="">
+	<div class="wrapper">
+		<nav class="breadcrumbs">
+			<ul>
+				<li>
+					<a href="/">YouHM.COM</a>
+				</li>
+				<li class="">
+					<a href="#" onclick="return false;">ОФОРМЛЕНИЕ ЗАКАЗА</a>
+				</li>
+			</ul>
+		</nav>
+		<header class="checkout-header">
+			<h1>ОФОРМЛЕНИЕ ЗАКАЗА</h1>
+			<ul class="checkout-breadcrumbs items-3 clearfix">
+				<li class="item">1. ВОЙТИ</li>
+				<li class="item">2. ДОСТАВКА И ОПЛАТА</li>
+				<li class="item item-current item-last">3. СПАСИБО</li>
+			</ul>
+		</header>
+		<div class="row">
+			<div class="grid col-8">
+				<div class="checkout-confirmation">
+					<div class="box">
+						<h1 class="box-headline">ПОДТВЕРЖДЕНИЕ ЗАКАЗА</h1>
+						<h2 class="thanks-for-shopping box-content">Спасибо, что Вы совершили покупку в нашем магазине</h2>
+
+						<div class="box-content order-confirmation-order-delivered">
+							<p class="descriptive">
+								Подтверждение Вашего заказа было отправлено на <%= @user.email %>
+							</p>
+							<a href="/my-overview" class="slide-down-toggle">ПРОСМОТРЕТЬ ПОДТВЕРЖДЕНИЕ</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</main>
+
+  <span role="status" aria-live="assertive" aria-relevant="additions" class="ui-helper-hidden-accessible"></span>
+  <% content_for :javascript do %>
+  <script>
+  	$(document).ready(function(){
+	  	$('.slide-down-toggle').click(function(){
+	  		$('.checkout-confirmation .view-order').toggle();
+	  	});
+	  	localStorage.removeItem('myCart');
+  	});
+  </script>
+  <% end %>

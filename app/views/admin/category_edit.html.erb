@@ -1,0 +1,51 @@
+
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5>Редактирование категории</h5>
+                <div class="ibox-tools">
+                    <a class="collapse-link">
+                        <i class="fa fa-chevron-up"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="ibox-content">
+                <%= semantic_form_for @category, :url => admin_category_update_path(@category) , :html => { :class => "form-horizontal"} do |f| %>
+                    <p>Введите пустые поля</p>
+                    <div class="form-group">
+                    <%= f.label  :name , "Имя" , class: "col-lg-12"%>
+                        <div class="col-lg-12"><%= f.text_field :name, class: 'form-control' %><span class="help-block m-b-none">Введите имя для категории</span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                    <%= f.label  :about , "Описание" , class: "col-lg-12"%>
+                        <div class="col-lg-12"><%= f.text_area :about, as: :summernote , class: "summernote"  %><span class="help-block m-b-none">Введите описание категории</span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                    <%= f.label  :category_id , "Родительская категория" , class: "col-lg-12"%>
+
+                        <div class="col-lg-12">
+                          <%= f.select(:category_id, @categories.collect { |p| [ p.name, p.id ] }, { include_blank: true },{ :class => "form-control m-b"}) %>
+                          <span class="help-block m-b-none">Введите родителя для категории</span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                    <%= f.label  :pop_id , "Попап" , class: "col-lg-12"%>
+                        <div class="col-lg-12">
+                          <%= f.select(:pop_id, @pops.collect { |p| [ p.name, p.id ] }, { include_blank: true },{ :class => "form-control m-b"}) %>
+                          <span class="help-block m-b-none">Введите попап размерной сетки</span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-lg-12">
+                          <%= f.submit  "Изменить категорию" , :class => "btn btn-sm btn-primary"  %>
+                        </div>
+                    </div>
+                <% end %>
+            </div>
+        </div>
+    </div>
+</div>

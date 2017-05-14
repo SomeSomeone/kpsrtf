@@ -1,0 +1,7 @@
+<div class="img">
+
+  <%= f.label :img %>
+  <%= f.file_field :img , class: 'form-control'%>
+  <%=link_to_remove_association "remove product img", f , { wrapper_class: 'img' }%>
+  	
+ </div>

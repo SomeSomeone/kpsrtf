@@ -1,0 +1,100 @@
+	<main role="main" class="hm-club-overview my-hm responsive">
+		<div class="wrapper">
+			<nav class="breadcrumbs">
+				<ul>
+					<li>
+
+						<a href="#">Yourhm.com.ua</a>
+					</li>
+
+					<li class="">
+						<a href="#">Ваша учетная запись</a>
+					</li>
+					<li class="active">
+						<a href="#" onclick="return false;">Обзор</a>
+					</li>
+				</ul>
+			</nav>
+			<nav class="section navigation menu " role="navigation">
+				<ul role="menu">
+					<li class="current item" role="presentation" tabindex="0">
+						<a href="/my-overview" role="menuitem">Обзор</a>
+					</li>
+					<li class="item" role="presentation" tabindex="-1">
+						<a href="/my-profile" role="menuitem">Личные сведения</a>
+					</li>
+					<li class="item" role="presentation" tabindex="-1">
+						<a href="/my-order" role="menuitem">Заказы</a>
+					</li>
+					<li class="item" role="presentation" tabindex="-1">
+						<a href="/my-address" role="menuitem">Адресная книга</a>
+					</li>
+				</ul>
+			</nav>
+			<div class="layout ng-scope" ng-controller="MyOverviewController">
+				<div class="modules sidebarpluscontent">
+					<aside role="presentation">
+						<section class="responsive club-user">
+							<div class="greeting">
+								<header class="module-heading">
+									<h1 class="module-heading-title">Здравствуйте
+									<%if (@user.first_name) %>
+										, <%=@user.first_name%>
+									<%end%>
+									!</h1>
+								</header>
+								<div class="module-content">
+									<p>
+										Приветствуем Вас! Это — Ваша персональная инфопанель H&amp;M, где Вы можете обновить Ваши персональные данные и платежные реквизиты, а также просмотреть информацию о Ваших заказах
+									</p>
+								</div>
+							</div>
+							<header class="module-heading">
+								<h1 class="module-heading-title" id="personal-details-title">ЛИЧНЫЕ СВЕДЕНИЯ</h1>
+							</header>
+							<div class="module-content">
+								<dl role="person" class="user-details">
+									<dt>Эл. Почта</dt>
+									<dd>
+										<span><%=@user.email%></span>
+									</dd>
+									<%if @user.tel%>
+										<dt>Номер телефона</dt>
+										<dd>
+											<span><%=@user.tel%></span>
+										</dd>
+									<%end%>
+								</dl>
+							</div>
+							<a href="/my-profile" id="personal-details-title-link" class="navigate button">Смотреть еще</a>
+						</section>
+					</aside>
+					<div>
+						<section class="responsive orders-summary">
+							<header class="module-heading ">
+								<h1 class="module-heading-title">ЗАКАЗЫ</h1>
+								<a href="/my-order" class="view-all link" title="View all orders">Посмотреть все заказы</a>
+							</header>
+							<div class="module-content">
+								<table aria-labelledby="hmd003">
+									<tbody>
+										<% @orders.each do |order|%>
+											<tr class="order-row" data-order-id="214371527">
+												<td class="order-date"> <strong class="my-hm-order-date" style="width: 25%"><%= order.created_at %></strong>
+												</td>
+												<td class="order-id "><%= order.id %></td>
+												<td class="order-total"><%= order.sum %> Грн</td>
+												<td class="order-status">
+													<a class="order-link" href="#" title=""><%= order.status %></a>
+												</td>
+											</tr>
+										<% end %>
+									</tbody>
+								</table>
+							</div>
+						</section>
+					</div>
+				</div>
+			</div>
+		</div>
+	</main>

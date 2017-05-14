@@ -1,0 +1,118 @@
+<main role="main" class="responsive segments">
+  <!-- Main -->
+  <!--AEMPUBPRDEU35-->
+  <div class="layout">
+    <div class="parsys main">
+      <div class="ghost section"></div>
+      <%if @baners[0]%>
+      <section class="segment section">
+        <%= @baners[0].text.html_safe %>
+      </section>
+      <%end%>
+      <%if @baners[1]%>
+      <section class="segment section singleteasercontainer">
+          <%= @baners[1].text.html_safe %>
+      </section>
+      <%end%>
+      <div class="parbase newarrivalscontainer section">
+
+        <section class="segment new-arrivals">
+          <h2 class="heading"></h2>
+          <div class="four modules">
+          <% if @products[0..3]%>
+            <% @products[0..3].each do |product| %>
+              <% if product and product.product_datum[0]%>
+              <div class="department-product-item">
+                <article class="product-item" data-articlecode="" data-newarrivals-first-article="" data-activity-type="" data-activity-code="" data-promotion-creative="" onclick="">
+                  <!-- Product item -->
+                  <%= link_to "/single/hm-#{product.product_datum[0].article}" , class: "product-item-link" do %>
+                    <%=image_tag(product.img(:original), width:"260" , height:"390" , alt:"" , class:"product-item-image" )%>
+                  <%end%>
+                  <div class="product-item-details">
+                    <h3 class="product-item-heading">
+                      <%= link_to product.name,"/single/hm-#{product.product_datum[0].article}" %>
+                    </h3>
+                    <% if product.product_datum[0]!=nil and product.product_datum[0].price!=nil %>
+                          <%if product.product_datum[0].promotional_price!=nil and  product.product_datum[0].promotional_price>0 %>
+                            <strong class="price sale-price"> <%=product.product_datum[0].promotional_price%> Грн
+                              <span class="price original-price"><%= product.product_datum[0].price%> Грн</span>
+                            </strong>
+                          <%else%>
+                          <strong class="price"><%= product.product_datum[0].price%> Грн</strong>
+                          <%end%>
+                        <%else%>
+                          <strong class="price">Уточняеться</strong>
+                    <% end %>
+
+                  </div>
+                </article>
+                <!-- /Product item -->
+              </div>
+              <% end %>
+            <% end %>
+          <% end %>
+
+          </div>
+        </section>
+      </div>
+      <%if @baners[2] || @baners[3]%>
+      <section class="segment section">
+        <div class="two modules">
+          <%if @baners[2] %>
+              <%=@baners[2].text.html_safe%>
+          <% end %>
+          <%if @baners[3]%>
+              <%=@baners[3].text.html_safe%>
+          <% end %>
+        </div>
+      </section>
+      <% end %>
+      <%if @baners[4] %>
+      <section class="segment section singleteasercontainer">
+          <%=@baners[4].text.html_safe%>
+      </section>
+      <%end%>
+      <div class="parbase newarrivalscontainer section">
+
+        <section class="segment new-arrivals">
+          <h2 class="heading"></h2>
+          <div class="four modules">
+          <% if @products[4..-1]%>
+            <% @products[4..-1].each do |product| %>
+              <% if product and product.product_datum[0]%>
+                            <div class="department-product-item">
+                <article class="product-item" data-articlecode="" data-newarrivals-first-article="" data-activity-type="" data-activity-code="" data-promotion-creative="" onclick="">
+                  <!-- Product item -->
+                  <%= link_to "/single/hm-#{product.product_datum[0].article}" , class: "product-item-link" do %>
+                    <%=image_tag(product.img(:original), width:"260" , height:"390" , alt:"" , class:"product-item-image" )%>
+                  <%end%>
+                  <div class="product-item-details">
+                    <h3 class="product-item-heading">
+                      <%= link_to product.name,"/single/hm-#{product.product_datum[0].article}" %>
+                    </h3>
+                    <% if product.product_datum[0]!=nil and product.product_datum[0].price!=nil %>
+                          <%if product.product_datum[0].promotional_price!=nil and  product.product_datum[0].promotional_price>0 %>
+                            <strong class="price sale-price"> <%=product.product_datum[0].promotional_price%> Грн
+                              <span class="price original-price"><%= product.product_datum[0].price%> Грн</span>
+                            </strong>
+                          <%else%>
+                          <strong class="price"><%= product.product_datum[0].price%> Грн</strong>
+                          <%end%>
+                        <%else%>
+                          <strong class="price">Уточняеться</strong>
+                    <% end %>
+
+                  </div>
+                </article>
+                <!-- /Product item -->
+              </div> 
+              <% end %> 
+            <% end %>
+          <% end %>
+          </div>
+        </section>
+      </div>
+    </div>
+  </div>
+  <div class="parbase overlaycontainer"></div>
+</main>

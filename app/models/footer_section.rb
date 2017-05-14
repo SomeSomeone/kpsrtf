@@ -1,0 +1,2 @@
+class FooterSection < ApplicationRecord
+end

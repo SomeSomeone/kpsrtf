@@ -1,0 +1,62 @@
+
+
+<%= semantic_form_for @product, :url => admin_product_update_path(@product) do |f| %>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5>Редактирование товара</h5>
+                <div class="ibox-tools">
+                    <a class="collapse-link">
+                        <i class="fa fa-chevron-up"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="ibox-content">
+                <div class="form-horizontal">
+                    <p>Введите пустые поля</p>
+                    <div class="form-group">
+                    <%= f.label  :name , "Имя" , class: "col-lg-12"%>
+                        <div class="col-lg-12"><%= f.text_field :name, class: 'form-control' %><span class="help-block m-b-none">Введите имя для группы цветов</span>
+                        </div>
+                    </div>
+                    <div class="fileinput fileinput-new input-group" data-provides="fileinput">
+                      
+                      <div class="form-control" data-trigger="fileinput"><i class="glyphicon glyphicon-file fileinput-exists"></i> <span class="fileinput-filename"></span></div>
+                      <span class="input-group-addon btn btn-default btn-file"><span class="fileinput-new">Select file</span><span class="fileinput-exists">Change</span><%= f.file_field :img %></span>
+                      <a href="#" class="input-group-addon btn btn-default fileinput-exists" data-dismiss="fileinput">Remove</a>
+                      </div>
+                      <div class="fileinput fileinput-new input-group" data-provides="fileinput">
+                      
+                      <div class="form-control" data-trigger="fileinput"><i class="glyphicon glyphicon-file fileinput-exists"></i> <span class="fileinput-filename"></span></div>
+                      <span class="input-group-addon btn btn-default btn-file"><span class="fileinput-new">Select file</span><span class="fileinput-exists">Change</span><%= f.file_field :img_alt %></span>
+                      <a href="#" class="input-group-addon btn btn-default fileinput-exists" data-dismiss="fileinput">Remove</a>
+                      </div>
+                      <%= f.label  :categories , "Категория" , class: ""%>
+                          <div class="">
+                            <%= f.select(:categories, @categories.collect { |s| [ s.name, s.id ] }, { include_blank: true },{:multiple => true, :class => "form-control m-b"}) %>
+                            <span class="help-block m-b-none">Введите родителя для категории</span>
+                            <br>
+                          </div>
+                      <%= f.label :visible %>
+                      <%= f.check_box :visible%>
+
+                    <div class="form-group">
+                        <div class="col-lg-12">
+                          <%= f.submit  "Обновить продукт" , :class => "btn btn-sm btn-primary"  %>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </div>
+</div>
+  <%= f.semantic_fields_for :product_datum do |product_data| %>
+    <%=render 'product_datum_fields', f: product_data %>
+  <%end%>
+  <div class="col-lg-12">
+    <%= link_to_add_association 'Добавить вариант', f, :product_datum ,:class => 'btn btn-sm btn-default'%>
+  </div>
+</div>
+
+</div>
+<% end %>

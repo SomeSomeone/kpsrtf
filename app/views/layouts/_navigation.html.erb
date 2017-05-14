@@ -1,0 +1,111 @@
+<% if admin_signed_in? %>
+
+<nav class="navbar-default navbar-static-side" role="navigation">
+    <div class="sidebar-collapse">
+        <ul class="nav metismenu" id="side-menu">
+            <li>
+                <a href="/">
+                    <i class="fa fa-home"></i> <span class="nav-label">Переход на сайт</span>
+                </a>
+            </li>
+            <li class="<%=is_active_action('product_new')%>">
+                <%= link_to  controller: "admin", action: "product_new"  do %>
+                <i class="fa fa-tag"></i> <span class="nav-label" data-i18n="nav.gridoptions">Создать товар</span>
+                <% end %>
+            </li>
+            <li class="<%=is_active_action('products')%>">
+                <%= link_to  controller: "admin", action: "products" do %>
+                <i class="fa fa-list"></i> <span class="nav-label" data-i18n="nav.gridoptions">Все товары</span>
+                <% end %>
+            </li>
+            <li class="<%=is_active_action('color_new')%>">
+                <%= link_to  controller: "admin", action: "color_new" do %>
+                <i class="fa fa-paint-brush"></i> <span class="nav-label" data-i18n="nav.gridoptions">Создать цвет</span>
+                <% end %>
+            </li>
+            <li class="<%=is_active_action('colors')%>">
+                <%= link_to  controller: "admin", action: "colors" do %>
+                <i class="fa fa-list-ol"></i> <span class="nav-label" data-i18n="nav.gridoptions">Все цвета</span>
+                <% end %>
+            </li>
+            <li class="<%=is_active_action('main_color_new')%>">
+                <%= link_to controller: "admin", action: "main_color_new" do %>
+                <i class="fa fa-plus-square"></i> <span class="nav-label" data-i18n="nav.gridoptions">Создать группу цветов</span>
+                <% end %>
+            </li>
+            <li class="<%=is_active_action('main_colors')%>">
+                <%= link_to  controller: "admin", action: "main_colors"  do %>
+                <i class="fa fa-list-ul"></i> <span class="nav-label" data-i18n="nav.gridoptions">Все группы цветов</span>
+                <% end %>
+            </li>
+            <li class="<%=is_active_action('category_new')%>">
+                <%= link_to  controller: "admin", action: "category_new" do %>
+                <i class="fa fa-laptop"></i> <span class="nav-label" data-i18n="nav.gridoptions">Создать категорию</span>
+                <% end %>
+            </li>
+            <li class="<%=is_active_action('categories')%>">
+                <%= link_to controller: "admin", action: "categories"  do %>
+                <i class="fa fa-sitemap"></i> <span class="nav-label" data-i18n="nav.gridoptions">Все категории</span>
+                <% end %>
+            </li>
+            <li class="<%=is_active_action('size_new')%>">
+                <%= link_to controller: "admin", action: "size_new"  do %>
+                <i class="fa fa-expand"></i> <span class="nav-label" data-i18n="nav.gridoptions">Создать размер</span>
+                <% end %>
+            </li>
+            <li class="<%=is_active_action('sizes')%>">
+                <%= link_to controller: "admin", action: "sizes" do %>
+                <i class="fa fa-arrows"></i> <span class="nav-label" data-i18n="nav.gridoptions">Все размеры</span>
+                <% end %>
+            </li>
+            <li class="<%=is_active_action('baner_new')%>">
+                <%= link_to controller: "admin", action: "baner_new"  do %>
+                <i class="fa fa-picture-o"></i> <span class="nav-label" data-i18n="nav.gridoptions">Создать банер</span>
+                <% end %>
+            </li>
+            <li class="<%=is_active_action('baners')%>">
+                <%= link_to controller: "admin", action: "baners" do %>
+                <i class="fa fa-files-o"></i> <span class="nav-label" data-i18n="nav.gridoptions">Все банеры</span>
+                <% end %>
+            </li>
+            <li class="<%=is_active_action('pop_new')%>">
+                <%= link_to controller: "admin", action: "pop_new"  do %>
+                <i class="fa fa-clone"></i> <span class="nav-label" data-i18n="nav.gridoptions">Создать попап</span>
+                <% end %>
+            </li>
+            <li class="<%=is_active_action('pops')%>">
+                <%= link_to controller: "admin", action: "pops" do %>
+                <i class="fa fa-window-restore"></i> <span class="nav-label" data-i18n="nav.gridoptions">Все попапы</span>
+                <% end %>
+            </li>
+             <li class="<%=is_active_action('orders')%>">
+                <%= link_to controller: "admin", action: "orders"  do %>
+                <i class="fa fa-cart-plus"></i> <span class="nav-label" data-i18n="nav.gridoptions">Заказы</span>
+                <% end %>
+            </li>
+            <li class="<%=is_active_action('page_new')%>">
+                <%= link_to controller: "admin", action: "page_new"  do %>
+                <i class="fa fa-file"></i> <span class="nav-label" data-i18n="nav.gridoptions">Создать Страницу</span>
+                <% end %>
+            </li>
+            <li class="<%=is_active_action('pages')%>">
+                <%= link_to controller: "admin", action: "pages" do %>
+                <i class="fa fa-files-o"></i> <span class="nav-label" data-i18n="nav.gridoptions">Все Страницы</span>
+                <% end %>
+            </li>
+            <li class="<%=is_active_action('footer_sections')%>">
+                <%= link_to controller: "admin", action: "footer_sections" do %>
+                <i class="fa fa-files-o"></i> <span class="nav-label" data-i18n="nav.gridoptions">Блоки футера</span>
+                <% end %>
+            </li>
+            <li class="<%=is_active_action('footer_section_new')%>">
+                <%= link_to controller: "admin", action: "footer_section_new" do %>
+                <i class="fa fa-files-o"></i> <span class="nav-label" data-i18n="nav.gridoptions">Создать блок футера</span>
+                <% end %>
+            </li>
+
+        </ul>
+
+    </div>
+</nav>
+<% end %>

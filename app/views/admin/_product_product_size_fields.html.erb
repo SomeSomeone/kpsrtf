@@ -1,0 +1,12 @@
+<div class="size">
+  <%= f.label :has %>
+  <%= f.check_box :has%>
+  <%=link_to_remove_association "remove product size", f , { wrapper_class: 'size' }%>
+	<div class="form-group">
+	<%= f.label  :product_size_id , "size" , class: "col-lg-2 control-label"%>
+	    <div class="col-lg-10">
+	      <%= f.select(:product_size_id, @sizes.collect { |p| [ p.size, p.id ] }, {} ,{ :class => "form-control m-b"}) %>
+	      <span class="help-block m-b-none">Введите цвет для группы цветов</span>
+	    </div>
+	</div>
+</div>

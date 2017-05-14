@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="ru" class="js history rgba no-touchevents lastchild nthchild backgroundsize borderradius flexbox flexboxlegacy csstransforms csstransitions grunticon ng-scope" ng-app="hmApp" style="">
+<head>
+<%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+ <!-- Include style per-controller - vendor plugins -->
+<%= stylesheet_link_tag get_controller if (Rails.application.assets || ::Sprockets::Railtie.build_environment(Rails.application)).find_asset("#{get_controller}.css") %>
+
+  <!--[if lt IE 9]>
+  <link rel="stylesheet" href="/etc/designs/hm/clientlibs/desktop/ie8.min.css" type="text/css">
+  <![endif]-->
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=1000px">
+  <meta name="keywords">
+  <meta name="description" content="Добро пожаловать - Ваш интернет-источник вдохновения. Мы предлагаем стиль и качество по лучшей цене.">
+  <meta property="og:title" content="Мода и хорошее качество одежды по лучшей цене">
+  <meta property="og:description" content="Добро пожаловать - Ваш интернет-источник вдохновения. Мы предлагаем стиль и качество по лучшей цене.">
+  <meta property="og:site_name" content="H&amp;M">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://yourhm.com.ua">
+  <title>Мода и лучшее качество одежды по доступной цене</title>
+
+</head>
+<body>
+  <!-- Code to manage the mobile preview after css changes by HTML team -->
+  <header class="header-global">
+    <!-- Header -->
+    <!--AEMPUBPRDEU29-->
+    <div class="warehousemessage"></div>
+    <div class="wrapper">
+      <a href="/" class="logotype hidden-text"></a>
+      <div class="parbase topnav">
+        <nav class="primary-menu">
+          <!-- Primary menu -->
+          <ul>
+            <%@mainCat.each do |cat|%>
+              <li>
+                <a href="/products/<%=cat.name%>"><%=cat.name%></a>
+              </li>
+            <% end %>
+          </ul>
+        </nav>
+        <!-- /Primary Menu -->
+      </div>
+
+      <nav class="services-menu">
+        <!-- Services menu -->
+
+        <div class="linklist parbase linklist1">
+<!--
+          <ul class="list">
+
+            <li class="item">
+              <a class="link" href="#">Обслуживание</a>
+            </li>
+
+            <li class="item">
+              <a class="link" href="#">Новостная рассылка</a>
+            </li>
+
+          </ul>
+          -->
+        </div>
+
+      </nav>
+      <!-- /Services menu -->
+      <nav class="session-menu">
+        <!-- Session menu -->
+
+        <div class="session-menu-top-row">
+          <a href="/favourites" class="js-favorite-entry-point favorite-entry-point is-favorite icon-favorites-dark icon">Избранное</a>
+          <span class="parbase minicart">
+            <div class="shopping-bag rollover-popdown is-loaded" data-cart="/pl_pl/minicart/view">
+              <a href="/cart" class="goto-shopping-bag rollover-toggle">
+                Корзина (<span class="shoppingbag-item-counts">0</span>)
+              </a>
+              <div class="shopping-bag-rollover row popdown"></div>
+            </div>
+          </span>
+        </div>
+        <div class="signin rollover-popdown">
+          <div class="parbase account">
+            <div class="signin rollover-popdown">
+            <% if user_signed_in? %>
+              <div class="signin-signed-in" style="display:block">
+                <a class="goto-my-hm" href="/my-overview" rel="noreferrer">Мой Кабинет</a>
+                <a class="goto-sign-in" href="users/sign_out">Выйти</a>
+              </div>
+              <%else%>
+              <div class="signin-not-signed-in" style="display:block">
+                <a class="goto-my-hm" href="/my-overview" rel="noreferrer">Мой Кабинет</a>
+                <a href="/my-overview" class="goto-sign-in rollover-toggle">Зарегистрироваться / Войти</a>
+              </div>
+            <% end %>
+            </div>
+          </div>
+        </div>
+
+      </nav>
+      <!-- /Session menu -->
+      <div class="autosuggestsearch parbase">
+        <div id="search-field" class="ui-widget">
+
+          <form method="get" action="/search" class="ng-pristine ng-valid">
+            <span role="status" aria-live="polite" class="ui-helper-hidden-accessible"></span>
+            <input id="main-search" data-url="" type="text" data-test="false" name="search" placeholder="Поиск" minlength="3" maxlength="200" data-autocomplete-disabled="false" class="ui-autocomplete-input" autocorrect="off" spellcheck="false" autocomplete="off"></form>
+          <span class="magnify"></span>
+          <ul class="ui-autocomplete ui-front ui-menu ui-widget ui-widget-content" id="ui-id-1" tabindex="0" style="display: none;"></ul>
+        </div>
+
+      </div>
+
+      
+
+    </div>
+  </header>
+  <!-- /Header -->
+  <!-- HeaderLife -->
+
+
+
+
+
+<%= yield %>
+
+
+
+ <footer class="footer-global responsive">
+
+    <div class="layout">
+      <div class="four modules footer-menu footer-content">
+        <nav class="footer-category">
+          <h4 class="footer-heading js-toggle-trigger">КУПИТЬ</h4>
+          <ul class="list">
+            <%@mainCat.each do |cat|%>
+              <li class="item">
+                <a class="link" href="/products/<%=cat.name%>"><%=cat.name%></a>
+              </li>
+            <% end %>
+          </ul>
+        </nav>
+        <% @footer_sections.each do |footer_section|%>
+          <nav class="footer-category">
+            <%=(footer_section.text||"").html_safe %>
+          </nav>
+        <%end%>
+      </div>
+
+      <ul class="footer-social footer-content">
+
+        <li class="item">
+          <a href="#" target="_blank" title="Facebook" class="hidden-text icon icon-social-facebook-white">Facebook</a>
+        </li>
+
+        <li class="item">
+          <a href="#" target="_blank" title="Twitter" class="hidden-text icon icon-social-twitter-white">Twitter</a>
+        </li>
+
+        <li class="item">
+          <a href="#" target="_blank" title="Instagram" class="hidden-text icon icon-social-instagram-white">Instagram</a>
+        </li>
+
+        <li class="item">
+          <a href="#" title="Youtube" target="_blank" class="hidden-text icon icon-social-youtube-white">Youtube</a>
+        </li>
+
+        <li class="item">
+          <a href="#" title="Google +" target="_blank" class="hidden-text icon icon-social-googleplus-white">Google +</a>
+        </li>
+
+        <li class="item">
+          <a href="#" target="_blank" title="Pinterest" class="hidden-text icon icon-social-pinterest-white">Pinterest</a>
+        </li>
+
+      </ul>
+
+
+      <a href="/" class="footer-logotype icon icon-hm-white hidden-text">H&amp;M</a>
+    </div>
+
+  </footer>
+<%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+
+    <!-- Include javascript per-view -->
+    <!-- For demo purpose we include javascript in view but you can easily start SeedProject and organize it with Rails asset pipeline as you want -->
+    <%= yield :javascript %>
+</body>
+</html>

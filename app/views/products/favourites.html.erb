@@ -1,0 +1,163 @@
+<main role="main" class="responsive fill">
+    <div class="wrapper">
+
+        <nav class="breadcrumbs">
+            <ul>
+                <li>
+                    <a href="#">YourHM.com</a>
+                </li>
+            </ul>
+        </nav>
+
+        <div class="wrapper">
+            <h1 class="favorite-heading">ЛЮБИМЫЕ МОДЕЛИ</h1>
+            <div  ng-controller="FavoritesContextController" ng-cloak>
+                <ul class="product-detail-list responsive favorite-list js-favorite-list" id="favouritesPage-items">
+                    <!-- /Wishlist item --> 
+                </ul>
+                
+                <div class="save_info">
+                    <section class="segment favorites-empty">
+                        <h3 class="heading icon-favorites">Сохранить ваши избранные товары</h3>
+                        <p class="text">
+                            Хотите сохранить понравившиеся товары? Просто нажмите на значок в виде сердца на товаре, после чего этот товар появится здесь.
+                        </p>
+                        <a class="button" href="/products/">ПРОСМОТРЕТЬ СЕЙЧАС</a>
+                    </section>
+                </div>
+
+            </div>
+
+            <div class="hidden modal-content fadeInModal" style="margin-top: 91.5px;" id="error-popup">
+                <button class="modalclose icon-close-black"></button>
+                <h1 class="sticky heading"></h1>
+                <div class="modal-wrapper" style="max-height: 140px;">
+                    <div aria-hidden="false" class="modal-content">
+                        <div class="modal-text">
+                            <p class="text"></p>
+                        </div>
+                        <div class="sticky button-group">
+                            <button class="modalclose button">OK</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+<% content_for :javascript do %>
+<script>
+  $(document).ready(function(){
+    // $('.secondary').click(function(){
+    //   var remove_id = $(this).attr('data-id');
+    //   $(this).parent().parent().remove();
+    //   $.get("/removetofavorite/" + remove_id, function(data) {
+    //     console.log(data);
+    //   });
+    // });
+    items = JSON.parse(localStorage.getItem('myKey'));
+    if(items){
+    $.each(items, function(){
+        if(this.promotional_price){
+            d = '<div>\
+                    <p class="product-detail-price ng-binding sale-price">' + this.promotional_price + ' \
+                        <span class="original-price ng-binding">' + this.price + '</span>\
+                    </p>\
+                </div>'
+        }
+        else{
+            d = '<div>\
+                    <p class="product-detail-price">\
+                        <span class="original-price">'+ this.price +'</span>\
+                    </p>\
+                </div>'
+        }
+        var size_option;
+        console.log(this.sizes)
+        $.each(this.sizes, function(){
+            console.log(this.size)
+            size_option += '<option value="' + this.size + '">'+ this.size + '</option>'
+        });
+      $('.product-detail-list').append('\
+        <li class="product-detail-list-item">\
+  <div class="product-detail-list-item-image-wrapper">\
+    <div class="wrapper-inner">\
+      <a href="/single/hm-'+ this.article +'" class="product-detail-list-item-image">\
+        <img class="product-detail-list-item-image-image" src="'+ this.src +'" alt="1" title="1">\
+      </a>\
+    </div>\
+  </div>\
+  <div class="product-detail-list-item-details">\
+    <h3 class="sub-sub-heading">' + this.name + '</h3>\
+    ' + d + '\
+    <p class="product-detail-selection"></p>\
+    <dl class="product-detail-list-item-details-list">\
+        <dt>№ арт.:</dt>\
+        <dd class="pr_article">'+ this.article +'</dd>\
+        <dt>Цвет:</dt>\
+        <dd class="pr_color">'+ this.color +'</dd>\
+    </dl>\
+  </div>\
+  <div class="product-detail-list-item-actions favorite-list-actions">\
+    <button class="button secondary icon icon-trash" type="button" title="Удалить из раздела «Избранное»" data-article="' + this.article + '">Удалить из раздела «Избранное»</button>\
+    <label class="product-detail-list-item-actions-label" for="favorite-options-0"></label>\
+    <div class="favorite-add-to-bag icon-add-to-bag">\
+      <select class="add-to-bag" name="favorite-add-to-bag-options-0" id="favorite-options-" data-article="' + this.article + '" title="ДОБАВИТЬ" В="" КОРЗИНУ="">\
+        <option value="">Выбрать размер</option>\
+        ' + size_option + '\
+      </select>\
+    </div>\
+  </div>\
+</li>')
+    })
+    }
+    $('.secondary').click(function(){
+        itemss = JSON.parse(localStorage.getItem('myKey'));
+        var this_article = $(this).attr('data-article');
+        $.each(itemss, function(index){
+            if(this.article == this_article){
+                itemss.splice(index, 1);
+                localStorage.setItem('myKey', JSON.stringify(itemss));
+                $('.secondary[data-article="' + this_article + '"]').parent().parent().remove();
+            }
+        });
+    });
+    $('.add-to-bag').on('change', function(){
+        itemss = JSON.parse(localStorage.getItem('myKey'));
+        cartsItems = JSON.parse(localStorage.getItem('myCart')) || [];
+        var this_article = $(this).attr('data-article');
+        var change_count = $(this).find('option:selected').val();
+        $.each(itemss, function(index , s){
+            if(this.article == this_article){
+                this['size'] = change_count;
+                this['count'] = itemss[index]['count'] + 1;
+                var helper=true
+                $.each( cartsItems , function(index1, s1){
+                    if (s.article==s1.article && s1.size==change_count){
+                        if(s1.count >= 10){
+                            s1.count = 10;
+                        }
+                        else{
+                            s1.count+=1;
+                        }
+                        helper=false
+                    }
+                })
+                if (helper) {
+                    cartsItems.push(itemss[index]);                    
+                }
+                localStorage.setItem('myCart', JSON.stringify(cartsItems));
+                itemss.splice(index, 1);
+                localStorage.setItem('myKey', JSON.stringify(itemss));
+                $('.add-to-bag[data-article="' + this_article + '"]').parent().parent().parent().remove();
+            }
+        });
+        cartCount();
+    });
+    // $('.product-detail-list-item-image img').attr('src', items.src);
+    // $('.original-price').text(items.price);
+    // $('.pr_article').text(items.article);
+    // $('.pr_color').text(items.color);
+  });
+</script>
+<% end %>

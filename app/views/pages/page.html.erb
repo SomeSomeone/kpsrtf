@@ -1,0 +1,89 @@
+
+	<main role="main">
+		<div class="wrapper">
+			<div class="breadcrumb">
+
+				<nav class="breadcrumbs">
+					<ul>
+						<li>
+							<a href="/ru_ru/index.html">HM.com</a>
+						</li>
+
+						<li>
+							<a href="/ru_ru/customer-service.html" title="Служба поддержки покупателей">Служба поддержки покупателей</a>
+						</li>
+						<li>Доставка</li>
+					</ul>
+				</nav>
+			</div>
+
+			<div class="row">
+				<div class="grid col-3">
+					<div class="left parsys iparsys">
+						<div class="section">
+							<div class="new"></div>
+						</div>
+						<div class="iparys_inherited">
+							<div class="left parsys iparsys">
+								<div class="leftcustomerservice parbase section">
+									<nav class="section-menu customerservice ">
+										<!-- Section menu -->
+										<ul>
+											<li>
+												<h2>
+													<a href="/ru_ru/customer-service.html">Служба поддержки покупателей</a>
+												</h2>
+												<div class="section-menu-sub-menu">
+													<div class="section-menu-sub-menu-inner">
+														<div class="section-menu-categories">
+															<% @pages.each do |p|%>
+																<div class="section-menu-category sub ">
+																	<a href="<%=p.link%>"><%=p.name%></a>
+																	<ul></ul>
+																</div>
+															<%end%>
+														</div>
+													</div>
+												</div>
+											</li>
+										</ul>
+									</nav>
+								</div>
+							</div>
+						</div>
+					</div>
+
+				</div>
+				<div class="grid col-6">
+					<article class="article-contents">
+						<%=@page.content.html_safe %>
+					</article>
+				</div>
+				<div class="grid col-3">
+					<div class="parsys right iparsys">
+						<div class="section">
+							<div class="new"></div>
+						</div>
+						<div class="iparys_inherited">
+							<div class="parsys right iparsys"></div>
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</main>
+
+  <script>
+  $(document).ready(function(){
+  	$('.slide-down-toggle').click(function(){
+  		$(this).toggleClass('open');
+  	});
+  });
+  </script>
+
+
+
+  <span role="status" aria-live="assertive" aria-relevant="additions" class="ui-helper-hidden-accessible"></span>
+</body>
+</html>

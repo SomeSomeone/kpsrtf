@@ -1,0 +1,178 @@
+
+<main role="main" class="favorites-active">
+	<div class="wrapper">
+		<nav class="breadcrumbs">
+			<ul>
+				<li>
+					<a href="/ru_ru/">Yourhm.com.ua</a>
+				</li>
+				<li class="active">
+					<a href="#" onclick="return false;">КОРЗИНА</a>
+				</li>
+			</ul>
+		</nav>
+		<script type="text/javascript">$("body").addClass("checkout-loader-layer");</script>
+		<header class="checkout-header">
+			<h1>КОРЗИНА</h1>
+		</header>
+		<div class="row sticky-wrapper ng-scope" ng-controller="CartContextController">
+			<div class="grid col-8">
+				<h2 class="visuallyhidden">Товары в корзине</h2>
+				<ul class="product-detail-list responsive ng-scope" id="cartPage-items">
+
+				</ul>
+			</div>
+			<div id="cartPage-summary" class="grid col-4">
+				<div class="shopping-bag-order-total sticky-on-scroll semi-sticky" data-sticky-offset="-20" data-sticky-stop-offset="-70">
+					<div class="box">
+						<h2 class="box-headline">ОБЩАЯ СТОИМОСТЬ ТОВАРОВ В КОРЗИНЕ</h2>
+						<div class="box-content">
+							<div class="shopping-bag-total">
+								<table class="order-total">
+									<tbody>
+										<tr>
+											<th scope="row">СТОИМОСТЬ ЗАКАЗА:</th>
+											<td>
+												<span id="newPriceSubtotal" class="ng-binding">0 Грн</span>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+								<a href="/diver"><button class="button button-big">ПЕРЕЙТИ К ОФОРМЛЕНИЮ ЗАКАЗА</button></a>
+							</div>
+							<p class="fine-print">
+								Цены и стоимость доставки являются неподтвержденными до перехода к разделу оформления заказа.
+							</p>
+							<p class="fine-print">
+								14-дневный период возврата товара, комиссия за возврат и возврат стоимости за неотправленный товар. Прочитать о&nbsp;
+								<a class="overlay-trigger underline" href="#">Прочитать о возврате и возмещении стоимости товара.</a>
+							</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<input type="hidden" id="added_to_cart" value="">
+</main>
+<% content_for :javascript do %>
+<script>
+	$(document).ready(function(){
+		
+		cartsItems = JSON.parse(localStorage.getItem('myCart'));
+		$('#added_to_cart').val(JSON.stringify(cartsItems));
+		var item_summ;
+		if(cartsItems){
+	    	$.each(cartsItems, function(){
+	    		if(this.promotional_price){
+	    			promo = '<p class="product-detail-price ng-binding sale-price">' + this.promotional_price + ' Грн<span class="original-price">' + this.price + ' Грн </span></p>';
+	    			item_summ = this.promotional_price * this.count;
+	    		}
+	    		else{
+	    			promo = '<p class="product-detail-price ng-binding">' + this.price + ' Грн</p>'
+	    			item_summ = this.price * this.count;
+	    		}
+	    		var all_summ;
+	    		all_summ += item_summ;
+	    		var options;
+	    		for(var i = 1; i <= 10; i++){
+	    			if(i == this.count){
+	    				options += '<option value='+i+' label='+ i +' selected="selected">'+i+'</option>'
+	    			}
+	    			else{
+	    				options += '<option value='+i+' label='+ i +'>'+i+'</option>'
+	    			}
+	    		}
+	    		$('.product-detail-list').append('\
+	    			<li class="product-detail-list-item ng-scope">\
+						<div class="product-detail-list-item-image-wrapper">\
+							<div class="wrapper-inner">\
+								<a href="#" class="product-detail-list-item-image ">\
+                <img class="product-detail-list-item-image-image" src="' + this.src + '" alt="In cart" title="In cart"></a>\
+							</div>\
+						</div>\
+						<div class="product-detail-list-item-details">\
+							<div class="product-detail-list-item-price-info">\
+								<p class="product-detail-list-item-total-price">\
+									Итого:\
+									<span class="entry_new_price ng-binding">' + item_summ + ' Грн</span>\
+								</p>\
+							</div>\
+							<h3 class="sub-sub-heading ng-binding">' + this.name + '</h3>\
+							' + promo + '\
+							<p class="product-detail-selection"></p>\
+							<div class="product-item-selection ng-binding"></div>\
+							<p></p>\
+							<dl class="product-detail-list-item-details-list">\
+								<dt>№ арт.:</dt>\
+								<dd class="ng-binding">' + this.article + '</dd>\
+								<dt>Цвет:</dt>\
+								<dd class="ng-binding">' + this.color + '</dd>\
+								<dt>Размер:</dt>\
+								<dd class="ng-binding">' + this.size + '</dd>\
+							</dl>\
+						</div>\
+						<div class="product-detail-list-item-actions">\
+							<button class="button secondary icon icon-trash" type="button" title="Remove product" data-article="' + this.article + '"></button>\
+							<label class="product-detail-list-item-actions-label" for="shopping-bag-quantity-options-4"></label>\
+							<div class="select-primary product-detail-list-item-quantity">\
+								<select name="product-detail-list-item-quantity" data-validation="false" class="ng-pristine ng-untouched ng-valid select_change">\
+									' + options + '\
+								</select>\
+							</div>\
+						</div>\
+					</li>');
+	    	});
+	    	// if(item_summ){
+		    // 	$('#newPriceSubtotal').text(item_summ + ' Грн');
+		    // 	$('#total_price_of_basket').text(item_summ + 99 + ' Грн');
+		    // }
+	    }
+	    function calcPrice(){
+		    var price_of_item = 0;
+				$('.entry_new_price').each(function(){
+					price_of_item = parseInt($(this).text()) + price_of_item;
+					// console.log(price_of_item);
+				});
+				$('#newPriceSubtotal').text(price_of_item + ' Грн');
+				// $('#total_price_of_basket').text(price_of_item  + ' Грн');
+			}
+	    $('.icon-trash').click(function(){
+        delete_from_cart = JSON.parse(localStorage.getItem('myCart'));
+        var this_article = $(this).attr('data-article');
+        var thet=this;
+        $.each(delete_from_cart, function(index){
+          if(this.article == this_article){
+            delete_from_cart.splice(index, 1);
+            localStorage.setItem('myCart', JSON.stringify(delete_from_cart));
+            $(thet).parent().parent().remove();
+          }
+      	});
+      	calcPrice();
+      	cartCount();
+    	});
+
+    	$('.icon-move-favorite').click(function(){
+    		data_id = $(this).attr('data-id');
+    		$.get("/get?id="+data_id, function(data) {
+	    		a = data;
+	    		add_to_fav = JSON.parse(localStorage.getItem('myKey')) || [];
+	    		add_to_fav.push(a);
+	    		localStorage.setItem('myKey', JSON.stringify(add_to_fav));
+	  		});
+    	});
+    	$('.select_change').on('change', function(){
+    		var change_count = $(this).find('option:selected').val();
+    		var index_of_block = $(this).parent().parent().parent().index();
+    		console.log(index_of_block);
+    		cartsItems = JSON.parse(localStorage.getItem('myCart'));
+    		cartsItems[index_of_block].count = change_count;
+    		console.log(cartsItems);
+    		$($(this).parent().parent().parent()).find('.entry_new_price').text(change_count * cartsItems[index_of_block].price + ' Грн')
+    		localStorage.setItem('myCart', JSON.stringify(cartsItems));
+    		calcPrice();
+    	});
+    	calcPrice();
+		});
+</script>
+<% end %>

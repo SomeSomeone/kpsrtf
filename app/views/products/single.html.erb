@@ -1,0 +1,901 @@
+
+
+
+
+
+<%if @pop%>
+	Вот твой поп
+	<%=@pop.text.html_safe%>
+<%end%>
+
+
+	<main role="main">
+	<!-- Main -->
+	<div class="wrapper">
+		<div class="product parbase">
+			<!--PAGE:productDetail -->
+			<div class="catalogwarning parbase">
+			<script>
+				 var productArticleDetails = {
+  'alternate': '\u0412\u044F\u0437\u0430\u043D\u044B\u0439 \u043A\u0430\u0440\u0434\u0438\u0433\u0430\u043D - {alternatecolor} - Женщины | H&M RU', 
+    'articleCode':'0129393047', 'baseProductCode' : '0129393_group_042_047', 'categoryParentKey' : '/1/ladies',
+    
+    'styleWithArticles' : [
+      
+          '0510152001',
+      
+          '0228257002',
+      
+          '0469513001',
+      
+          '0377144014',
+      
+          '0452689002',
+      
+          '0466250001',
+      
+          '0451703001',
+      
+          '0481645001',
+      
+          '0286825010',
+      
+          '0270381003'
+      
+    ],
+    
+    
+    // 
+    <% @product_datas.each do |product_data| %>
+    '<%= product_data.article %>0000': {
+      'name': 'Черный',
+      'colorCode': '09',  
+      'selection': false,
+      'description': '<%= product_data.about%>',
+      'images':[
+          
+          <% product_data.photos.each do  |photo|  %>
+          {
+          'thumbnail': '<%= photo.img.url(:original) %>',
+          'image': '<%= photo.img.url(:original) %> ',
+          'zoom': '<%= photo.img.url(:original) %>'
+          },
+          <%end%>
+          
+      ],
+      
+      
+        
+        
+          'price': '<%= product_data.price %> Грн',
+          'priceOriginal': false,
+          'priceValue': '<%= product_data.price %> ',
+          'priceSaleValue': null,
+        
+      
+      
+      
+              
+        
+          'promoMarkerIcon': '',
+              'priceClub': null,
+              
+                    'promoMarkerUrl': '//www2.hm.com/medias/3for2-RU.png?context=bWFzdGVyfHJvb3R8MzA4OHxpbWFnZS9wbmd8aDRlL2hjZi8xMDQ0Mzk1MDI2MDI1NC5wbmd8OGNmNjZlMWEwMzhkN2I0YzkzMDg1ZGM3OTU0MzA0M2FhZTg3NTc0ZGMwMGJhYTNiMzAyNDQ3ZTY2NjkxN2IxYg',
+            'promoMarkerAlt': '',
+                    'promoMarkerLegalText': '\u042D\u0442\u043E \u043F\u0440\u0435\u0434\u043B\u043E\u0436\u0435\u043D\u0438\u0435 \u0434\u0435\u0439\u0441\u0442\u0432\u0443\u0435\u0442 \u043D\u0430 \u0441\u0430\u0439\u0442\u0435 hm.com \u0434\u043E 05.04.2017 \u0438\u043B\u0438 \u0434\u043E \u0442\u0435\u0445 \u043F\u043E\u0440, \u043F\u043E\u043A\u0430 \u0442\u043E\u0432\u0430\u0440\u044B \u0435\u0441\u0442\u044C \u0432 \u043D\u0430\u043B\u0438\u0447\u0438\u0438',
+                    'promoMarkerLabelText': '',
+          
+        
+      
+      
+      
+      
+      
+      'composition': [
+        
+          '\u0410\u043A\u0440\u0438\u043B 50%; \u0412\u0438\u0441\u043A\u043E\u0437\u0430 50%'
+        
+        ],
+      
+      
+      'careInstructions': [
+          
+              '\u041C\u0430\u0448\u0438\u043D\u043D\u0430\u044F \u0441\u0442\u0438\u0440\u043A\u0430 \u043F\u0440\u0438 \u0442\u0435\u043C\u043F\u0435\u0440\u0430\u0442\u0443\u0440\u0435 40\u00B0'
+          
+            ],
+      
+      
+      
+      'url': '/single/hm-<%= product_data.article %>'
+      
+    },
+    <%end%>
+  };
+</script>
+			</div>
+			<div class="row product-detail">
+				<div class="images parbase">
+					<section class="product-detail-images grid col-6 clearfix">
+						<button class="product-detail-thumbnails-scroll-up disabled">
+							<div class="navigation-arrow-up"></div>
+						</button>
+						<div class="product-detail-thumbnails">
+							<ul>
+								
+								<% @product_data.photos.each do  |photo|  %>
+								<li class="product-detail-thumbnail">
+									<%=image_tag(photo.img(:original) ,class:"swatch")%>
+								</li>
+								<%end%>
+								
+							</ul>
+						</div>
+						<button class="product-detail-thumbnails-scroll-down disabled">
+							<div class="navigation-arrow-down"></div>
+						</button>
+						<div class="product-detail-main-image">
+							<% if @product_data.photos[0] %>
+								<div class="product-detail-main-image-container">
+	                				<%=image_tag(@product_data.photos[0].img(:original) ,class:"swatch")%>
+								</div>
+							<%end%>
+							<span class="product-detail-zoom-info">Нажмите на изображение, чтобы изменить его размер</span>
+							<span class="product-detail-zoom-info touch-info">Коснуться изображения, чтобы развернуть его на весь экран</span>
+						</div>
+					</section>
+				</div>
+				<section class="product-detail-meta grid col-6">
+					<div class="product-detail-options">
+						<h1 class="product-item-headline"><%= @product.name%></h1>
+						<div class="price parbase">
+							<%if @product_data.promotional_price!=nil and @product_data.promotional_price>0 %>
+								<div class="product-item-price product-item-price-discount">
+									<span class="price-value"><%= @product_data.promotional_price%> Грн</span>
+									<small class="price-value-original"><%= @product_data.price%> Грн</small>
+								</div>
+							<%else%>
+								<div class="product-item-price">
+									<span class="price-value"><%= @product_data.price%> Грн</span>
+								</div>
+							<%end%>
+						</div>
+						<div class="product-item-selection hidden"></div>
+						<div id="swatchsize">
+							<% if @color_active || @colors !=[]%>
+								<div class="product-colors clearfix loaded">
+									<% if @color_active%>
+									<div class="product-input-label" data-value="">
+										Цвет:
+										<span><%= @color_active.name %></span>
+									</div>
+									<%end%>
+									<ul class="inputlist clearfix">
+										<% @product_datas.each do |product_data| %>
+											<li>
+												<% if @color_active==product_data.color %>
+													<a href="/single/hm-<%= product_data.article %>" title="<%= product_data.color.name %>" data-sizes="" data-articlecode="<%= product_data.article %>0000" id="filter-colour-<%= product_data.article %>" class="filter-option active">
+												<% else %>
+													<a href="/single/hm-<%= product_data.article %>" title="<%= product_data.color.name %>" data-sizes="" data-articlecode="<%= product_data.article %>0000" id="filter-colour-<%= product_data.article %>" class="filter-option ">
+												<%end%>
+		    					                <%=image_tag(product_data.color.img(:original) ,class:"pattern")%></a>
+											</li>
+										<%end%>
+										</li>
+									</ul>
+								</div>
+							<%end%>
+							<div class="product-sizes loaded">
+								<div class="product-input-label" data-value="Выбрать размер" data-default-value="Select size">
+									Размер:
+									<span>Select size</span>
+								</div>
+								<% @product_datas.each do |product_data| %>
+									<ul class="inputlist clearfix" data-sizelist="<%= product_data.article %>0000">
+										<% if (product_data.product_product_sizes) %>
+											<% product_data.product_product_sizes.each_with_index do |product_product_size, k| %>
+												<li class="one_size">
+													<label for="filter-size-<%= product_data.article %>00<%= k %>">
+														<input type="radio" name="product-size" value="<%= product_product_size.product_size.size %>" data-size="001" id="filter-size-<%= product_data.article %>00<%= k %>" <%if ! product_product_size.has%> disabled <% end %>>
+														<%if product_product_size.has%>
+														<div class="detailbox detailbox-value">
+															<span><%= product_product_size.product_size.size %></span>
+														</div>
+														<%else%>
+														<div class="detailbox detailbox-value unavailable">
+															<span><%= product_product_size.product_size.size %></span>
+														</div>
+														<%end%>
+													</label>
+												</li>
+											<%end%>
+										<%end%>
+									</ul>
+								<%end%>
+								<div class="product-detail-linked-product">
+									<a href="javascript:void(0)" class="underline overlay-trigger open">Руководство по размерам</a><br>
+									<a href="javascript:void(0)" class="underline overlay-trigger">Онлайн помощь по подбору размера</a>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="product-detail-details">
+						<div class="product-detail-availability">
+							Доставка через: 2-14 рабочих дней (Больший срок для отдаленных районов. Проверьте страницу Службы поддержки покупателей для подробной информации)
+						</div>
+						<button class="button button-big button-buy product-details-favorite button-disabled" data-not-added-text="Вы должны выбрать имеющийся в наличии размер" data-added-text="Товар добавлен" data-shopping-bag-text="Корзина" data-shopping-bag-failed-text="При добавлении товара в корзину произошла ошибка" data-quantity-text="Количество" data-color-text="Цвет" data-size-text="Размер" data-default-quantity="1" data-sold-out-text="Распродано" data-not-added-sold-out-text="Изделие данного цвета распродано во всех размерах">Добавить в корзину</button>
+
+<!-- 						<button class="button button-big button-secondary button-favorite icon icon-favorites-dark js-button-favorite is-favorite">СОХРАНЕНО КАК ИЗБРАННОЕ</button> -->
+
+						<button class="button button-big button-secondary button-favorite icon icon-favorites-dark js-button-favorite" data-id="<%= @product_data.id %>">СОХРАНИТЬ КАК ИЗБРАННОЕ</button>
+
+						<div class="parbase details">
+							<div class="product-detail-tabs tabs">
+								<ul class="tab-items">
+									<li class="tab-item">
+										<a href="javascript:;" class="tab-item-link active" data-target="tab-description">Описание</a>
+									</li>
+									<li class="tab-item">
+										<a href="javascript:;" class="tab-item-link" data-target="tab-details">Подробнее</a>
+									</li>
+									<li class="tab-item">
+										<a href="javascript:;" class="tab-item-link" data-target="tab-delivery">Доставка</a>
+									</li>
+								</ul>
+								<div class="tab-pane tab-description active">
+									<p class="product-detail-description-text" itemprop="description">
+										<%= @product_data.about%>
+									</p>
+									<ul class="product-warninglist" data-headline-text="ПРЕДУПРЕЖДЕНИЕ!"></ul>
+								</div>
+								<div class="tab-pane tab-details">
+									<%=@product_data.more.html_safe %>
+								</div>
+
+								<div class="tab-pane tab-delivery">
+									<p>
+										Чтобы разместить заказ Вам должно быть больше 18 лет и Вы должны быть резидентом РФ. В зависимости от того, где вы проживаете, Вам доставят Ваш заказ в срок от 2 до 14 рабочих дней после того, как Вы получите подтверждение на Ваш адрес электронной почты. В период высокого спроса и распродаж, возможно, доставка займет больше времени. Вы сможете оплатить Ваш заказ после доставки наличными или банковской картой. У Вас всегда есть 14 дней, чтобы принять решение подходит ли Вам товар (Возврату и обмену не подлежат продукты личной гигиены (заколки, расчески и другие аналогичные товары), бельевые изделия, в том числе купальные изделия, чулочно-носочные изделия, парфюмерно-косметические изделия).
+									</p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</section>
+			</div>
+		</div>
+
+
+		<div class="praone parbase productrecommendationarea">
+			<!-- PRA 1 -->
+			<section class="product-recommendation-area product-items items-6 ng-scope">
+				<header>
+					<h2 class="product-recommendation-area-title ng-binding">Также покупают</h2>
+				</header>
+				<div class="product-items-content">
+					<div class="row swipe swipe-single" style="visibility: visible;">
+						<ul class="swipe-items">
+							<!-- ngRepeat: list in praCtrl.pra1Panel.products -->
+							<li class="swipe-item ng-scope" data-index="0">
+								<!-- ngRepeat: product in list -->
+								<% @products.each do |p| %>
+								3
+								<div class="grid col-2 ng-scope" ng-repeat="product in list">
+									<article class="product-item club-price-item">
+										<%= link_to "/single/hm-#{p.product_datum[0].article}" , class: "product-item-link" do %>
+                      						<%=image_tag(p.img(:original) , width:"140", height:"210", class:"product-item-image")%>
+											<button type="button" data-tracking-type="event" data-tracking-json-template="utagFavorite" data-tracking-params="Favourites|0440439013|Утепленный бомбер|PRODUCT_DETAIL_PAGE" class="favorite icon icon-favorites js-favorite" data-saved-text="" data-not-saved-text=""></button>
+										<%end%>
+										<div class="product-item-details">
+											<h3 class="product-item-headline">
+												<a class="ng-binding" href="#"><%=p.name%></a>
+											</h3>
+												<% if p.product_datum[0]!=nil and p.product_datum[0].price!=nil %>
+													<%if p.product_datum[0].promotional_price!=nil and  p.product_datum[0].promotional_price>0 %>
+														<strong class="price sale-price"> <%=p.product_datum[0].promotional_price%> Грн
+															<span class="price original-price"><%= p.product_datum[0].price%> Грн</span>
+														</strong>
+													<%else%>
+													<strong class="price"><%= p.product_datum[0].price%> Грн</strong>
+													<%end%>
+												<%else%>
+													<strong class="price">Уточняеться</strong>
+												<% end %>
+												<span class="price original-price ng-binding"></span>
+											<ul class="list-swatches">
+												<!-- ngRepeat: color in product.variantData -->
+
+												<%p.color.each do |c|  %>
+													<li ng-repeat="color in product.variantData" class="item ng-scope" add-space="">
+														<%=image_tag(c.img(:original) ,class:"swatch")%>
+													</li>
+												<%end%>
+
+												
+												<!-- end ngRepeat: color in product.variantData -->
+											</ul>
+										</div>
+									</article>
+								</div>
+								<%end%>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</section>
+		</div>
+		<div class="parsys main"></div>
+	</div>
+</main>
+<div class="modaloverlay responsive hidden">
+	<div class="modalbackground"></div>
+	<div class="modal fadeInModal" style="margin-top: 117px;">
+		<button class="modalclose icon-close-black"></button>
+		<h1 class="sticky">ON</h1>
+		<div class="modal-wrapper" style="max-height: 895px; margin-top: 64px; box-sizing: border-box;">
+			<div class="modal-content">
+				<div class="parbase sizelisting" aria-hidden="false">
+					<div class="parbase intro textimage">
+						<article class="article-contents size-guide-intro">
+							<div class="row">
+								<div class="grid col-6">
+									<p>
+										<img style="float: right;" src="/content/dam/Customer-Service/Sizeguide/size-guide-men-new.png"></p>
+									<p>
+										Pomiarów należy dokonywać po zdjęciu ubrania. Aby wybrać odpowiedni rozmiar koszuli, musisz sprawdzić rozmiar kołnierzyka. Weź koszulę, która najlepiej na Tobie leży, i zmierz obwód kołnierzyka od środka górnego guzika koszuli do brzegu dziurki na guzik.
+									</p>
+									<p>A: Klatka piersiowa</p>
+									<p>B: Talia</p>
+									<p>C: Biodra</p>
+									<p>D: Wewnętrzna długość nogawki mierzona od krocza do podłogi.</p>
+									<p>&nbsp;</p>
+									<div class="toggle-list size-guides">
+										<div class="toggle-list-item">
+											<h3 class="toggle-list-headline slide-down-toggle">
+												<span>KOSZULE</span>
+											</h3>
+											<div class="toggle-list-content article-contents slide-down">
+												<table class="size-guide"></table>
+												<table class="size-guide">
+													<tbody>
+														<tr>
+															<th>&nbsp;</th>
+															<th>XS</th>
+															<th>S</th>
+															<th>M</th>
+														</tr>
+														<tr>
+															<th scope="row" class="size-guide-emphasized">EUR</th>
+															<td>35/36</td>
+															<td>37/38</td>
+															<td>39/40</td>
+														</tr>
+														<tr>
+															<th scope="row">Klatka piersiowa (cm)</th>
+															<td>80-84</td>
+															<td>88-92</td>
+															<td>96-100</td>
+														</tr>
+														<tr>
+															<th scope="row">Talia (cm)</th>
+															<td>68-72</td>
+															<td>76-80</td>
+															<td>84-88</td>
+														</tr>
+													</tbody>
+												</table>
+												<table class="size-guide">
+													<tbody>
+														<tr>
+															<th>&nbsp;</th>
+															<th>L</th>
+															<th>XL</th>
+															<th>2XL</th>
+														</tr>
+														<tr>
+															<th scope="row" class="size-guide-emphasized">EUR</th>
+															<td>41/42</td>
+															<td>43/44</td>
+															<td>45/46</td>
+														</tr>
+														<tr>
+															<th scope="row">Klatka piersiowa (cm)</th>
+															<td>104-108</td>
+															<td>112-116</td>
+															<td>120-124</td>
+														</tr>
+														<tr>
+															<th scope="row">Talia (cm)</th>
+															<td>92-96</td>
+															<td>100-104</td>
+															<td>108-112</td>
+														</tr>
+													</tbody>
+												</table>
+											</div>
+										</div>
+										<div class="toggle-list-item">
+											<h3 class="toggle-list-headline slide-down-toggle">
+												<span>KOSZULKI</span>
+											</h3>
+											<div class="toggle-list-content article-contents slide-down">
+												<table class="size-guide">
+													<tbody>
+														<tr>
+															<th>&nbsp;</th>
+															<th>XS</th>
+															<th colspan="2" scope="col" class="colheader">S</th>
+															<th colspan="2" scope="col" class="colheader">M</th>
+														</tr>
+														<tr>
+															<th class="size-guide-emphasized" scope="row">EUR</th>
+															<td class="size-guide-emphasized">42</td>
+															<td class="size-guide-emphasized">44</td>
+															<td class="size-guide-emphasized">46</td>
+															<td class="size-guide-emphasized">48</td>
+															<td class="size-guide-emphasized">50</td>
+														</tr>
+														<tr>
+															<th scope="row">Klatka piersiowa (cm)</th>
+															<td>84</td>
+															<td>88</td>
+															<td>92</td>
+															<td>96</td>
+															<td>100</td>
+														</tr>
+														<tr>
+															<th scope="row">Talia (cm)</th>
+															<td>72</td>
+															<td>76</td>
+															<td>80</td>
+															<td>84</td>
+															<td>88</td>
+														</tr>
+													</tbody>
+												</table>
+												<table class="size-guide">
+													<tbody>
+														<tr>
+															<th>&nbsp;</th>
+															<th class="colheader" scope="col" colspan="2">L</th>
+															<th class="colheader" scope="col" colspan="2">XL</th>
+															<th class="colheader" scope="col" colspan="2">2XL</th>
+														</tr>
+														<tr>
+															<th class="size-guide-emphasized" scope="row">EUR</th>
+															<td class="size-guide-emphasized">52</td>
+															<td class="size-guide-emphasized">54</td>
+															<td class="size-guide-emphasized">56</td>
+															<td class="size-guide-emphasized">58</td>
+															<td class="size-guide-emphasized">60</td>
+															<td class="size-guide-emphasized">62</td>
+														</tr>
+														<tr>
+															<th scope="row">Klatka piersiowa (cm)</th>
+															<td>104</td>
+															<td>108</td>
+															<td>112</td>
+															<td>116</td>
+															<td>120</td>
+															<td>124</td>
+														</tr>
+														<tr>
+															<th scope="row">Talia (cm)</th>
+															<td>92</td>
+															<td>96</td>
+															<td>100</td>
+															<td>104</td>
+															<td>108</td>
+															<td>112</td>
+														</tr>
+													</tbody>
+												</table>
+											</div>
+										</div>
+										<div class="toggle-list-item">
+											<h3 class="toggle-list-headline slide-down-toggle">
+												<span>SPODNIE</span>
+											</h3>
+											<div class="toggle-list-content article-contents slide-down">
+												<table class="size-guide">
+													<tbody>
+														<tr>
+															<th>&nbsp;</th>
+															<th class="colheader" scope="col" colspan="2">XS</th>
+															<th class="colheader" scope="col" colspan="2">S</th>
+															<th class="colheader" scope="col" colspan="2">M</th>
+														</tr>
+														<tr>
+															<th class="size-guide-emphasized" scope="row">EUR</th>
+															<td class="size-guide-emphasized">&nbsp;</td>
+															<td class="size-guide-emphasized">42</td>
+															<td class="size-guide-emphasized">44</td>
+															<td class="size-guide-emphasized">46</td>
+															<td class="size-guide-emphasized">48</td>
+															<td class="size-guide-emphasized">50</td>
+														</tr>
+														<tr>
+															<th scope="row">Talia (cm)</th>
+															<td>&nbsp;</td>
+															<td>72</td>
+															<td>76</td>
+															<td>80</td>
+															<td>84</td>
+															<td>88</td>
+														</tr>
+														<tr>
+															<th scope="row">Biodra (cm)</th>
+															<td>&nbsp;</td>
+															<td>90</td>
+															<td>93</td>
+															<td>96</td>
+															<td>99</td>
+															<td>102</td>
+														</tr>
+														<tr>
+															<th scope="row">Wewnętrzna długość nogawki (cm)</th>
+															<td>&nbsp;</td>
+															<td>81</td>
+															<td>81</td>
+															<td>82</td>
+															<td>82</td>
+															<td>83</td>
+														</tr>
+													</tbody>
+												</table>
+												<table class="size-guide">
+													<tbody>
+														<tr>
+															<th>&nbsp;</th>
+															<th class="colheader" scope="col" colspan="2">L</th>
+															<th class="colheader" scope="col" colspan="2">XL</th>
+															<th class="colheader" scope="col" colspan="2">2XL</th>
+														</tr>
+														<tr>
+															<th class="size-guide-emphasized" scope="row">EUR</th>
+															<td class="size-guide-emphasized">52</td>
+															<td class="size-guide-emphasized">54</td>
+															<td class="size-guide-emphasized">56</td>
+															<td class="size-guide-emphasized">58</td>
+															<td class="size-guide-emphasized">60</td>
+															<td class="size-guide-emphasized">62</td>
+														</tr>
+														<tr>
+															<th scope="row">Talia (cm)</th>
+															<td>92</td>
+															<td>96</td>
+															<td>100</td>
+															<td>104</td>
+															<td>108</td>
+															<td>112</td>
+														</tr>
+														<tr>
+															<th scope="row">Biodra (cm)</th>
+															<td>105</td>
+															<td>108</td>
+															<td>111</td>
+															<td>114</td>
+															<td>117</td>
+															<td>120</td>
+														</tr>
+														<tr>
+															<th scope="row">Wewnętrzna długość nogawkig (cm)</th>
+															<td>83</td>
+															<td>84</td>
+															<td>85</td>
+															<td>85</td>
+															<td>86</td>
+															<td>86</td>
+														</tr>
+													</tbody>
+												</table>
+											</div>
+										</div>
+										<div class="toggle-list-item">
+											<h3 class="toggle-list-headline slide-down-toggle">
+												<span>DŻINSY</span>
+											</h3>
+											<div class="toggle-list-content article-contents slide-down">
+												<p>
+													Rozmiary dżinsów często są podawane w calach, na przykład 30/32. Pierwsza liczba oznacza rozmiar talii, a druga – wewnętrzną długość nogawki.
+												</p>
+												<table class="size-guide"></table>
+												<table class="size-guide">
+													<tbody>
+														<tr>
+															<th>&nbsp;</th>
+															<th>XS</th>
+															<th>S</th>
+															<th>M</th>
+															<th>L</th>
+															<th>XL</th>
+														</tr>
+														<tr>
+															<th class="size-guide-emphasized" scope="row">Rozmiar</th>
+															<td class="size-guide-emphasized">26", 27"</td>
+															<td class="size-guide-emphasized">28",29",30"</td>
+															<td class="size-guide-emphasized">31",32",33"</td>
+															<td class="size-guide-emphasized">34",36"</td>
+															<td class="size-guide-emphasized">38"</td>
+														</tr>
+													</tbody>
+												</table>
+											</div>
+										</div>
+										<div class="toggle-list-item">
+											<h3 class="toggle-list-headline slide-down-toggle">
+												<span>ROZMIARY DLA WYSOKICH</span>
+											</h3>
+											<div class="toggle-list-content article-contents slide-down">
+												<table class="size-guide"></table>
+												<p> <b>Koszulki</b>
+												</p>
+												<p>
+													Długość + 3&nbsp;cm (względem standardowego rozmiaru)
+													<br>Długość rękawa + 3&nbsp;cm (względem standardowego rozmiaru)</p>
+												<p> <b>Spodnie</b>
+												</p>
+												<p>
+													Wewnętrzna długość nogawki + 4&nbsp;cm (względem standardowego rozmiaru)
+												</p>
+												<table class="size-guide">
+													<tbody>
+														<tr>
+															<th>MARYNARKI</th>
+															<th colspan="2" scope="col" class="colheader">M</th>
+															<th colspan="2" scope="col" class="colheader">L</th>
+														</tr>
+														<tr>
+															<th scope="row" class="size-guide-emphasized">EUR</th>
+															<td>148</td>
+															<td>150</td>
+															<td>152</td>
+															<td>154</td>
+														</tr>
+														<tr>
+															<th scope="row">Klatka piersiowa (cm)</th>
+															<td>96</td>
+															<td>100</td>
+															<td>104</td>
+															<td>108</td>
+														</tr>
+													</tbody>
+												</table>
+												<table class="size-guide">
+													<tbody>
+														<tr>
+															<th>SPODNIE</th>
+															<th class="colheader" scope="col" colspan="2">M</th>
+															<th class="colheader" scope="col" colspan="2">L</th>
+														</tr>
+														<tr>
+															<th scope="row" class="size-guide-emphasized">EUR</th>
+															<td>148</td>
+															<td>150</td>
+															<td>152</td>
+															<td>154</td>
+														</tr>
+														<tr>
+															<th scope="row">Talia (cm)</th>
+															<td>84</td>
+															<td>88</td>
+															<td>92</td>
+															<td>96</td>
+														</tr>
+														<tr>
+															<th scope="row">Biodra (cm)</th>
+															<td>99</td>
+															<td>102</td>
+															<td>105</td>
+															<td>108</td>
+														</tr>
+														<tr>
+															<th scope="row">Wewnętrzna długość nogawki (cm)</th>
+															<td>86</td>
+															<td>87</td>
+															<td>88</td>
+															<td>88</td>
+														</tr>
+													</tbody>
+												</table>
+											</div>
+										</div>
+										<div class="toggle-list-item">
+											<h3 class="toggle-list-headline slide-down-toggle">
+												<span>DODATKI</span>
+											</h3>
+											<div class="toggle-list-content article-contents slide-down">
+												<div class="table-scrollable">
+													<img src="/content/dam/Customer-Service/Sizeguide/acc-hands100x162.jpg">
+													<div class="toggle-list-content article-contents slide-down">
+														<div class="table-scrollable">
+															<h5>RĘKAWICZKI I MITENKI</h5>
+															<table class="size-guide">
+																<tbody>
+																	<tr>
+																		<th>&nbsp;</th>
+																		<th>XS</th>
+																		<th>S</th>
+																		<th>M</th>
+																		<th>L</th>
+																		<th>XL</th>
+																	</tr>
+																	<tr>
+																		<th scope="size-guide-emphasized">Obwód dłoni (cm)</th>
+																		<td scope="size-guide-emphasized">20,1</td>
+																		<td scope="size-guide-emphasized">20,9</td>
+																		<td scope="size-guide-emphasized">21,7</td>
+																		<td scope="size-guide-emphasized">22,5</td>
+																		<td scope="size-guide-emphasized">23,3</td>
+																	</tr>
+																</tbody>
+															</table>
+														</div>
+														<p>&nbsp;</p>
+														<img src="/content/dam/Customer-Service/Sizeguide/acc-hats200x124.jpg">
+														<div class="toggle-list-content article-contents slide-down">
+															<div class="table-scrollable">
+																<h5>CZAPKI</h5>
+																<table class="size-guide">
+																	<tbody>
+																		<tr>
+																			<th>&nbsp;</th>
+																			<th>S</th>
+																			<th>M</th>
+																			<th>L</th>
+																			<th>XL</th>
+																		</tr>
+																		<tr>
+																			<th scope="size-guide-emphasized">Obwód głowy (cm)</th>
+																			<td scope="size-guide-emphasized">56</td>
+																			<td scope="size-guide-emphasized">58</td>
+																			<td scope="size-guide-emphasized">60</td>
+																			<td scope="size-guide-emphasized">62</td>
+																		</tr>
+																	</tbody>
+																</table>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</article>
+					</div>
+					<div class="toggle-list size-guides">
+						<div class="parsys listing"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<% content_for :javascript do %>
+<script>
+  // добавление в расперсенный json - items.la="llllll"
+  // объединение 2-х объектов
+  // a=[];
+  // a.push(b);
+  // a.push(items)
+  $(document).ready(function(){
+  	showMessage();
+  	if($('input[name="product-size"]:checked').length > 0){
+	  	disableButton();
+	  }
+    // // окно сайзгайда
+    $('.product-detail-linked-product .open, .modalclose').click(function(){
+    	// console.log('clicj');
+    	$('.modaloverlay').toggleClass('hidden');
+    });
+    // // окно сайзгайда/
+    // // описание
+    $('.tab-item > a').click(function(){
+    	$('.tab-item > a').removeClass('active');
+    	$(this).addClass('active');
+    	var i = $(this).parent().index();
+    	$('.tab-pane').removeClass('active');
+    	$('.tab-pane').eq(i).addClass('active');
+    });
+    // описание /
+    function disableButton(){
+	    $('.button-buy').removeClass('button-disabled');
+    }
+
+    $('.detailbox').click(function(){
+    	disableButton();
+    });
+
+  	var color = $('.filter-option.active').attr('data-articlecode');
+    $('.inputlist.clearfix[data-sizelist="' + color +'"]').show();
+
+    // function cartCount(plus_one) {
+    // 	cartCounts = JSON.parse(localStorage.getItem('cartCount'));
+  		// cartCounts = cartCounts + plus_one;
+  		// $('.shoppingbag-item-counts').text(cartCounts);
+  		// localStorage.setItem('cartCount', JSON.stringify(cartCounts));
+    // }
+
+
+    function showMessage() {
+    	itemss = JSON.parse(localStorage.getItem('myKey'));
+    	if(itemss)
+    		$.each(itemss, function(){
+    			if(this.article == <%= @product_data.article %>){
+    				$('.button-favorite').addClass('is-favorite').text('СОХРАНЕНО КАК ИЗБРАННОЕ');
+    			}
+    		});
+		}
+		function addToFav(){
+			$.get("/get?id="+<%= @product_data.id %>, function(data) {
+    		a = data;
+    		a['size'] = 0;
+    		a['id'] = <%= @product_data.id %>;
+    		a['count'] = 0;
+    		items = JSON.parse(localStorage.getItem('myKey')) || [];
+    		items.push(a);
+    		localStorage.setItem('myKey', JSON.stringify(items));
+    		showMessage();
+  		});
+		}
+    $('.button-favorite').click(function(){
+    	itemss = JSON.parse(localStorage.getItem('myKey'))||[];
+    	var status = true
+  		$.each(itemss, function(index){
+  			if(this.article == <%= @product_data.article %>){
+  				$('.button-favorite').removeClass('is-favorite');
+  				$('.button-favorite').text('СОХРАНИТЬ КАК ИЗБРАННОЕ')
+  				itemss.splice(index, 1);
+  				localStorage.setItem('myKey', JSON.stringify(itemss));
+  				status=false
+  			}
+  		});
+    	if(status){
+    		addToFav();
+    	}
+    });
+
+
+    function addToCart(size_val){
+			$.get("/get?id="+<%= @product_data.id %>, function(data) {
+    		a = data;
+    		a['size'] = size_val;
+    		a['id'] = <%= @product_data.id %>;
+    		a['count'] = 1;
+    		cart_mas = JSON.parse(localStorage.getItem('myCart')) || [];
+    		$.each(cart_mas, function(index){
+    			if(this.size == size_val){
+    				cart_mas.splice(index, 1);
+            localStorage.setItem('myCart', JSON.stringify(cart_mas));
+            count = this.count + 1;
+            		if(count >= 10){
+            			a['count'] = 10;
+            		}
+            		else{
+            			a['count'] = count;
+            		}
+    			}
+    		});
+    		cart_mas.push(a);
+    		localStorage.setItem('myCart', JSON.stringify(cart_mas));
+    		cartCount();
+  		});
+		}
+		$('.button-buy').click(function(){
+			size_check = false;
+			$('input[name="product-size"]').each(function(index){
+				if($(this).prop('checked')){
+					size_check = true;
+					size_val = $(this).parent().find('.detailbox > span').text();
+					addToCart(size_val);
+				}
+			});
+			if(!size_check){
+				alert($('.button-buy').attr('data-not-added-text'));
+			}
+		});
+		// cartCount(0);
+  });
+
+  </script>
+  <% end %>

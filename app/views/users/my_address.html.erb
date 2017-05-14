@@ -1,0 +1,101 @@
+<%= semantic_form_for @address_new, :url => users_address_create_path(@address_new) do |f| %>
+  <% if @address_new.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@address_new.errors.count, "error") %> prohibited this @address_new from being saved:</h2>
+
+      <ul>
+      <% @address_new.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+
+  <%= f.label :city %>
+  <%= f.text_field :city, class: 'form-control' %>
+
+  <%= f.label :post_index %>
+  <%= f.text_field :post_index, class: 'form-control' %>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
+<main role="main" class="responsive my-hm">
+		<div class="wrapper">
+			<nav class="breadcrumbs">
+				<ul>
+					<li>
+						<a href="#">Yourhm.com.ua</a>
+					</li>
+
+					<li class="">
+						<a href="#">Ваша учетная запись</a>
+					</li>
+
+					<li class="active">
+						<a href="#" onclick="return false;">Адресная книга</a>
+					</li>
+				</ul>
+			</nav>
+			<script type="text/javascript">$("body").addClass("checkout-loader-layer");</script>
+			<nav class="section navigation menu " role="navigation">
+				<ul role="menu">
+					<li class="item" role="presentation" tabindex="0">
+						<a href="/my-overview" role="menuitem">Обзор</a>
+					</li>
+					<li class="item" role="presentation" tabindex="-1">
+						<a href="/my-profile" role="menuitem">Личные сведения</a>
+					</li>
+					<li class="item" role="presentation" tabindex="-1">
+						<a href="/my-order" role="menuitem">Заказы</a>
+					</li>
+					<li class="current item" role="presentation" tabindex="-1">
+						<a href="/my-address" role="menuitem">Адресная книга</a>
+					</li>
+				</ul>
+			</nav>
+			<% if @addresses%>
+			<div class="layout layout-eight ng-scope" id="profileDIV">
+				<div class="form-section agile-form disabled-form" id="profile">
+					<fieldset class="form-part">
+						<legend class="heading">Адресная книга</legend>
+						<%= semantic_form_for @addresses, :url => users_address_update_path(@addresses) do |f| %>
+						<div class="inputwrapper">
+							<label class="label" for="myhm-email">Адрес</label>
+							<%= f.text_field :city, class: 'text-input field' %>
+							<span class="static ng-binding"><%= @addresses.city%></span>
+							<div class="input-info ng-hide">Указывайте полный адрес(область, район, населенный пункт)</div>
+						</div>
+
+						<div class="inputwrapper required">
+							<label class="label" for="checkout.firstName">Отделение Новой почты</label>
+							<%= f.text_field :post_index, class: 'text-input field' %>
+							<span class="static ng-binding"><%= @addresses.post_index%></span>
+							<div class="input-info ng-hide"></div>
+						</div>
+
+					</fieldset>
+					<div class="button-group">
+						<button type="button" class="secondary button redaction_data">Редактировать</button>
+						<%= f.submit value:'ИЗМЕНИТЬ', class: 'hidden change_button'%>
+						<div id="globalMessages"></div>
+					</div>
+					<% end %>
+				</div>
+
+			</div>
+			<% end %>
+		</div>
+	</main>
+	<% content_for :javascript do %>
+	<script>
+		$(document).ready(function(){
+			$('.redaction_data').click(function(){
+				$('#profile').toggleClass('disabled-form');
+				$('.change_button').toggle();
+			});
+		});
+	</script>
+	<% end %>

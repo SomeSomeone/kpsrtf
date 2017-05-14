@@ -1,0 +1,464 @@
+<main role="main" class="responsive segments">
+  <!-- Main -->
+  <!--AEMPUBPRDEU30-->
+    <div class="breadcrumb">
+
+      <nav class="breadcrumbs">
+        <!-- Breadcrumbs -->
+        <ul>
+          <li><a href="#">YourHM</a></li>
+          <li>
+            <%if @current_main_cat%>
+              <%= @current_main_cat.name%>
+            <%else%>
+              всё
+            <%end%>
+            </li>
+        </ul>
+      </nav>
+      <!-- /Breadcrumbs -->
+    </div>
+
+    <div class="layout">
+      <section class="sidebarpluscontent modules">
+        <aside class="aside section-menu">
+          <div class="left parbase">
+            <nav class="section-menu">
+              <ul>
+                <li>
+                  <h2>
+                    <a href="#">Женщины</a>
+                  </h2>
+                  <div class="section-menu-sub-menu">
+                    <div class="section-menu-sub-menu-inner">
+                          <div class="section-menu-categories">
+<!-- 
+                            <div class="section-menu-category">
+                              <h4 class="">
+                                <span>Новые поступления</span>
+                              </h4>
+                              <ul style="display: block;">
+
+                                <li class="section-menu-subdepartment ">
+                                  <a href="#">Одежда</a>
+                                </li>
+
+                                <li class="section-menu-subdepartment ">
+                                  <a href="#">Обувь</a>
+                                </li>
+
+                                <li class="section-menu-subdepartment ">
+                                  <a href="#">Аксессуары</a>
+                                </li>
+
+                              </ul>
+                            </div> -->
+
+                            <div class="section-menu-category">
+                              <h4 class="">
+                                <span>Выбрать категорию</span>
+                              </h4>
+                              <ul style="display: block;">
+
+                                <li class="section-menu-subdepartment ">
+                                  <a href="/products/">Посмотреть все</a>
+                                </li>
+                                <% @main_category.each do |main_category|%>
+                                <% if main_category%>
+                                <% if @cat_active.include?(main_category)%>
+                                  <li class="section-menu-subdepartment current">
+                                <% else %>
+                                  <li class="section-menu-subdepartment">
+                                <% end %>
+                                
+                                  <a href="#"><%=main_category.name%></a>
+                                  <% if @category.select{|e| e.parent==main_category} %>
+                                      <ul>
+                                        <%@category.select{|e| e.parent==main_category}.each do |category|%>
+                                          <% if @cat_active.include?(category)%>
+                                            <li class="section-menu-subcategory current">
+                                          <% else %>
+                                            <li class="section-menu-subcategory">
+                                          <% end %>
+                                            <a href="#">
+                                               <%=category.name%>
+                                            </a>
+                                            <% if @category.select{|e| e.parent==category} %>
+                                              <ul>
+                                                <% @category.select{|e| e.parent==category}.each do |sub_category|%>
+                                                  <% if @cat_active.include?(sub_category)%>
+                                                    <li class="section-menu-subcategory current">
+                                                  <% else %>
+                                                    <li class="section-menu-subcategory">
+                                                  <% end %>
+                                                    <a href="">sub_category.name</a>
+                                                  </li>
+                                                <%end%>
+                                              </ul>
+                                            <% end %>
+                                          </li>
+                                        <%end%>
+                                      </ul>
+                                  <%end%>
+                                </li>
+                                <%end%>  
+                              <%end%>
+                              </ul>
+                            </div>
+
+<!-- 
+                            <div class="section-menu-category">
+                              <h4 class="">
+                                <span>ИЗБРАННОЕ</span>
+                              </h4>
+                              <ul style="display: block;">
+
+                                <li class="section-menu-subdepartment ">
+                                  <a href="#">Bещь недели</a>
+                                </li>
+
+                                <li class="section-menu-subdepartment ">
+                                  <a href="#">Утилитарный стиль</a>
+                                </li>
+
+                                <li class="section-menu-subdepartment ">
+                                  <a href="#">Белье и одежда для сна</a>
+                                </li>
+
+                                <li class="section-menu-subdepartment ">
+                                  <a href="#">Весенние куртки</a>
+                                </li>
+                              </ul>
+                            </div>
+
+                            <div class="section-menu-category">
+                              <h4 class="">
+                                <span>КОЛЛЕКЦИИ</span>
+                              </h4>
+                              <ul style="display: block;">
+
+                                <li class="section-menu-subdepartment current">
+                                  <a href="#">Blue Darlings</a>
+                                </li>
+                                <li class="section-menu-subdepartment ">
+                                  <a href="#">НОВИНКИ ВЕСНЫ</a>
+                                </li>
+                                <li class="section-menu-subdepartment ">
+                                  <a href="#">H&M Studio S/S 2017</a>
+                                </li>
+                                <li class="section-menu-subdepartment ">
+                                  <a href="#">New Trends To Try</a>
+                                </li>
+                                <li class="section-menu-subdepartment ">
+                                  <a href="#">Premium Essentials</a>
+                                </li>
+                              </ul>
+                            </div>
+
+                            <div class="section-menu-category">
+                              <h4 class="">
+                                <span>ВЫБРАТЬ КОЛЛЕКЦИЮ</span>
+                              </h4>
+                              <ul style="display: block;">
+                                <li class="section-menu-subdepartment ">
+                                  <a href="#">Divided</a>
+                                </li>
+
+                                <li class="section-menu-subdepartment ">
+                                  <a href="#">Trend</a>
+                                </li>
+
+                                <li class="section-menu-subdepartment ">
+                                  <a href="#">Modern Classic</a>
+                                </li>
+
+                                <li class="section-menu-subdepartment ">
+                                  <a href="#">Party</a>
+                                </li>
+
+                                <li class="section-menu-subdepartment ">
+                                  <a href="#">Basics</a>
+                                </li>
+
+                                <li class="section-menu-subdepartment ">
+                                  <a href="#">L.O.G.G.</a>
+                                </li>
+
+                                <li class="section-menu-subdepartment ">
+                                  <a href="#">Sportswear</a>
+                                </li>
+
+                                <li class="section-menu-subdepartment ">
+                                  <a href="#">Premium Quality</a>
+                                </li>
+                              </ul>
+                            </div> -->
+                          </div>
+                    </div>
+                  </div>
+
+                </li>
+              </ul>
+            </nav>
+          </div>
+
+          <div class="left-bottom parsys"></div>
+        </aside>
+        <div class="parsys main">
+          <% if @current_cat %>
+          <div class="heading parbase section text">
+            <h1 class=""><%=@current_cat.name%></h1>
+          </div>
+          <div class="parbase section text">
+            <p><%=(@current_cat.about||"").html_safe%></p>
+          </div>
+          <% end %>
+          <div class="productlisting parbase section">
+            <!--PAGE:productListing -->
+            <div class="catalogwarning parbase"></div>
+            <!-- Product filters -->
+            <div class="row">
+              <div class="product-filters sticky-on-scroll" data-sticky-width="100%" data-sticky-stop-offset="25" data-sticky-fill="true" style="">
+                <div class="row">
+                  <div class="totop">
+                    <a href="#" class="toptrigger">Вернуться наверх</a>
+                    <a href="#" class="filterlogo">Вернуться к началу</a>
+                  </div>
+                  <div class="filteractions clearfix">
+                    <ul class="triggers clearfix">
+                      <!--  category condition  -->
+                      <li class="js-clickexpand clickexpand filter " data-expandoptions="{&quot;toggle&quot;:&quot;true&quot;}">
+                        <a href="javascript:;" class="trigger js-expandtrigger"> <strong>Фильтр</strong>
+                        </a>
+                        <div class="expandtarget js-expandtarget filters">
+                          <form class="js-product-list-filter-form ng-pristine ng-valid" method="get" data-productlist-page="true" data-filtered-products-url="/products">
+                            <div class="row">
+                              <div class="cols clearfix">
+                                <div class="col">
+                                  <h4>Цвет</h4>
+                                  <ul class="inputlist grid" data-filter-param-name="colorWithNames[]">
+                                  <% @PossibleColors.each do |c|%>
+                                        <li>
+                                          <a href="/bodies" title="<%= c.name %>" class="filter-option <% if @ChoizenColor.include?(c.name) %> active <% end %>" data-value="<%= c.name %>">
+                                            <span class="pattern" style="background:#000000;"></span>
+                                            <%= c.name %>
+                                          </a>
+                                        </li>
+                                    <% end %>
+                                  </ul>
+                                </div>
+
+                                <div class="col">
+                                  <h4>Размер</h4>
+                                  <ul class="inputlist row-cols">
+                                    <% @PossibleSizes.each_with_index do |c, k|%>
+                                      <li class="row-col">
+                                        <ul data-filter-param-name="sizes[]" class="inputlist rows">
+                                          <li>
+                                            <label for="filter-size-<%= c.size %>">
+                                              <input id="filter-size-<%= c.size %>" type="checkbox" value="<%= c.size %>" <% if @ChoizenSize.include?(c.size) %> checked="checked" <% end %>>
+                                              <div class="detailbox detailbox-value">
+                                                <span><%= c.size %></span>
+                                              </div>
+                                            </label>
+                                          </li>
+                                        </ul>
+                                      </li>
+                                    <% end %>
+                                  </ul>
+                                </div>
+                              </div>
+                            </div>
+
+                            <div class="row clearfilters">
+                              <button class="button button-secondary js-filters-clear" disabled="disabled">СБРОСИТЬ ФИЛЬТР</button>
+                              <a class="button js-filters-close" href="javascript:;">Закрыть</a>
+                            </div>
+                            <!-- <input type="hidden" name="image" value="stillLife" class="filter-toggle-images-value" data-filter-param-name="image"></form> -->
+                        </div>
+                      </li>
+                      <li class="js-clickexpand clickexpand sort-by " data-expandoptions="jkjkj">
+                        <a href="javascript:;" class="trigger js-expandtrigger">
+                          <strong>Сортировать</strong>
+                        </a>
+                        <div class="expandtarget js-expandtarget sort">
+                          <ul class="menu toggleCurrent">
+                            <li class="menu-sub-item current">
+                              <span class="menu-link" data-value="best">Лучшее</span>
+                            </li>
+                            <li class="menu-sub-item">
+                              <span class="menu-link" data-value="PriceAsc">Самая низкая цена</span>
+                            </li>
+                            <li class="menu-sub-item">
+                              <span class="menu-link" data-value="PriceDesc">Самая высокая цена</span>
+                            </li>
+                          </ul>
+                        </div>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              <!-- /Product filters -->
+            </div>
+            <div class="row">
+              <div class="model-and-product-switch">
+                <div class="grid col-6">
+                  <ul>
+                    <li class="right">
+                      <span class="filterinfo">
+                        <strong>ОТОБРАЖАЕТСЯ</strong>
+                        <span class="load-count"><%= @products.size %></span>
+                        из
+                        <span class="total-counts"><%= @products_all %></span>
+                        товаров
+                      </span>
+                    </li>
+                  </ul>
+                </div>
+                <!-- <div class="grid col-3 filter-group toggle-images">
+                  <ul>
+                    <li>
+                      <a id="color_filter_model" href="#" data-value="model" class="">Модель</a>
+                    </li>
+                    <li>
+                      <a id="color_filter_stillLife" href="#" data-value="stillLife" class="selected">Изделие</a>
+                    </li>
+                  </ul>
+                </div> -->
+              </div>
+            </div>
+            <div class="product-items-wrapper clearfix" data-articlecode="#">
+              <section class="product-items big productlist-row">
+                <!-- Product items -->
+                <div class="product-items-content">
+                  <div class="row">
+                    <%@products.each do |product| %>
+                    <!-- Product item -->
+                    <% if product.product_datum[0]%>
+                    <div class="grid col-3">
+                      <article class="product-item club-price-item" style="position: relative;">
+                        <%= link_to "/single/hm-#{product.product_datum[0].article}" , class: "product-item-link" do %>
+                          <img src="<%= product.img(:original) %>" alt="" width="222" height="333" class="product-item-image" data-altimage="<%= product.img_alt(:original) %>">
+                        <%end%>
+                        <button type="button" style="z-index: 9999;" class="favorite icon icon-favorites" data-tracking-type="event" data-saved-text="СОХРАНЕНО КАК ИЗБРАННОЕ" data-not-saved-text="СОХРАНИТЬ КАК ИЗБРАННОЕ" data-id="<%= product.product_datum[0].id %>" data-article="<%= product.product_datum[0].article %>"">СОХРАНИТЬ КАК ИЗБРАННОЕ</button>
+
+                        <div class="product-item-details">
+                          <h3 class="product-item-heading">
+                            <a href="#"><%=product.name%></a>
+                          </h3>
+                        <% if product.product_datum[0]!=nil and product.product_datum[0].price!=nil %>
+                          <%if product.product_datum[0].promotional_price!=nil and product.product_datum[0].promotional_price>0 %>
+                            <strong class="price sale-price"> <%=product.product_datum[0].promotional_price%> Грн
+                              <span class="price original-price"><%= product.product_datum[0].price%> Грн</span>
+                            </strong>
+                          <%else%>
+                          <strong class="price"><%= product.product_datum[0].price%> Грн</strong>
+                          <%end%>
+                        <%else%>
+                          <strong class="price">Уточняеться</strong>
+                        <% end %>
+                          <ul class="list-swatches">
+                           <%product.color.each do |c|  %>
+                            <li class="item">
+                              <%=image_tag(c.img(:original) ,class:"swatch")%>
+                            </li>
+                           <%end%>
+                          </ul>
+                        </div>
+                      </article>
+                    </div>
+                    <!-- /Product item -->
+                    <%end%>
+                    <%end%>
+                  
+                  </div>
+                </div>
+              </section>
+                  <%= will_paginate @products %>
+
+              <!-- /Product items -->
+              <a href="#" class="hidden listing-total-count" data-total-count="66"></a>
+            </div>
+            <a class="load-more-link button infinite-scroll" href="#">Загрузить еще изделия</a>
+            <div class="clearfix"></div>
+          </div>
+        </div>
+      </section>
+    </div>
+    <div class="parbase overlaycontainer"></div>
+  </main>
+  <% content_for :javascript do %>
+  <script>
+  $(document).ready(function(){
+      // $('.favorite').click(function(){
+      //   var a = $(this).attr('data-id');
+      //   console.log('click');
+      //     $.get("/addtofavorite/"+a, function(data) {
+      //       console.log(data);
+      //     });
+      //   });
+      itemss = JSON.parse(localStorage.getItem('myKey'));
+      if(itemss)
+        $('.favorite').each(function(){
+          var btn = $(this).attr('data-article');
+          $.each(itemss, function(){
+            if(this.article == btn){
+              $('.favorite[data-article="' + btn + '"]').addClass('is-favorite');
+            }
+          });
+        });
+      function showMessage(item_article) {
+        itemss = JSON.parse(localStorage.getItem('myKey'));
+        if(itemss)
+          $.each(itemss, function(){
+            if(this.article == item_article){
+              $('.favorite[data-article="' + item_article + '"]').addClass('is-favorite');
+            }
+          });
+      }
+      function addToFav(item_id, item_article){
+        $.get("/get?id="+ item_id, function(data) {
+          a = data;
+          a['size'] = 0;
+          a['id'] = item_id;
+          a['count'] = 0;
+          items = JSON.parse(localStorage.getItem('myKey')) || [];
+          items.push(a);
+          localStorage.setItem('myKey', JSON.stringify(items));
+          showMessage(item_article);
+        });
+      }
+
+      $('.favorite').click(function(){
+        itemss = JSON.parse(localStorage.getItem('myKey'))||[];
+        var status = true;
+        var this_article = $(this).attr('data-article');
+        var this_id = $(this).attr('data-id');
+        $.each(itemss, function(index){
+          if(this.article == this_article){
+            $('.favorite[data-article="' + this_article + '"]').removeClass('is-favorite');
+            itemss.splice(index, 1);
+            localStorage.setItem('myKey', JSON.stringify(itemss));
+            status=false
+          }
+        });
+        if(status){
+          addToFav(this_id, this_article);
+        }
+      });
+        itemss = JSON.parse(localStorage.getItem('myKey'));
+        console.log(itemss);
+    });
+      // $(document).ready(function(){
+      //   function addToFav(a){
+      //   console.log('click');
+      //     $.post("/addtofavorite/1", function(data) {
+      //       console.log(data);
+      //       // $('.nice-pop-block').html("<div class='nice-pop-close'></div><p class='after_subm'>Спасибо, Ваша заявка отправлена</p>");
+      //         // console.log($(data).submit());
+      //     });
+      //   }
+      // });
+    </script>
+<% end %>
