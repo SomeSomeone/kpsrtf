@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170513143653) do
+ActiveRecord::Schema.define(version: 20170514224205) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -57,6 +57,9 @@ ActiveRecord::Schema.define(version: 20170513143653) do
     t.integer "pop_id"
     t.string  "polka_url"
     t.text    "about"
+    t.text    "seo_text"
+    t.string  "url"
+    t.string  "title"
     t.index ["category_id"], name: "index_categories_on_category_id", using: :btree
     t.index ["pop_id"], name: "index_categories_on_pop_id", using: :btree
   end
@@ -93,12 +96,13 @@ ActiveRecord::Schema.define(version: 20170513143653) do
   create_table "orders", force: :cascade do |t|
     t.string   "address"
     t.integer  "user_id"
-    t.string   "status",     default: "Ожидает платежа", null: false
-    t.datetime "created_at",                             null: false
-    t.datetime "updated_at",                             null: false
-    t.float    "sum",        default: 0.0
-    t.float    "cash_back",  default: 0.0
-    t.integer  "address_id",                             null: false
+    t.string   "status",      default: "Ожидает платежа", null: false
+    t.datetime "created_at",                              null: false
+    t.datetime "updated_at",                              null: false
+    t.float    "sum",         default: 0.0
+    t.float    "cash_back",   default: 0.0
+    t.integer  "address_id",                              null: false
+    t.boolean  "bool_factor"
     t.index ["address_id"], name: "index_orders_on_address_id", using: :btree
     t.index ["user_id"], name: "index_orders_on_user_id", using: :btree
   end

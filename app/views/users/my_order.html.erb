@@ -1,9 +1,26 @@
+	<style>
+		.i_pay{
+			position: absolute;
+			padding: 6px 10px;
+			background-color: #008200;
+			color: #fff;
+			font-weight: 600;
+			top: 15px;
+			z-index: 9999;
+			left: 50%;
+			transform: translateX(-50%);
+			cursor: pointer;
+		}
+		.order-item{
+			position: relative;
+		}
+	</style>
 	<main role="main" class="responsive my-hm">
 		<div class="wrapper">
 			<nav class="breadcrumbs">
 				<ul>
 					<li>
-						<a href="/ru_ru/">Yourhm.com.ua</a>
+						<a href="/">Yourhm.com.ua</a>
 					</li>
 
 					<li class="">
@@ -52,6 +69,7 @@
 							<% end %>#00ff00'>
 							<%= order.status %></span>
 						</div>
+						<span class="i_pay" n-data='<%= order.id %>'>Я оплатил</span>
 						<div class="order-info">
 								<div class="order-details two modules">
 									<ul class="details-list">
@@ -96,45 +114,47 @@
 
 							<ul class="order-products product-detail-list responsive">
 								<% order.orders_product_data.each do |opd| %>
-								<li class="product-detail-list-item">
-									<div class="product-detail-list-item-image-wrapper">
-										<div class="wrapper-inner">
-											<a href="" class="product-detail-list-item-image">
-												<img alt="Product name" width="140" height="210" class="product-detail-list-item-image-image" src="<%=opd.product_datum.photos[0].img.url(:original)%>" title="Product name">
-											</a>
+								<% if opd and  opd.product_datum%>
+									<li class="product-detail-list-item">
+										<div class="product-detail-list-item-image-wrapper">
+											<div class="wrapper-inner">
+												<a href="" class="product-detail-list-item-image">
+													<img alt="Product name" width="140" height="210" class="product-detail-list-item-image-image" src="<%=opd.product_datum.photos[0].img.url(:original)%>" title="Product name">
+												</a>
+											</div>
 										</div>
-									</div>
-									<div class="product-detail-list-item-details">
-										<div class="product-detail-list-item-price-info">
-											<p class="product-detail-list-item-total-price">
-												Итого:
-												<span class="amount"><%= opd.product_datum.price*opd.count%> Грн</span>
-											</p>
+										<div class="product-detail-list-item-details">
+											<div class="product-detail-list-item-price-info">
+												<p class="product-detail-list-item-total-price">
+													Итого:
+													<span class="amount"><%= opd.product_datum.price*opd.count%> Грн</span>
+												</p>
+											</div>
+
+											<h3 class="sub-sub-heading"><%=opd.product_datum.product.name%></h3>
+											<span class="original-price"><%=opd.product_datum.price%> Грн</span>
+											<p class="product-detail-price"></p>
+											<p class="product-detail-price"></p>
+											<p></p>
+
+											<dl class="product-detail-list-item-details-list">
+
+												<dt>№ арт.:</dt>
+												<dd><%=opd.product_datum.article%></dd>
+
+												<dt>Цвет:</dt>
+												<dd><%=opd.product_datum.color.name%></dd>
+
+												<dt>Количество:</dt>
+												<dd><%= opd.count %></dd>
+
+												<dt>Размер:</dt>
+												<dd><%=opd.product_size.size%></dd>
+
+											</dl>
 										</div>
-
-										<h3 class="sub-sub-heading"><%=opd.product_datum.product.name%></h3>
-										<span class="original-price"><%=opd.product_datum.price%> Грн</span>
-										<p class="product-detail-price"></p>
-										<p class="product-detail-price"></p>
-										<p></p>
-
-										<dl class="product-detail-list-item-details-list">
-
-											<dt>№ арт.:</dt>
-											<dd><%=opd.product_datum.article%></dd>
-
-											<dt>Цвет:</dt>
-											<dd><%=opd.product_datum.color.name%></dd>
-
-											<dt>Количество:</dt>
-											<dd><%= opd.count %></dd>
-
-											<dt>Размер:</dt>
-											<dd><%=opd.product_size.size%></dd>
-
-										</dl>
-									</div>
-								</li>
+									</li>
+									<% end %>
 								<% end %>
 							</ul>
 
@@ -161,6 +181,13 @@
 				$(document).ready(function(){
 					$('.js-toggle-trigger').click(function(){
 						$(this).parent().toggleClass('is-open');
+					});
+					$('.i_pay').click(function(){
+						var o_id = $(this).attr('n-data');
+						console.log(o_id);
+						$.get("/order_activate/" + o_id, function(data) {
+							console.log(data);
+				  		});
 					});
 				});
 			</script>

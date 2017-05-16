@@ -1,4 +1,4 @@
-source 'https://rubygems.org'
+﻿source 'https://rubygems.org'
 
 git_source(:github) do |repo_name|
   repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?("/")
@@ -18,6 +18,7 @@ gem "paperclip", "~> 5.0.0"
 gem 'formtastic', '~> 3.0'
 gem "cocoon"
 gem "jquery-rails"
+gem 'chosen-rails'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.0.2'
 # Use postgresql as the database for Active Record

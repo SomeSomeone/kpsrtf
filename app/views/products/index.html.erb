@@ -1,3 +1,7 @@
+
+<% content_for :title do @current_cat.title  end %>
+<% content_for :description do @current_cat.seo_text end%>
+
 <main role="main" class="responsive segments">
   <!-- Main -->
   <!--AEMPUBPRDEU30-->
@@ -20,14 +24,16 @@
     </div>
 
     <div class="layout">
-      <section class="sidebarpluscontent modules">
-        <aside class="aside section-menu">
+      <section class="sidebarpluscontent modules ladies-flex">
+        <div class="ladies-side-bar-label"><div>КАТАЛОГ</div></div>
+        <aside class="aside section-menu ladies-side-bar">
+          <div class="side-bar-cross">+</div>
           <div class="left parbase">
             <nav class="section-menu">
               <ul>
                 <li>
                   <h2>
-                    <a href="#">Женщины</a>
+                    <a href="#"><%=@current_main_cat.name%></a>
                   </h2>
                   <div class="section-menu-sub-menu">
                     <div class="section-menu-sub-menu-inner">
@@ -61,26 +67,27 @@
                               <ul style="display: block;">
 
                                 <li class="section-menu-subdepartment ">
-                                  <a href="/products/">Посмотреть все</a>
+                                  <a href="/products/<%=@current_main_cat.url%>">Посмотреть все</a>
                                 </li>
                                 <% @main_category.each do |main_category|%>
-                                <% if main_category%>
+<!--                                 <% if main_category%>
                                 <% if @cat_active.include?(main_category)%>
                                   <li class="section-menu-subdepartment current">
                                 <% else %>
                                   <li class="section-menu-subdepartment">
                                 <% end %>
                                 
-                                  <a href="#"><%=main_category.name%></a>
-                                  <% if @category.select{|e| e.parent==main_category} %>
-                                      <ul>
+                                  <a href="/products/<%=main_category.url%>"><%=main_category.name%></a> -->
+
+                                  <% if @category.select{|e| e.parent==main_category} and @current_main_cat == main_category %>
+
                                         <%@category.select{|e| e.parent==main_category}.each do |category|%>
                                           <% if @cat_active.include?(category)%>
-                                            <li class="section-menu-subcategory current">
+                                            <li class="section-menu-subdepartment current">
                                           <% else %>
-                                            <li class="section-menu-subcategory">
+                                            <li class="section-menu-subdepartment">
                                           <% end %>
-                                            <a href="#">
+                                            <a href="/products/<%=main_category.url%>/<%=category.url%>">
                                                <%=category.name%>
                                             </a>
                                             <% if @category.select{|e| e.parent==category} %>
@@ -91,14 +98,13 @@
                                                   <% else %>
                                                     <li class="section-menu-subcategory">
                                                   <% end %>
-                                                    <a href="">sub_category.name</a>
+                                                    <a href="/products/<%=main_category.url%>/<%=category.url%>/<%=sub_category.url%>"><%=sub_category.name%></a>
                                                   </li>
                                                 <%end%>
                                               </ul>
                                             <% end %>
                                           </li>
                                         <%end%>
-                                      </ul>
                                   <%end%>
                                 </li>
                                 <%end%>  
@@ -204,7 +210,7 @@
 
           <div class="left-bottom parsys"></div>
         </aside>
-        <div class="parsys main">
+        <div class="parsys main parsys-width-90">
           <% if @current_cat %>
           <div class="heading parbase section text">
             <h1 class=""><%=@current_cat.name%></h1>
@@ -303,7 +309,7 @@
             </div>
             <div class="row">
               <div class="model-and-product-switch">
-                <div class="grid col-6">
+                <div class="grid col-6 pos-central-news">
                   <ul>
                     <li class="right">
                       <span class="filterinfo">
@@ -332,7 +338,7 @@
               <section class="product-items big productlist-row">
                 <!-- Product items -->
                 <div class="product-items-content">
-                  <div class="row">
+                  <div class="row flex-devil">
                     <%@products.each do |product| %>
                     <!-- Product item -->
                     <% if product.product_datum[0]%>
@@ -460,5 +466,18 @@
       //     });
       //   }
       // });
+      $(document).ready(function(){
+      $(".ladies-side-bar-label").click(function(){
+        $(".ladies-side-bar").toggleClass("active");
+        $(".ladies-side-bar-label").toggleClass("active")
+      });
+      $(".side-bar-cross").click(function(){
+        $(".ladies-side-bar").toggleClass("active");
+        $(".ladies-side-bar-label").toggleClass("active")
+      });
+      $('.js-clickexpand').click(function(){
+        $(this).find('.expandtarget').toggle();
+      });
+    })
     </script>
 <% end %>

@@ -55,6 +55,7 @@ class CartsController < ApplicationController
 												:currency => 'UAH',
 												:order_id => @order.id,
 												:description => 'Ваш заказ',
+												server_url: liqpay_payment_url
 												)
 		#:server_url => liqpay_payment 
 	end
@@ -66,16 +67,34 @@ class CartsController < ApplicationController
 			# обработать платеж 
 			@order.status="Принят"
 		else 
-			# обработать ошибку end rescue Liqpay::InvalidResponse # обработать ошибку 
+			@order.status="Ошибка"
 		end 
+		@order.save
 		format.html {redirect_to controller:"carts", action:"order", id:  @order.id , notice: 'Color was successfully created.' }
         format.json { render :show, status: :created, location: @order }
 	end
 	def diver
 		@payment=payment_method
 		@order=Order.new()
-		@address=Address.where(user: current_user)[0]||Address.new(user: current_user).save
+
+		@addresses=Address.where(user: @user)
+		unless  @addresses[0]
+			@address=Address.new(user: @user)
+			@address.save
+		else
+			@address=@addresses[0]
+		end
 		@order.address_ref=@address
+	end
+	def order_activate
+		@order=Order.find(params[:id])
+		@order.bool_factor=true
+		@order.save
+		 msg = { 
+	    	:status => "ok",
+	    	:message => "Success!"
+	    }
+	    format.json  { render :json => msg }
 	end
 	def order_params
    		params.require(:order).permit(:json)

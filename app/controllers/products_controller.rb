@@ -42,8 +42,8 @@ class ProductsController < ApplicationController
 		@cat=nil;
 		@cat_active=[]
 		@params_cat.each{ |cat_name|
-			if helper.find{|e| e.name == cat_name}
-				@cat=helper.find{|e| e.name == cat_name}
+			if helper.find{|e| e.url == cat_name}
+				@cat=helper.find{|e| e.url == cat_name}
 				helper=@category.select{|e| e.parent==@cat}
 				@cat_active<<@cat
 			else return
@@ -60,7 +60,7 @@ class ProductsController < ApplicationController
 					@cat_for_product<<c0
 					helper1=@category.select{|e| e.parent==c0}
 					if helper1 !=[]
-						helper1.each do c1
+						helper1.each do |c1|
 							@cat_for_product<<c1
 							helper2=@category.select{|e| e.parent==c1}
 							if helper2 !=[]

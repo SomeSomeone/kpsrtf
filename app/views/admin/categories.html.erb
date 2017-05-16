@@ -18,9 +18,14 @@
     <th>Имя</th>
     <td>Описание</td>
     <th>Отец</th>
+    <th>SEO текст</th>
+    <th>Ссылка</th>
+    <th>Тайтл</th>
+    <td>Ссылка парсера</td>
     <th>Обновить</th>
     <th>Удалить</th>
 </tr>
+
 </thead>
 <tbody>
 <% @categories.each do | category | %>
@@ -33,6 +38,12 @@
     		<%=category.parent.name%>
     	<%end%>
     </td>
+    <td><%=category.seo_text%></td>
+    <td><%=category.url%></td>
+    <td><%=category.title%></td>
+    <td>
+        <a href="<%=category.polka_url%>"><%=category.polka_url%></a>
+    </td>
     <td><%= link_to 'Обновить', admin_category_edit_path(category) %></td>
     <td><%= link_to 'Удалить', admin_category_destroy_path(category) , :method => 'delete', data: { confirm: 'Точно?' } %></td>
 </tr>
@@ -44,6 +55,10 @@
     <th>Имя</th>
     <td>Описание</td>
     <th>Отец</th>
+    <th>SEO текст</th>
+    <th>Ссылка</th>
+    <th>Тайтл</th>
+    <td>Ссылка парсера</td>
     <th>Обновить</th>
     <th>Удалить</th>
 </tr>

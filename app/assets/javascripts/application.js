@@ -6,6 +6,8 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require chosen-jquery
+//= require scaffold
 //= require turbolinks
 //= head.min.js
 //= desktop.min.js

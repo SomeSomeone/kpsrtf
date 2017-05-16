@@ -140,4 +140,6 @@ Rails.application.routes.draw do
   post 'carts/order_create'
   post '/liqpay_payment' => 'payments#liqpay_payment'
 
+  get 'order_activate/:id' => 'carts#order_activate', :defaults => { :format => 'json' }
+
 end

@@ -31,6 +31,7 @@
 								<table class="order-total">
 									<tbody>
 										<tr>
+
 											<th scope="row">СТОИМОСТЬ ЗАКАЗА:</th>
 											<td>
 												<span id="newPriceSubtotal" class="ng-binding">0 Грн</span>
@@ -55,6 +56,12 @@
 	</div>
 	<input type="hidden" id="added_to_cart" value="">
 </main>
+<select name="" id="" class="chosen-select">
+	<option></option>
+	<option value="1">1</option>
+	<option value="2">2</option>
+	<option value="3">3</option>
+</select>
 <% content_for :javascript do %>
 <script>
 	$(document).ready(function(){
@@ -87,7 +94,7 @@
 	    			<li class="product-detail-list-item ng-scope">\
 						<div class="product-detail-list-item-image-wrapper">\
 							<div class="wrapper-inner">\
-								<a href="#" class="product-detail-list-item-image ">\
+								<a href="/single/hm-'+ this.article +'" class="product-detail-list-item-image ">\
                 <img class="product-detail-list-item-image-image" src="' + this.src + '" alt="In cart" title="In cart"></a>\
 							</div>\
 						</div>\

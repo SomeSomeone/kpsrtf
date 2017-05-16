@@ -20,8 +20,28 @@
                         </div>
                     </div>
                     <div class="form-group">
+                    <%= f.label  :polka_url , "Ссылка для парсера" , class: "col-lg-12"%>
+                        <div class="col-lg-12"><%= f.text_field :polka_url, class: 'form-control' %><span class="help-block m-b-none">Введите ссылку парсера для категории</span>
+                        </div>
+                    </div>
+                    <div class="form-group">
                     <%= f.label  :about , "Описание" , class: "col-lg-12"%>
                         <div class="col-lg-12"><%= f.text_area :about, as: :summernote , class: "summernote"  %><span class="help-block m-b-none">Введите описание категории</span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                    <%= f.label  :url , "Ссылка на латинице" , class: "col-lg-12"%>
+                        <div class="col-lg-12"><%= f.text_field :url, class: 'form-control' %><span class="help-block m-b-none">Введите ссылку </span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                    <%= f.label  :title , "Тайтл" , class: "col-lg-12"%>
+                        <div class="col-lg-12"><%= f.text_field :title, class: 'form-control' %><span class="help-block m-b-none">Введите тайтл</span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                    <%= f.label  :seo_text , "SEO описание" , class: "col-lg-12"%>
+                        <div class="col-lg-12"><%= f.text_area :seo_text, as: :summernote , class: "summernote"  %><span class="help-block m-b-none">Введите SEO описание категории</span>
                         </div>
                     </div>
                     <div class="form-group">

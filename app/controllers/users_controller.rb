@@ -91,11 +91,10 @@ class UsersController < ApplicationController
       params
     end
     def my_overview
-    	@user=current_user
-		@orders=Order.where(user_id: current_user.id).order(updated_at:  :desc)
+		@orders=Order.where(user_id: @user.id).order(updated_at:  :desc)
 	end
 	def my_order
-		@orders=Order.where(user_id: current_user.id).order(updated_at:  :desc)
+		@orders=Order.where(user_id: @user.id).order(updated_at:  :desc)
 	end
 
 end

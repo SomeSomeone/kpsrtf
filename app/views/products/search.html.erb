@@ -1,5 +1,3 @@
-<%=@search%>
-<%=@res%>
 <main role="main" class="responsive segments">
   <!-- Main -->
   <!--AEMPUBPRDEU30-->
@@ -186,5 +184,12 @@
     </div>
     <div class="parbase overlaycontainer"></div>
   </main>
-
+  <% content_for :javascript do %>
+  <script>
+  $(document).ready(function(){
+    $('.js-clickexpand').click(function(){
+      $(this).find('.expandtarget').toggle();
+    });
+  });
+  <% end %>
 

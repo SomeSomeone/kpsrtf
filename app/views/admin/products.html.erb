@@ -20,9 +20,9 @@
     <th>Основная картинка</th>
     <th>Альтернативная картинка</th>
     <th>Показывается</th>
+    <td>Категория</td>
     <th>Обновить</th>
     <th>Удалить</th>
-
 </tr>
 </thead>
 <tbody>
@@ -33,13 +33,20 @@
     <td><%=image_tag(product.img(:original) , style: 'max-height:100px;max-width:100px;')%></td>
     <td><%=image_tag(product.img_alt(:original) , style: 'max-height:100px;max-width:100px;')%></td>
     <td>
-    <% if product.visible %>
-        да
-    <% else %>        
-        нет
-    <% end %>
+        <% if product.visible %>
+            да
+        <% else %>        
+            нет
+        <% end %>
     </td>
 
+    <td>
+        <%if product.categories[0] %>
+            <%=product.categories[0].name%>
+        <%else%>
+            нет
+        <%end%>
+    </td>
     <td><%= link_to 'Обновить', admin_product_edit_path(product) %></td>
     <td class="center"><%= link_to 'Удалить', admin_product_destroy_path(product) , :method => 'delete', data: { confirm: 'Точно?' } %></td>
 </tr>
@@ -52,6 +59,7 @@
     <th>Основная картинка</th>
     <th>Альтернативная картинка</th>
     <th>Показывается</th>
+    <td>Категория</td>
     <th>Обновить</th>
     <th>Удалить</th>
 </tr>

@@ -245,10 +245,20 @@
     </div>
     <% end %>
   </div>
+  <select class="chosen-select" id="chosen-select">
+    <option value="">а</option>
+    <option value="">б</option>
+    <option value="">в</option>
+  </select>
 </main>
 <% content_for :javascript do %>
 <script>
   $(document).ready(function(){
+    // novapost_request
+    // $( "#chosen-select" ).keypress(function() {
+    //   console.log( "Handler for .keypress() called." );
+    // });
+    // end
     cartsItems = JSON.parse(localStorage.getItem('myCart'));
     $('#order_json').val(JSON.stringify(cartsItems));
     if(cartsItems){

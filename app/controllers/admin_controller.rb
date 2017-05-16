@@ -4,7 +4,7 @@ class AdminController < ApplicationController
 	def index
 	end
 	def orders
-		@orders=Order.all
+		@orders=Order.all.order(updated_at:  :desc)
 	end
 	def colors
 		@colors=Color.all
@@ -180,7 +180,7 @@ class AdminController < ApplicationController
 	def color_create
 		@color = Color.new(color_params)
 	    respond_to do |format|
-	      if @color.save
+	      if @color.save!
 	        format.html {redirect_to controller:"admin", action:"colors", id:  @color.id , notice: 'Цвет успешно создан ' }
 	        format.json { render :show, status: :created, location: @color }
 	      else
@@ -430,6 +430,8 @@ class AdminController < ApplicationController
 	      if @order.update(order_params)
 	      	@user.money+=@order.cash_back
 	      	@user.save
+	      	@order.bool_factor=false
+	      	@order.save
 	        format.html {redirect_to controller:"admin", action:"orders", id:  @order.id , notice: 'Заказ был успешно обновлён' }
 	        format.json { render :show, status: :created, location: @order }
 	      else
@@ -543,7 +545,7 @@ class AdminController < ApplicationController
       params.require(:main_color).permit(:name , :hex)
     end
     def category_params
-      params.require(:category).permit(:name ,:parent_id ,:pop_id , :about)
+      params.require(:category).permit(:name ,:category_id ,:pop_id , :about ,:polka_url , :seo_text , :url , :title)
     end
     def photo_params
    		params.require(:photo).permit(:img)

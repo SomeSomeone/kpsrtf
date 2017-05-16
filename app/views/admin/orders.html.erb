@@ -25,11 +25,16 @@
     <th>Дата заказа</th>
     <th>Обновить</th>
     <th>Удалить</th>
+    <th>Заказ</th>
 </tr>
 </thead>
 <tbody>
 <% @orders.each do | order | %>
-<tr class="gradeX">
+<%if order.bool_factor%>
+<tr class="gradeX" style="background: #FFCDD2">
+<%else%>
+<tr class="gradeX" >
+<%end%>
     <td><%= order.id %></td>
     <td><%= order.address %></td>
     <td>
@@ -43,6 +48,65 @@
     <td><%= order.created_at.to_s(:db) %></td>
     <td><%= link_to 'Обновить', admin_order_edit_path(order) %></td>
     <td class="center"><%= link_to 'Удалить', admin_order_destroy_path(order) , :method => 'delete', data: { confirm: 'Точно?' } %></td>
+    <td><% order.orders_product_data.each do |opd| %><% end %></td>
+
+                <% if order.orders_product_data %>
+                
+                            <ul class="order-products product-detail-list responsive">
+                                <% order.orders_product_data.each do |opd| %>
+                                <li>
+                                    <a href=><%=opd.product_datum.price%> Грн</a>
+                                    <h3 ><%=opd.product_datum.product.name%></h3>
+                                            <p class="product-detail-list-item-total-price">
+                                                Итого:
+                                                <span class="amount"><%= opd.product_datum.price*opd.count%> Грн</span>
+                                            </p>
+                                    
+                                        <p class="product-detail-price"></p>
+                                        <p class="product-detail-price"></p>
+                                        <p></p>
+
+                                        <dl class="product-detail-list-item-details-list">
+
+                                            <dt>№ арт.:</dt>
+                                            <dd><%=opd.product_datum.article%></dd>
+
+                                            <dt>Цвет:</dt>
+                                            <dd><%=opd.product_datum.color.name%></dd>
+
+                                            <dt>Количество:</dt>
+                                            <dd><%= opd.count %></dd>
+
+                                            <dt>Размер:</dt>
+                                            <dd><%=opd.product_size.size%></dd>
+
+                                        </dl>
+                                    </div>
+                                </li>
+                                <% end %>
+                            </ul>
+                <% end %>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 </tr>
 <% end %>
 </tbody>
@@ -57,6 +121,7 @@
     <th>Дата заказа</th>
     <th>Обновить</th>
     <th>Удалить</th>
+    <th>Заказ</th>
 </tr>
 </tfoot>
 </table>

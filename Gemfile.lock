@@ -59,6 +59,10 @@ GEM
       xpath (~> 2.0)
     childprocess (0.7.0)
       ffi (~> 1.0, >= 1.0.11)
+    chosen-rails (1.5.2)
+      coffee-rails (>= 3.2)
+      railties (>= 3.0)
+      sass-rails (>= 3.2)
     climate_control (0.1.0)
     cocaine (0.5.8)
       climate_control (>= 0.0.3, < 1.0)
@@ -216,6 +220,7 @@ DEPENDENCIES
   bootstrap-sass (~> 3.3.7)
   byebug
   capybara (~> 2.13.0)
+  chosen-rails
   cocoon
   coffee-rails (~> 4.2)
   devise (~> 4.2, >= 4.2.1)
