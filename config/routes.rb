@@ -91,7 +91,18 @@ Rails.application.routes.draw do
   patch 'admin/footer_section_update/:id'=> 'admin#footer_section_update', :as => :admin_footer_section_update
   delete 'admin/footer_section_destroy/:id'=> 'admin#footer_section_destroy' , :as => :admin_footer_section_destroy
 
+  get 'admin/campaings'
+  get 'admin/campaing_new'
+  post 'admin/campaing_create'
+  get 'admin/campaing_edit/:id'=> 'admin#campaing_edit', :as => :admin_campaing_edit
+  patch 'admin/campaing_update/:id'=> 'admin#campaing_update', :as => :admin_campaing_update
+  delete 'admin/campaing_destroy/:id'=> 'admin#campaing_destroy' , :as => :admin_campaing_destroy
 
+
+
+  get 'admin/options' => 'admin#options'
+  get 'admin/option_edit/:id'=> 'admin#option_edit', :as => :admin_admin_option_edit
+  patch 'admin/option_update/:id'=> 'admin#option_update', :as => :admin_admin_option_update
 
 
   # pages
@@ -138,7 +149,7 @@ Rails.application.routes.draw do
   
   get "liqpay_request" => 'carts#liqpay_request'
   post 'carts/order_create'
-  post '/liqpay_payment' => 'payments#liqpay_payment'
+  post '/liqpay_payment' => 'carts#liqpay_payment', :defaults => { :format => 'json' }
 
   get 'order_activate/:id' => 'carts#order_activate', :defaults => { :format => 'json' }
 

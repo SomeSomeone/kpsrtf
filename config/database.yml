@@ -82,7 +82,7 @@ production:
   <<: *default
   host: localhost
   adapter: postgresql
-  encoding: utf8
+  encoding: utf-8
   database: hm_production
   pool: 5
   username: hm_user

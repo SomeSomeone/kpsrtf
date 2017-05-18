@@ -1,13 +1,9 @@
-
-
-
-
   <main role="main" class="">
     <div class="wrapper">
       <nav class="breadcrumbs">
         <ul>
           <li>
-            <a href="/ru_ru/">HM.COM</a>
+            <a href="/">YourHM.COM</a>
           </li>
 
           <li class="">
@@ -30,49 +26,45 @@
       Пожалуйста, заполните данные кириллицей и в соответствии с паспортом
     </div>
     <%= semantic_form_for @order, :url => carts_order_create_path(@order) do |f| %>
-    <div class="layout ng-scope" ng-controller="CheckoutContextController">
+    <div class="layout ng-scope">
       <div class="row">
         <div class="grid col-8">
-          <section id="checkoutAddressPartDiv" class="box checkout-section responsive checkout-address-section">
+          <section class="box checkout-section responsive checkout-address-section">
             <header class="box-headline checkout-address-section-header">
               <h1 class="heading">Мои данные</h1>
             </header>
-            <div class="address_hidden hidden">
+            <div class="address_hidden <% if @user.first_name && @user.second_name && @user.tel && @address.city && @address.post_index %> hidden <% end %>">
               <fieldset class="form-part">
                 <legend class="heading">ЛИЧНЫЕ СВЕДЕНИЯ</legend>
                 <div class="two modules">
                   <div>
                     <div class="inputwrapper required">
                       <label class="label" for="checkout.firstName">Имя</label>
-                      <!-- ngIf: true -->
-                      <div class="input-field-info ng-scope ng-hide">
-                        <span class="input-field-info-description hidden">Это поле необходимо заполнить латиницей</span>
+                      <div class="input-field-info">
+                        <span class="input-field-info-description hidden">Это поле необходимо заполнить кирилицей</span>
                       </div>
-                      <input required="" type="text" data-validation-maxlength="75" data-validation-regex="^(?:\s*)[^:“”\u0022;!@$%^&amp;*()_+={}\[<>
-                      ,.?`~|\]\\\/]+(\s+[^\s\d:“”\u0022;!@$%^&amp;*()_+={}\[<>,.?`~|\]\\\/]+)*(?:\s*)$" data-validation-maxlength-text="" data-validation-required-text="Пожалуйста, укажите имя. " data-validation-regex-text="Пожалуйста, введите снова без пробелов" id="newBillingAddress-firstName" name="firstName" maxlength="75" class="text-input field firstName  ng-pristine ng-untouched ng-invalid ng-invalid-required ng-valid-maxlength" autocomplete="given-name" value="<%= @user.first_name %>">
+                      <input type="text" name="firstName" class="text-input field firstName" value="<%= @user.first_name %>">
                       <div class="input-info"></div>
-                      <span class="static ng-binding ng-hide"></span>
+                      <span class="static"></span>
                     </div>
+
                     <div class="inputwrapper optional">
                       <label class="label" for="checkout.middleName">Отчество</label>
-                      <div class="input-field-info ng-scope ng-hide">
-                        <span class="input-field-info-description hidden">Это поле необходимо заполнить латиницей</span>
+                      <div class="input-field-info">
+                        <span class="input-field-info-description hidden">Это поле необходимо заполнить кирилицей</span>
                       </div>
-                      <input type="text" data-validation-maxlength="75" data-validation-regex="^(?:\s*)[^:“”\u0022;!@$%^&amp;*()_+={}\[<>
-                      ,.?`~|\]\\\/]+(\s+[^\s\d:“”\u0022;!@$%^&amp;*()_+={}\[<>,.?`~|\]\\\/]+)*(?:\s*)$" data-validation-maxlength-text="   " data-validation-required-text=" " data-validation-regex-text="" id="newBillingAddress-middleName" name="middleName" maxlength="75" class="text-input field middleName  ng-pristine ng-untouched ng-valid ng-valid-maxlength" autocomplete="" value="<%= @user.father %>">
-                      <div class="input-info">Укажите Ваше отчество здесь</div>
-                      <span class="static ng-binding ng-hide"></span>
+                      <input type="text" name="middleName" class="text-input field middleName" value="<%= @user.father %>">
+                      <span class="static"></span>
                     </div>
 
                     <div class="inputwrapper required">
                       <label class="label" for="checkout.lastName">Фамилия</label>
-                      <div class="input-field-info ng-scope ng-hide">
-                        <span class="input-field-info-description hidden">Это поле необходимо заполнить латиницей</span>
+                      <div class="input-field-info">
+                        <span class="input-field-info-description hidden">Это поле необходимо заполнить кирилицей</span>
                       </div>
-                      <input required="" type="text" data-validation-maxlength="150" data-validation-regex="^(?:\s*)[^:“”\u0022;!@$%^&amp;*()_+={}\[<>
-                      ,.?`~|\]\\\/]+(\s+[^\s\d:“”\u0022;!@$%^&amp;*()_+={}\[<>,.?`~|\]\\\/]+)*(?:\s*)$" data-validation-maxlength-text="   " data-validation-required-text="Пожалуйста, укажите фамилию. " data-validation-regex-text="Пожалуйста, введите снова без пробелов" id="newBillingAddress-lastName" name="lastName" maxlength="150" class="text-input field lastName  ng-pristine ng-untouched ng-invalid ng-invalid-required ng-valid-maxlength" autocomplete="family-name" value="<%= @user.second_name %>">
+                      <input type="text" name="lastName" class="text-input field lastName" value="<%= @user.second_name %>">
                       <div class="input-info"></div>
-                      <span class="static ng-binding ng-hide"></span>
+                      <span class="static"></span>
                     </div>
                   </div>
                   <div>
@@ -81,10 +73,20 @@
                       <p class="static checkout-email-address ng-binding"><%= @user.email %></p>
                     </div>
 
+                    <div class="inputwrapper required">
+                      <label class="label" for="checkout.lastName">Номер телефона</label>
+                      <div class="input-field-info">
+                        <span class="input-field-info-description hidden">Это поле необходимо заполнить кирилицей</span>
+                      </div>
+                      <input type="text" name="tel" class="text-input field tel" value="<%= @user.tel %>">
+                      <div class="input-info"></div>
+                      <span class="static"></span>
+                    </div>
+
                     <div class="inputwrapper select-date  optional" ng-class="false ? 'required' : 'optional'">
                       <label class="label" for="myhm-dob">Дата рождения</label>
                       <input class="form-control" value="<%= @user.date %>" type="date" name="user-date" id="user_date">
-                      <span class="static ng-binding ng-hide"></span>
+                      <span class="static"></span>
                     </div>
                   </div>
                 </div>
@@ -100,27 +102,25 @@
                   <div>
                     <div class="inputwrapper required">
                       <%= h.label  :city , "Город" , class: "label"%>
-                      <!-- ngIf: true -->
-                      <div class="input-field-info ng-scope">
-                        <span class="input-field-info-description hidden">Это поле необходимо заполнить латиницей</span>
-                      </div>
-                      <!-- end ngIf: true -->
-                      <%= h.text_field :city , html: {"required" => "" , "type"=> "text",  "data-validation-maxlength" => "40", "data-validation-regex" => "^(?:\s*)[^\s“”\u0022;]+[^“”\u0022;]*(?:\s*)$" , " data-validation-maxlength-text" => "" , "data-validation-required-text" => "Пожалуйста, укажите адрес. " , "data-validation-regex-text" => "Удалить первый пробел" , "id" => "newBillingAddress-line1", "name"=> "mainCity", "maxlength" => "40", "class" => "text-input field line1  ng-pristine ng-untouched ng-invalid ng-invalid-required ng-valid-maxlength" , "autocomplete"=> "address-line1" ,  "value"=> @address.city }%>
-                      <div class="input-info"">При заполнении указывайте область, район и населенный пункт</div>
-                      <span class="static ng-binding ng-hide"></span>
+                      <span class="static"></span>
+                        <% if @address.city %>
+                        <%= h.select(:city, [[@address.city , @address.city ]], {} ,{ :class => "chosen-select"}) %>
+                        <% elsif %>
+                        <%= h.select(:city, [['Ваш адрес' , '' ]], {} ,{ :class => "chosen-select"}) %>
+                        <% end %>
+                        <div class="input-info"">При заполнении указывайте область, район и населенный пункт</div>
                     </div>
                   </div>
                   <div>
                     <div class="inputwrapper required">
                       <%= h.label  :post_index , "Отделение Новой почты" , class: "label"%>
-                      <!-- ngIf: true -->
-                      <div class="input-field-info ng-scope ng-hide" ng-if="true">
-                        <span class="input-field-info-description hidden">Это поле необходимо заполнить латиницей</span>
-                      </div>
-                      <!-- end ngIf: true -->
-                      <%= h.text_field :post_index ,  html: {"class"=>"text-input field town  ng-pristine ng-untouched ng-invalid ng-invalid-required ng-valid-maxlength", 'value'=>@address.post_index }%>
+                      <% if @address.post_index %>
+                      <%= h.select(:post_index, [[@address.post_index , @address.post_index ]], {} ,{ :class => "chosen-select-addrr"}) %>
+                      <% elsif %>
+                      <%= h.select(:post_index, [['Отделение Новой Почты' , '' ]], {} ,{ :class => "chosen-select-addrr"}) %>
+                      <% end %>
                       <div class="input-info">Укажите номер отделения Новой почты</div>
-                      <span class="static ng-binding ng-hide"></span>
+                      <span class="static"></span>
                     </div>
                   </div>
                 </div>
@@ -139,10 +139,10 @@
                   </div>
                 </div>
                 <!-- <input type="submit" id="submitBillingAddress" value="ПЕРЕЙТИ К РАЗДЕЛУ &quot;ДОСТАВКА&quot;" data-validation-text="Эту форму не удалось отправить. Пожалуйста, проверьте указанную Вами информацию."> -->
-                <button class="save_new_data">Сохранить</button>
+                <a class="save_new_data">Сохранить</a>
               </div>
             </div>
-            <div class="read-only row">
+            <div class="read-only row <% if !@user.first_name || !@user.second_name || !@user.tel || !@address.city || !@address.post_index %> hidden <% end %>">
               <div class="grid col-4">
                 <div class="box-content">
                   <h3 class="checkout-header-text">ЛИЧНЫЕ СВЕДЕНИЯ</h3>
@@ -151,7 +151,7 @@
                     <br>
                     <%= @user.email %>
                     <br>
-                    <%= @user.date %>
+                    <%= @user.tel %>
                   </div>
                 </div>
               </div>
@@ -168,10 +168,10 @@
                 </div>
               </div>
             </div>
-            <button id="checkoutAddressPartEdit" type="button" class="link responsive navigate icon-caret-right edit-toggle ng-scope"> 
-        Редактировать</button>
+            <button type="button" class="link responsive navigate icon-caret-right edit-toggle"> 
+        Редактирование</button>
           </section>
-          <section id="checkoutDeliveryPartDiv" class="box checkout-section checkout-delivery-section responsive">
+          <section class="box checkout-section checkout-delivery-section responsive">
             <header class="box-headline checkout-delivery-section-header">
               <h1 class="heading">ДОСТАВКА</h1>
             </header>
@@ -192,8 +192,16 @@
             input[type=text]+.input-info.invalid.field-validation-message{
               margin-top:0px;
             }
+            .save_new_data{
+              background: #000;
+              color: #fff;
+              padding: 8px 20px;
+            }
             </style>
-          <section id="checkoutPaymentPartDiv" class="box checkout-section checkout-payment-section responsive">
+          <%= semantic_form_for @order, :url => carts_order_create_path(@order) do |f| %>
+          Введите скидочный код:
+          <%= f.text_field :campaign_code, class: 'form-control' %>
+          <section class="box checkout-section checkout-payment-section responsive">
             <header class="box-headline checkout-payment-section-header">
               <h1 class="heading">Способ оплаты</h1>
             </header>
@@ -203,7 +211,6 @@
                 Выберите способ оплаты
                 </br>
                 <div class="select-primary product-detail-list-item-quantity">
-                <%= semantic_form_for @order, :url => carts_order_create_path(@order) do |f| %>
                   <%= select("money","money" , @payment, {} ) %>
                   <%= f.hidden_field :json, class: 'form-control' %>
                 <!-- <select name="" id="">
@@ -211,6 +218,8 @@
                   <option value="privat24">Оплата через терминал ПриватБанка или Приват24</option>
                 </select> -->
                 </div>
+
+
                 </div>
               </div>
             </div>
@@ -220,7 +229,7 @@
         </div>
         
         <div class="grid col-4">
-          <div class="box checkout-order" id="checkoutOrderPartDiv">
+          <div class="box checkout-order">
             <h2 class="box-headline">ВАШ ЗАКАЗ</h2>
             <ul class="checkout-order-items">
 
@@ -230,7 +239,7 @@
                 <tfoot>
                   <tr class="total">
                     <th scope="row">СТОИМОСТЬ ЗАКАЗА:</th>
-                    <td id="total_price_of_basket">2598 Грн</td>
+                    <td id="total_price_of_basket">0 Грн</td>
                   </tr>
                 </tfoot>
               </table>
@@ -245,19 +254,64 @@
     </div>
     <% end %>
   </div>
-  <select class="chosen-select" id="chosen-select">
-    <option value="">а</option>
-    <option value="">б</option>
-    <option value="">в</option>
-  </select>
 </main>
 <% content_for :javascript do %>
 <script>
   $(document).ready(function(){
+    $('.edit-toggle').click(function(){
+      $('.address_hidden, .read-only').toggle();
+    });
     // novapost_request
-    // $( "#chosen-select" ).keypress(function() {
-    //   console.log( "Handler for .keypress() called." );
-    // });
+    $(".chosen-search input").keyup(function(){
+      // console.log($(this).val());
+      var letterVal = $(this).val();
+      var nova = {
+        "modelName": "Address",
+        "calledMethod": "searchSettlements",
+        "methodProperties": {
+            "CityName": $(this).val()
+        },
+        "apiKey": "993750c8658bf925309d3c781906709e"
+      }
+      nova = JSON.stringify(nova);
+      $.ajax('https://api.novaposhta.ua/v2.0/json/', {type: 'POST', data: nova,  success: function(req){
+        // console.log(req.responseText)
+        $('.chosen-select option').remove();
+        $.each(req.data[0].Addresses, function(index){
+          console.log(this['DeliveryCity']);
+          $('.chosen-results').append('<li class="active-result" data-option-array-index="' + index + '">' + this['MainDescription'] + ' ' + this['Region'] + ' район ' + this['Area'] + ' область' + '</li>');
+          $('.chosen-select').append('<option data-city-ref="' + this['DeliveryCity'] + '">' + this['MainDescription'] + ' ' + this['Region'] + ' район ' + this['Area'] + ' область' + '</option>');
+        });
+        // console.log(req.data[0].Addresses);
+        $('.chosen-select').trigger('chosen:updated');
+        $('.chosen-search input').val(letterVal);
+       }}
+      );
+    });
+    $(".chosen-select-addrr").chosen({width: "100%"});
+    $('.chosen-select').on('change', function() {
+        $('.chosen-select-addrr option').remove();
+        var c_ref = $('#address_city option').filter(':selected').attr('data-city-ref');
+        console.log(c_ref);
+        var nova_addrr = {
+          "modelName": "AddressGeneral",
+          "calledMethod": "getWarehouses",
+          "methodProperties": {
+               "CityRef": c_ref
+          },
+          "apiKey": "993750c8658bf925309d3c781906709e"
+        }
+      nova_addrr = JSON.stringify(nova_addrr);
+      $.ajax('https://api.novaposhta.ua/v2.0/json/', {type: 'POST', data: nova_addrr,  success: function(addrrReq){
+        console.log(addrrReq);
+         $.each(addrrReq.data, function(index){
+          console.log(this['Description']);
+          $('#address_post_index .chosen-results').append('<li class="active-result" data-option-array-index="' + index + '">' + this['Description'] + '</li>');
+          $('.chosen-select-addrr').append('<option>' + this['Description'] + '</option>');
+        })
+         $('.chosen-select-addrr').trigger('chosen:updated');
+      }});
+      });
     // end
     cartsItems = JSON.parse(localStorage.getItem('myCart'));
     $('#order_json').val(JSON.stringify(cartsItems));

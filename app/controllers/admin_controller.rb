@@ -33,6 +33,12 @@ class AdminController < ApplicationController
 	def pages
 		@pages=Page.all
 	end
+	def options
+		@admin_options=AdminOption.all
+	end
+	def campaings
+		@campaings=Campaign.all
+	end
 	def product_new
 		@product = Product.new
 		@product.product_datum.build
@@ -275,6 +281,7 @@ class AdminController < ApplicationController
 		@category=Category.find(params[:id])
 		@categories=Category.all
 		@pops=Pop.all
+		@baners=Baner.all
 	end
 	def category_update
 		@category = Category.find(params[:id])
@@ -525,13 +532,69 @@ class AdminController < ApplicationController
 		end
 	end
 
+
+	def campaing_new
+		@campaing=Campaign.new
+	end
+	def campaing_create
+		@campaing=Campaign.new(campaing_params)
+		#@campaing.period = Date.new event["period(1i)"].to_i, event["period(2i)"].to_i, event["period(3i)"].to_i, event["period(4i)"].to_i , event["period(5i)"].to_i
+	    respond_to do |format|
+	      if @campaing.save
+	        format.html {redirect_to controller:"admin", action:"campaings", id:  @campaing.id , notice: 'Банер был успешно создан' }
+	        format.json { render :show, status: :created, location: @campaing }
+	      else
+	        format.html { render :new }
+	        format.json { render json: @campaing.errors, status: :unprocessable_entity }
+	      end
+	    end
+	end
+	def campaing_edit
+		@campaing=Campaign.find(params[:id])
+	end
+	def campaing_update
+		@campaing=Campaign.find(params[:id])
+	    respond_to do |format|
+	      if @campaing.update(campaing_params)
+	        format.html {redirect_to controller:"admin", action:"campaings", id:  @campaing.id , notice: 'Банер был успешно обновлён' }
+	        format.json { render :show, status: :created, location: @campaing }
+	      else
+	        format.html { render :edit }
+	        format.json { render json: @campaing.errors, status: :unprocessable_entity }
+	      end
+	    end
+	end
+	def campaing_destroy
+		@campaing=Campaign.find(params[:id])
+		@campaing.destroy
+		respond_to do |format|
+		  format.html { redirect_to controller:"admin", action:"campaings", notice: 'Банер был успешно удалён' }
+		  format.json { head :no_content }
+		end
+	end
+
+
 	def send_message
 		@order=Order.find(params[:id])
 		@user = @order.user
 		RootMailer.cart_email(@user).deliver_now
 	end
 
-
+	def option_edit
+		@admin_option=AdminOption.find(params[:id])
+	end
+	def option_update
+		@admin_option=AdminOption.find(params[:id])
+	    respond_to do |format|
+	      if @admin_option.update(admin_options_params)
+	        format.html {redirect_to controller:"admin", action:"options", id:  @admin_option.id , notice: 'Банер был успешно обновлён' }
+	        format.json { render :show, status: :created, location: @admin_option }
+	      else
+	        format.html { render :edit }
+	        format.json { render json: @admin_option.errors, status: :unprocessable_entity }
+	      end
+	    end
+	end
 	def page_params
 	  params.require(:page).permit( :link, :name , :content ,:order)
 	end
@@ -545,7 +608,7 @@ class AdminController < ApplicationController
       params.require(:main_color).permit(:name , :hex)
     end
     def category_params
-      params.require(:category).permit(:name ,:category_id ,:pop_id , :about ,:polka_url , :seo_text , :url , :title)
+      params.require(:category).permit(:name ,:category_id ,:pop_id , :baner_id , :about ,:polka_url , :seo_text , :url , :title)
     end
     def photo_params
    		params.require(:photo).permit(:img)
@@ -554,7 +617,7 @@ class AdminController < ApplicationController
    		params.require(:product_size).permit(:size)
    	end
    	def order_params
-   		params.require(:order).permit(:status , :cash_back )
+   		params.require(:order).permit(:status , :cash_back , :about)
    	end
    	def baner_params
    		params.require(:baner).permit( :name ,:text , :photo_id , :number)
@@ -564,5 +627,11 @@ class AdminController < ApplicationController
    	end
    	def footer_sections_params
    		params.require(:footer_section).permit(:order , :text , :see_all , :visible)
+   	end
+   	def admin_options_params
+   		params.require(:admin_option).permit(:value)
+   	end
+   	def campaing_params
+   		params.require(:campaign).permit(:code, :value, :number, :inf_number, "period(1i)" ,"period(2i)" , "period(3i)", "period(4i)", "period(5i)", :inf_period)   		
    	end
 end

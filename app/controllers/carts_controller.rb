@@ -1,5 +1,6 @@
 class CartsController < ApplicationController
 	before_action :authenticate_user! , :only => [:create_order, :diver , :order ]
+	protect_from_forgery with: :null_session
 	def order_create
 		puts params
 		@order=Order.new(order_params)
@@ -10,8 +11,8 @@ class CartsController < ApplicationController
 	    
 	      	@address = Address.where(user: current_user)[0]||Address.new
 	      	
-	      	@address.city=order_address_params["city"]
-	      	@address.post_index=order_address_params["post_index"]
+	      	@address.city=order_address_params["city"]||@address.city
+	      	@address.post_index=order_address_params["post_index"]||@address.post_index
 	      	@address.user=@order.user
 	      	@address.save
 	      	@order.address_ref = @address
@@ -21,6 +22,7 @@ class CartsController < ApplicationController
 	    respond_to do |format|
 	      if @order.save
 	      	@order.sum=0
+	      	@order.polka_sum=0
 	      	if data && data!=[]
 		      	data.each { |d|
 		      		a=OrdersProductDatum.new
@@ -29,10 +31,25 @@ class CartsController < ApplicationController
 		      		a.product_datum_id=d['id']
 		      		a.product_size=ProductSize.find_by(size: d['size'])
 		      		pd = ProductDatum.find(d['id'])
-		      		@order.sum += (pd.promotional_price||pd.price)*a.count
+		      		if pd.get_promotional_price and pd.get_promotional_price>0
+		      			@order.sum += pd.get_promotional_price*a.count
+		      			@order.polka_sum+=pd.promotional_price*a.count
+		      		else
+		      			@order.sum += pd.get_price*a.count
+		      			@order.polka_sum+= pd.price*a.count
+		      		end
+		      		
 		      		a.save
 		      	}
 	      	end
+	      	persent=Campaign.find_by(code: order_params[:campaign_code])
+
+	      	if persent and persent.actual? and (Order.find_by(user: current_user , campaign_id: persent.id)).nil?
+	      		persent.get_one
+      			@order.sum=@order.sum*(1-persent.value/100)
+      			@order.campaign_id=persent.id
+	      	end
+
 	      	@order.save        
 
 	      	RootMailer.cart_email(@user , @order).deliver_now
@@ -55,7 +72,8 @@ class CartsController < ApplicationController
 												:currency => 'UAH',
 												:order_id => @order.id,
 												:description => 'Ваш заказ',
-												server_url: liqpay_payment_url
+												server_url: liqpay_payment_url,
+												:sandbox => 1
 												)
 		#:server_url => liqpay_payment 
 	end
@@ -97,7 +115,7 @@ class CartsController < ApplicationController
 	    format.json  { render :json => msg }
 	end
 	def order_params
-   		params.require(:order).permit(:json)
+   		params.require(:order).permit(:json , :campaign_code)
    	end
    	def order_address_params
    		params.require(:order).require(:address_ref_attributes)

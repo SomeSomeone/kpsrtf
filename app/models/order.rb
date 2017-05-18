@@ -4,4 +4,6 @@ class Order < ActiveRecord::Base
   attr_accessor :json
   belongs_to :address_ref , class_name: "Address" , foreign_key: "address_id"
   accepts_nested_attributes_for :address_ref
+  attr_accessor :campaign_code
+  has_one :campaign
 end

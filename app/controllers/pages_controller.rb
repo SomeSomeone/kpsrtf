@@ -1,7 +1,7 @@
 class PagesController < ApplicationController
   
   def index
-    @products=Product.order("updated_at").where( visible: true).limit(8)
+    @products=Product.order(updated_at: :desc).where( visible: true).limit(8)
     @baners=Baner.where.not(number:  nil).order(number:  :desc)
   end
   def page

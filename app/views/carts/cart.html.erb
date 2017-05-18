@@ -4,7 +4,7 @@
 		<nav class="breadcrumbs">
 			<ul>
 				<li>
-					<a href="/ru_ru/">Yourhm.com.ua</a>
+					<a href="/">Yourhm.com.ua</a>
 				</li>
 				<li class="active">
 					<a href="#" onclick="return false;">КОРЗИНА</a>
@@ -15,14 +15,18 @@
 		<header class="checkout-header">
 			<h1>КОРЗИНА</h1>
 		</header>
-		<div class="row sticky-wrapper ng-scope" ng-controller="CartContextController">
-			<div class="grid col-8">
+		<div class="row sticky-wrapper ng-scope flex-mother" ng-controller="CartContextController">
+			<div class="grid col-8 empty_cart">
 				<h2 class="visuallyhidden">Товары в корзине</h2>
-				<ul class="product-detail-list responsive ng-scope" id="cartPage-items">
-
-				</ul>
+				<ul class="product-detail-list responsive ng-scope too-empty" id="cartPage-items"></ul>
+				<div class="box-content shopping-bag-empty">
+					<h2>ВАША КОРЗИНА ПУСТА!</h2>
+					<div ng-if="getContext().anonymousUser" class="ng-scope">
+						Зарегистрируйтесь, чтобы сохранить выбранные товары или получить доступ к уже сохраненным товарам в Вашей корзине.
+					</div>
+				</div>
 			</div>
-			<div id="cartPage-summary" class="grid col-4">
+			<div id="cartPage-summary" class="grid col-4 flex-child-cart">
 				<div class="shopping-bag-order-total sticky-on-scroll semi-sticky" data-sticky-offset="-20" data-sticky-stop-offset="-70">
 					<div class="box">
 						<h2 class="box-headline">ОБЩАЯ СТОИМОСТЬ ТОВАРОВ В КОРЗИНЕ</h2>
@@ -56,16 +60,9 @@
 	</div>
 	<input type="hidden" id="added_to_cart" value="">
 </main>
-<select name="" id="" class="chosen-select">
-	<option></option>
-	<option value="1">1</option>
-	<option value="2">2</option>
-	<option value="3">3</option>
-</select>
 <% content_for :javascript do %>
 <script>
 	$(document).ready(function(){
-		
 		cartsItems = JSON.parse(localStorage.getItem('myCart'));
 		$('#added_to_cart').val(JSON.stringify(cartsItems));
 		var item_summ;

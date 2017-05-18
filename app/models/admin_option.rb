@@ -1,0 +1,2 @@
+class AdminOption < ApplicationRecord
+end

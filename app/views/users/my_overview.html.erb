@@ -1,100 +1,241 @@
-	<main role="main" class="hm-club-overview my-hm responsive">
-		<div class="wrapper">
-			<nav class="breadcrumbs">
-				<ul>
-					<li>
+<style>
+	.i_pay{
+		position: absolute;
+		padding: 6px 10px;
+		background-color: #008200;
+		color: #fff;
+		font-weight: 600;
+		top: 15px;
+		z-index: 9999;
+		left: 50%;
+		transform: translateX(-50%);
+		cursor: pointer;
+	}
+	.order-item{
+		position: relative;
+	}
+</style>
+<main role="main" class="hm-club-overview my-hm responsive">
+	<div class="wrapper">
+		<nav class="breadcrumbs">
+			<ul>
+				<li>
 
-						<a href="#">Yourhm.com.ua</a>
-					</li>
+					<a href="#">Yourhm.com.ua</a>
+				</li>
 
-					<li class="">
-						<a href="#">Ваша учетная запись</a>
-					</li>
-					<li class="active">
-						<a href="#" onclick="return false;">Обзор</a>
-					</li>
-				</ul>
-			</nav>
-			<nav class="section navigation menu " role="navigation">
-				<ul role="menu">
-					<li class="current item" role="presentation" tabindex="0">
-						<a href="/my-overview" role="menuitem">Обзор</a>
-					</li>
-					<li class="item" role="presentation" tabindex="-1">
-						<a href="/my-profile" role="menuitem">Личные сведения</a>
-					</li>
-					<li class="item" role="presentation" tabindex="-1">
-						<a href="/my-order" role="menuitem">Заказы</a>
-					</li>
-					<li class="item" role="presentation" tabindex="-1">
-						<a href="/my-address" role="menuitem">Адресная книга</a>
-					</li>
-				</ul>
-			</nav>
-			<div class="layout ng-scope" ng-controller="MyOverviewController">
-				<div class="modules sidebarpluscontent">
-					<aside role="presentation">
-						<section class="responsive club-user">
-							<div class="greeting">
-								<header class="module-heading">
-									<h1 class="module-heading-title">Здравствуйте
-									<%if (@user.first_name) %>
-										, <%=@user.first_name%>
-									<%end%>
-									!</h1>
-								</header>
-								<div class="module-content">
-									<p>
-										Приветствуем Вас! Это — Ваша персональная инфопанель H&amp;M, где Вы можете обновить Ваши персональные данные и платежные реквизиты, а также просмотреть информацию о Ваших заказах
-									</p>
-								</div>
-							</div>
+				<li class="">
+					<a href="#">Ваша учетная запись</a>
+				</li>
+				<li class="active">
+					<a href="#" onclick="return false;">Обзор</a>
+				</li>
+			</ul>
+		</nav>
+		<nav class="section navigation menu " role="navigation">
+			<ul role="menu">
+				<li class="current item" role="presentation" tabindex="0">
+					<a href="/my-overview" role="menuitem">Обзор</a>
+				</li>
+				<li class="item" role="presentation" tabindex="-1">
+					<a href="/my-profile" role="menuitem">Личные сведения</a>
+				</li>
+				<li class="item" role="presentation" tabindex="-1">
+					<a href="/my-order" role="menuitem">Заказы</a>
+				</li>
+				<li class="item" role="presentation" tabindex="-1">
+					<a href="/my-address" role="menuitem">Адресная книга</a>
+				</li>
+			</ul>
+		</nav>
+		<div class="layout ng-scope" ng-controller="MyOverviewController">
+			<div class="modules sidebarpluscontent">
+				<aside role="presentation">
+					<section class="responsive club-user">
+						<div class="greeting">
 							<header class="module-heading">
-								<h1 class="module-heading-title" id="personal-details-title">ЛИЧНЫЕ СВЕДЕНИЯ</h1>
+								<h1 class="module-heading-title">Здравствуйте
+								<%if (@user.first_name) %>
+									, <%=@user.first_name%>
+								<%end%>
+								!</h1>
 							</header>
 							<div class="module-content">
-								<dl role="person" class="user-details">
-									<dt>Эл. Почта</dt>
+								<p>
+									Приветствуем Вас! Это — Ваша персональная инфопанель H&amp;M, где Вы можете обновить Ваши персональные данные и платежные реквизиты, а также просмотреть информацию о Ваших заказах
+								</p>
+							</div>
+						</div>
+						<header class="module-heading">
+							<h1 class="module-heading-title" id="personal-details-title">ЛИЧНЫЕ СВЕДЕНИЯ</h1>
+						</header>
+						<div class="module-content">
+							<dl role="person" class="user-details">
+								<dt>Эл. Почта</dt>
+								<dd>
+									<span><%=@user.email%></span>
+								</dd>
+								<%if @user.tel%>
+									<dt>Номер телефона</dt>
 									<dd>
-										<span><%=@user.email%></span>
+										<span><%=@user.tel%></span>
 									</dd>
-									<%if @user.tel%>
-										<dt>Номер телефона</dt>
-										<dd>
-											<span><%=@user.tel%></span>
-										</dd>
-									<%end%>
-								</dl>
-							</div>
-							<a href="/my-profile" id="personal-details-title-link" class="navigate button">Смотреть еще</a>
-						</section>
-					</aside>
-					<div>
-						<section class="responsive orders-summary">
-							<header class="module-heading ">
-								<h1 class="module-heading-title">ЗАКАЗЫ</h1>
-								<a href="/my-order" class="view-all link" title="View all orders">Посмотреть все заказы</a>
-							</header>
-							<div class="module-content">
-								<table aria-labelledby="hmd003">
-									<tbody>
-										<% @orders.each do |order|%>
-											<tr class="order-row" data-order-id="214371527">
-												<td class="order-date"> <strong class="my-hm-order-date" style="width: 25%"><%= order.created_at %></strong>
-												</td>
-												<td class="order-id "><%= order.id %></td>
-												<td class="order-total"><%= order.sum %> Грн</td>
-												<td class="order-status">
-													<a class="order-link" href="#" title=""><%= order.status %></a>
-												</td>
-											</tr>
-										<% end %>
-									</tbody>
-								</table>
-							</div>
-						</section>
+								<%end%>
+								<dt>На личном счёте</dt>
+								<dd> 
+									<span><%=@user.money%></span>
+								</dd>
+							</dl>
+						</div>
+						<a href="/my-profile" id="personal-details-title-link" class="navigate button">Смотреть еще</a>
+					</section>
+				</aside>
+				<div>
+					<section class="responsive orders-summary">
+						<header class="module-heading ">
+							<h1 class="module-heading-title">ЗАКАЗЫ</h1>
+							<a href="/my-order" class="view-all link" title="View all orders">Посмотреть все заказы</a>
+						</header>
+						<div class="module-content">
+											<ul class="orders">
+			<% @orders.each do |order|%>
+			<% if order.orders_product_data %>
+				<li class="order-item">
+					<div class="order-header js-toggle-trigger">
+						<span class="order-id">ORDER&nbsp;<%= order.id %></span>
+						<span class="order-date"><%= order.created_at %></span>
+						<span class="order-status" style='color: 
+						<% if order.status == "Ожидает платежа" %>#333
+						<% elsif order.status == "Отменен"%>#ff0000
+						<% end %>#00ff00'>
+						<%= order.status %></span>
 					</div>
+					<span class="i_pay" n-data='<%= order.id %>'>Я оплатил</span>
+					<div class="order-info">
+							<div class="order-details two modules">
+								<ul class="details-list">
+
+									<li class="item">
+										<span class="label">ЭЛ. ПОЧТА</span>
+										<span class="static"><%= order.user.email %></span>
+									</li>
+
+									<li class="item">
+										<span class="label">ДАТА ЗАКАЗА</span>
+										<span class="static"><%= order.created_at %></span>
+									</li>
+
+									<li class="item">
+										<span class="label">СПОСОБ ОПЛАТЫ</span>
+										<span class="static">Оплата на счет магазина</span>
+									</li>
+
+								</ul>
+								<ul class="details-list">
+									<li class="item">
+										<span class="label">ВАРИАНТЫ ДОСТАВКИ</span>
+										<span class="static">Доставка Новой почтой</span>
+									</li>
+
+									<li class="item">
+										<span class="label">АДРЕС ДОСТАВКИ</span>
+										<span class="static">
+											<%= order.user.first_name + ' ' + order.user.father + ' ' + order.user.second_name%>
+											<br>
+											<%= order.address %>
+										</span>
+									</li>
+
+									<li class="item">
+										<span class="label">ОБЩАЯ СТОИМОСТЬ ЗАКАЗА</span>
+										<span class="amount"><%= order.sum %> Грн</span>
+									</li>
+								</ul>
+							</div>
+
+						<ul class="order-products product-detail-list responsive">
+							<% order.orders_product_data.each do |opd| %>
+							<% if opd and  opd.product_datum%>
+								<li class="product-detail-list-item">
+									<div class="product-detail-list-item-image-wrapper">
+										<div class="wrapper-inner">
+											<a href="" class="product-detail-list-item-image">
+												<img alt="Product name" width="140" height="210" class="product-detail-list-item-image-image" src="<%=opd.product_datum.photos[0].img.url(:original)%>" title="Product name">
+											</a>
+										</div>
+									</div>
+									<div class="product-detail-list-item-details">
+										<div class="product-detail-list-item-price-info">
+											<p class="product-detail-list-item-total-price">
+												Итого:
+												<span class="amount"><%= (opd.product_datum.get_promotional_price||opd.product_datum.get_price)*opd.count%> Грн</span>
+											</p>
+										</div>
+
+										<h3 class="sub-sub-heading"><%=opd.product_datum.product.name%></h3>
+										<span class="original-price"><%=opd.product_datum.get_price||opd.product_datum.get_price%> Грн</span>
+										<p class="product-detail-price"></p>
+										<p class="product-detail-price"></p>
+										<p></p>
+
+										<dl class="product-detail-list-item-details-list">
+
+											<dt>№ арт.:</dt>
+											<dd><%=opd.product_datum.article%></dd>
+
+											<dt>Цвет:</dt>
+											<dd><%=opd.product_datum.color.name%></dd>
+
+											<dt>Количество:</dt>
+											<dd><%= opd.count %></dd>
+
+											<dt>Размер:</dt>
+											<dd><%=opd.product_size.size%></dd>
+
+										</dl>
+									</div>
+								</li>
+								<% end %>
+							<% end %>
+						</ul>
+
+						<!-- FINISH -->
+						<ul class="order-table">
+							<li class="item">
+								<span class="label">Итого:</span>
+								<span class="static "><%= order.sum %> Грн</span>
+							</li>
+
+							<li class="item order-total">
+								<span class="label">ИТОГО:</span>
+								<span class="static "><%=order.sum%> Грн</span>
+							</li>
+						</ul>
+					</div>
+				</li>
+				<% end %>
+				<% end %>
+			</ul>
+						</div>
+					</section>
 				</div>
 			</div>
 		</div>
-	</main>
+	</div>
+</main>
+<% content_for :javascript do %>
+<script type="text/javascript">
+	$(document).ready(function(){
+		$('.js-toggle-trigger').click(function(){
+			$(this).parent().toggleClass('is-open');
+		});
+		$('.i_pay').click(function(){
+			var o_id = $(this).attr('n-data');
+			console.log(o_id);
+			$.get("/order_activate/" + o_id, function(data) {
+				console.log(data);
+	  		});
+		});
+	});
+</script>
+<% end %>

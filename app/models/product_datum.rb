@@ -6,4 +6,11 @@ class ProductDatum < ActiveRecord::Base
   
   has_and_belongs_to_many :photos
   accepts_nested_attributes_for :photos, reject_if: :all_blank, allow_destroy: true
+
+  def get_price
+    (price*AdminOption.find_by(key: "valuta").value.to_f).ceil
+  end
+  def get_promotional_price
+  	(promotional_price*AdminOption.find_by(key: "valuta").value.to_f).ceil
+  end
 end

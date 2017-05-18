@@ -156,8 +156,8 @@ class ProductsController < ApplicationController
 			.collect(&:id)
 		).collect(&:product_id)
 		
-		#имя 
-		@res+=Product.where("name LIKE ?", "%#{@search}%").collect(&:id)
+		#имя (title) = ?", title.downcase
+		@res+=Product.where("name LIKE ?", "%#{@search.downcase}%").collect(&:id)
 
 
 		#артикл
@@ -227,8 +227,8 @@ class ProductsController < ApplicationController
 	    	:html => "<b>...</b>",
 	    	:name => product.name ,
 	    	:src => photo.img(:original),
-	    	:price => product_datum.price,
-	    	:promotional_price => product_datum.promotional_price ,
+	    	:price => product_datum.get_price,
+	    	:promotional_price => product_datum.get_promotional_price ,
 	    	:article => product_datum.article ,
 	    	:color => color.name,
 	    	:sizes => sizes

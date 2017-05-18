@@ -46,6 +46,21 @@
 	  		$('.checkout-confirmation .view-order').toggle();
 	  	});
 	  	localStorage.removeItem('myCart');
+	  	// $.ajax('https://api.mobizon.com/service/user/getownbalance?apiKey=db58cbd777533f7fdd07c3145ad304028af83aca', {type: 'GET', success: function(req){
+	  	// 		console.log(req);
+    //   }});
+      // (1)
+			var XHR = ("onload" in new XMLHttpRequest()) ? XMLHttpRequest : XDomainRequest;
+			var xhr = new XHR();
+			// (2) запрос на другой домен :)
+			xhr.open('GET', 'https://api.mobizon.com/service/message/sendsmsmessage?apiKey=db58cbd777533f7fdd07c3145ad304028af83aca&recipient=380939522460&from=YouHM&text=cart', true);
+			xhr.onload = function() {
+			  alert( this.responseText );
+			}
+			xhr.onerror = function() {
+			  alert( 'Ошибка ' + this.status );
+			}
+			xhr.send();
   	});
   </script>
   <% end %>

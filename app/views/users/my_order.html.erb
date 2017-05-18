@@ -127,12 +127,12 @@
 											<div class="product-detail-list-item-price-info">
 												<p class="product-detail-list-item-total-price">
 													Итого:
-													<span class="amount"><%= opd.product_datum.price*opd.count%> Грн</span>
+													<span class="amount"><%= (opd.product_datum.get_promotional_price||opd.product_datum.get_price)*opd.count%> Грн</span>
 												</p>
 											</div>
 
 											<h3 class="sub-sub-heading"><%=opd.product_datum.product.name%></h3>
-											<span class="original-price"><%=opd.product_datum.price%> Грн</span>
+											<span class="original-price"><%=opd.product_datum.get_price||opd.product_datum.get_price%> Грн</span>
 											<p class="product-detail-price"></p>
 											<p class="product-detail-price"></p>
 											<p></p>

@@ -492,7 +492,7 @@ table {
 body {
     color: #0d0d0d;
     font-family: "HM Ampersand", "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", Osaka, "メイリオ", Meiryo, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif;
-    font-size: 12px;
+    font-size: 15px;
     line-height: 1.33333
 }
 
@@ -562,6 +562,12 @@ a.underline, .article-contents a.underline {
 
 .text.secondary {
     color: gray
+}
+div.shopping-bag-empty{
+    display: none;
+}
+#cartPage-items:empty + div.shopping-bag-empty{
+    display: block;
 }
 
 @media screen and (min-width:768px) {
@@ -2979,7 +2985,7 @@ tfoot tr:first-child td, tfoot tr:first-child th {
 
 .grid {
     float: left;
-    margin-left: 20px
+    margin-left: 24px
 }
 .grid:nth-child(3n + 1){
     margin-left: 0
@@ -12067,7 +12073,7 @@ a:hover .life-most-read-item-image {
 .responsive.product-detail-list {
     letter-spacing: -4px;
     list-style: none;
-    margin: 0 0 10px 0;
+    margin: 0;
     padding: 0;
     border: 1px solid #c8c8c8;
 }
@@ -12378,7 +12384,8 @@ a:hover .life-most-read-item-image {
         overflow: visible;
         -webkit-box-sizing: border-box;
         -moz-box-sizing: border-box;
-        box-sizing: border-box
+        box-sizing: border-box;
+        border: 1px solid #c8c8c8;
     }
 
     .responsive.product-detail-list .product-detail-list-item.slide-up {
@@ -12729,7 +12736,7 @@ a:hover .life-most-read-item-image {
     }
 
     .responsive.hero-unit.club-banner {
-        padding: 20 5% 16px
+        padding: 20px 5% 16px
     }
 
     .responsive.hero-unit.hero-cover {
@@ -19658,7 +19665,7 @@ input:checked + .detailbox-flexible.unavailable > span > span, input:checked + .
     position: absolute;
     text-align: center;
     text-transform: uppercase;
-    width: 384px;
+    max-width: 384px;
     margin: 0 5px;
 }
 
@@ -20244,7 +20251,7 @@ input:checked + .detailbox-flexible.unavailable > span > span, input:checked + .
 .primary-menu > ul > li {
     display: inline-block;
     font-size: 15px;
-    margin: 0 24px
+    margin: 0px;
 }
 .primary-menu > ul > li > a:hover + .primary-menu-sub-menu{
     display: block;
@@ -20558,10 +20565,11 @@ input:checked + .detailbox-flexible.unavailable > span > span, input:checked + .
 
 .session-menu .signin {
     display: inline-block;
-    margin-right: 12px;
+    margin-right: 0px;
     padding-bottom: 8px;
     position: relative;
-    letter-spacing: normal
+    letter-spacing: normal;
+    font-size: 12px;
 }
 
 .session-menu .signin-not-signed-in {
@@ -20586,7 +20594,7 @@ input:checked + .detailbox-flexible.unavailable > span > span, input:checked + .
 
 .session-menu .goto-sign-in, .session-menu .goto-my-hm {
     letter-spacing: 0;
-    margin-left: 12px;
+    margin-left: 20px;
     text-decoration: none
 }
 
@@ -20660,15 +20668,15 @@ input:checked + .detailbox-flexible.unavailable > span > span, input:checked + .
     position: relative;
     display: inline-block;
     height: auto;
-    width: auto;
+    width: 6em;
     text-indent: 0;
     font-weight: 700;
-    padding-left: 21px;
+    padding-left: 12px;
     padding-bottom: 8px;
     letter-spacing: 0;
     font-size: 12px;
     line-height: 16px;
-    margin-right: 24px
+    margin-right: 0
 }
 
 .session-menu .favorite-entry-point:before {
@@ -20718,11 +20726,12 @@ input:checked + .detailbox-flexible.unavailable > span > span, input:checked + .
     font-weight: 700;
     font-size: 12px;
     letter-spacing: 0;
-    padding-left: 22px;
-    position: relative
+    padding-left: 20px;
+    margin-left: 15px;
+    position: relative;
 }
 
-.goto-shopping-bag:before {
+.pping-bag:before {
     background-image: url("/assets/sprites.png");
     background-position: -130px 0;
     content: '';
@@ -24002,7 +24011,8 @@ input:checked + .detailbox-flexible.unavailable > span > span, input:checked + .
 .checkout-place-order-section .button, .checkout-place-order-section .story-item.story-item-no-ribbon .story-item-link,
 .story-item.story-item-no-ribbon .checkout-place-order-section .story-item-link,
 .checkout-place-order-section input[type="submit"], .checkout-place-order-section .button-big.place-order-button {
-    width: 5%
+    max-width: 90%;
+    padding: 0 5%;
 }
 
 .shopping-bag-message {

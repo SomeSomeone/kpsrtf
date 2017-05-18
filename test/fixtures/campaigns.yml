@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  code: MyString
+  value: 1.5
+  number: 1
+  inf_number: false
+  period: 2017-05-16 19:34:34
+  inf_period: false
+
+two:
+  code: MyString
+  value: 1.5
+  number: 1
+  inf_number: false
+  period: 2017-05-16 19:34:34
+  inf_period: false

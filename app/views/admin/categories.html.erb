@@ -22,6 +22,8 @@
     <th>Ссылка</th>
     <th>Тайтл</th>
     <td>Ссылка парсера</td>
+    <td>Попап</td>
+    <td>Банер</td>
     <th>Обновить</th>
     <th>Удалить</th>
 </tr>
@@ -44,6 +46,21 @@
     <td>
         <a href="<%=category.polka_url%>"><%=category.polka_url%></a>
     </td>
+    <td>
+        <% if category.pop %>
+            <%=category.pop.name%>
+        <%else%>
+            Не задан
+        <%end%>
+    </td>
+    <td>
+        <% if category.baner %>
+            <%=category.baner.name%>
+        <%else%>
+            Не задан
+        <%end%>
+   </td>
+
     <td><%= link_to 'Обновить', admin_category_edit_path(category) %></td>
     <td><%= link_to 'Удалить', admin_category_destroy_path(category) , :method => 'delete', data: { confirm: 'Точно?' } %></td>
 </tr>
@@ -59,6 +76,8 @@
     <th>Ссылка</th>
     <th>Тайтл</th>
     <td>Ссылка парсера</td>
+        <td>Попап</td>
+    <td>Банер</td>
     <th>Обновить</th>
     <th>Удалить</th>
 </tr>

@@ -1,5 +1,5 @@
 Liqpay.default_options = {
-    public_key: 'i65473908977',
-    private_key: 'vECQxieKiOGL4vkQKFbNVNLWl3JE2e3cvpjov2Y2',
+    public_key: 'i69885967013',
+    private_key: 'awX0vwwJoGd3OmaWn7I4fhDynf5JI3eT77BofHnb',
     currency: 'UAH'
 }

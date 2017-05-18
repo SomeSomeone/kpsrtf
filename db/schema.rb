@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170514224205) do
+ActiveRecord::Schema.define(version: 20170518014114) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,6 +22,11 @@ ActiveRecord::Schema.define(version: 20170514224205) do
     t.string   "city",       default: "", null: false
     t.string   "post_index", default: "", null: false
     t.index ["user_id"], name: "index_addresses_on_user_id", using: :btree
+  end
+
+  create_table "admin_options", force: :cascade do |t|
+    t.string "key"
+    t.string "value"
   end
 
   create_table "admins", force: :cascade do |t|
@@ -44,22 +49,38 @@ ActiveRecord::Schema.define(version: 20170514224205) do
   create_table "baners", force: :cascade do |t|
     t.text     "text"
     t.integer  "photo_id"
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
-    t.integer  "number",     default: 0
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
+    t.integer  "number",      default: 0
     t.string   "name"
+    t.integer  "category_id"
+    t.index ["category_id"], name: "index_baners_on_category_id", using: :btree
     t.index ["photo_id"], name: "index_baners_on_photo_id", using: :btree
   end
 
+  create_table "campaigns", force: :cascade do |t|
+    t.string   "code"
+    t.float    "value"
+    t.integer  "number"
+    t.boolean  "inf_number"
+    t.datetime "period"
+    t.boolean  "inf_period"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "categories", force: :cascade do |t|
-    t.string  "name",        default: "", null: false
-    t.integer "category_id"
-    t.integer "pop_id"
-    t.string  "polka_url"
-    t.text    "about"
-    t.text    "seo_text"
-    t.string  "url"
-    t.string  "title"
+    t.string   "name",        default: "", null: false
+    t.integer  "category_id"
+    t.integer  "pop_id"
+    t.string   "polka_url"
+    t.text     "about"
+    t.text     "seo_text"
+    t.string   "url"
+    t.string   "title"
+    t.datetime "date"
+    t.integer  "baner_id"
+    t.index ["baner_id"], name: "index_categories_on_baner_id", using: :btree
     t.index ["category_id"], name: "index_categories_on_category_id", using: :btree
     t.index ["pop_id"], name: "index_categories_on_pop_id", using: :btree
   end
@@ -103,7 +124,11 @@ ActiveRecord::Schema.define(version: 20170514224205) do
     t.float    "cash_back",   default: 0.0
     t.integer  "address_id",                              null: false
     t.boolean  "bool_factor"
+    t.string   "about"
+    t.integer  "campaign_id"
+    t.float    "polka_sum"
     t.index ["address_id"], name: "index_orders_on_address_id", using: :btree
+    t.index ["campaign_id"], name: "index_orders_on_campaign_id", using: :btree
     t.index ["user_id"], name: "index_orders_on_user_id", using: :btree
   end
 
@@ -227,10 +252,13 @@ ActiveRecord::Schema.define(version: 20170514224205) do
   end
 
   add_foreign_key "addresses", "users"
+  add_foreign_key "baners", "categories"
   add_foreign_key "baners", "photos"
+  add_foreign_key "categories", "baners"
   add_foreign_key "categories_products", "categories"
   add_foreign_key "categories_products", "products"
   add_foreign_key "colors", "main_colors"
+  add_foreign_key "orders", "campaigns"
   add_foreign_key "orders", "users"
   add_foreign_key "orders_product_data", "orders"
   add_foreign_key "orders_product_data", "product_sizes"

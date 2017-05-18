@@ -25,7 +25,7 @@
 
   <meta name="description" content="<%= yield :description %>">
   <title><%= yield :title %></title>
-
+  <%= csrf_meta_tags %>
 </head>
 <body>
 <div class="mini-menu"><svg xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://web.resource.org/cc/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:svg="http://www.w3.org/2000/svg" xmlns="http://www.w3.org/2000/svg" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" id="svg1938" sodipodi:version="0.32" inkscape:version="0.44" width="23" height="19" version="1.0" sodipodi:docbase="C:\Documents and Settings\belette\Bureau" sodipodi:docname="☰.svg">
@@ -207,12 +207,20 @@
     <!-- For demo purpose we include javascript in view but you can easily start SeedProject and organize it with Rails asset pipeline as you want -->
     <%= yield :javascript %>
     <script>
-            $(document).ready(function(){
-              $(".mini-menu").click(function(){
-                $(".primary-menu").toggleClass("active");
-                $(".mini-menu").toggleClass("active")
-              })
-            })
+      $(document).ready(function(){
+        $(".mini-menu").click(function(){
+          $(".primary-menu").toggleClass("active");
+          $(".mini-menu").toggleClass("active")
+        })
+      })
+      cartCount();
+      function cartCount(){
+          var cCount = JSON.parse(localStorage.getItem('myCart')).length;
+          // cCount = cCount + c_n_t;
+          $('.shoppingbag-item-counts').text(cCount);
+          console.log('sdds');
+        }
+
     </script>
 </body>
 </html>

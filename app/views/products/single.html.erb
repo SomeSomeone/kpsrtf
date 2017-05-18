@@ -67,9 +67,9 @@
       
         
         
-          'price': '<%= product_data.price %> Грн',
+          'price': '<%= product_data.get_price %> Грн',
           'priceOriginal': false,
-          'priceValue': '<%= product_data.price %> ',
+          'priceValue': '<%= product_data.get_price %> ',
           'priceSaleValue': null,
         
       
@@ -150,12 +150,12 @@
 						<div class="price parbase">
 							<%if @product_data.promotional_price!=nil and @product_data.promotional_price>0 %>
 								<div class="product-item-price product-item-price-discount">
-									<span class="price-value"><%= @product_data.promotional_price%> Грн</span>
-									<small class="price-value-original"><%= @product_data.price%> Грн</small>
+									<span class="price-value"><%= @product_data.get_promotional_price%> Грн</span>
+									<small class="price-value-original"><%= @product_data.get_price%> Грн</small>
 								</div>
 							<%else%>
 								<div class="product-item-price">
-									<span class="price-value"><%= @product_data.price%> Грн</span>
+									<span class="price-value"><%= @product_data.get_price%> Грн</span>
 								</div>
 							<%end%>
 						</div>
@@ -289,11 +289,11 @@
 											</h3>
 												<% if p.product_datum[0]!=nil and p.product_datum[0].price!=nil %>
 													<%if p.product_datum[0].promotional_price!=nil and  p.product_datum[0].promotional_price>0 %>
-														<strong class="price sale-price"> <%=p.product_datum[0].promotional_price%> Грн
-															<span class="price original-price"><%= p.product_datum[0].price%> Грн</span>
+														<strong class="price sale-price"> <%=p.product_datum[0].get_promotional_price%> Грн
+															<span class="price original-price"><%= p.product_datum[0].get_price%> Грн</span>
 														</strong>
 													<%else%>
-													<strong class="price"><%= p.product_datum[0].price%> Грн</strong>
+													<strong class="price"><%= p.product_datum[0].get_price%> Грн</strong>
 													<%end%>
 												<%else%>
 													<strong class="price">Уточняеться</strong>
@@ -863,16 +863,16 @@
     		a['count'] = 1;
     		cart_mas = JSON.parse(localStorage.getItem('myCart')) || [];
     		$.each(cart_mas, function(index){
-    			if(this.size == size_val){
+    			if(this.size == size_val && this.article == <%= @product_data.article %> ){
     				cart_mas.splice(index, 1);
-            localStorage.setItem('myCart', JSON.stringify(cart_mas));
-            count = this.count + 1;
-            		if(count >= 10){
-            			a['count'] = 10;
-            		}
-            		else{
-            			a['count'] = count;
-            		}
+		            localStorage.setItem('myCart', JSON.stringify(cart_mas));
+		            count = this.count + 1;
+	            		if(count >= 10){
+	            			a['count'] = 10;
+	            		}
+	            		else{
+	            			a['count'] = count;
+	            		}
     			}
     		});
     		cart_mas.push(a);

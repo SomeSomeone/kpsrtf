@@ -1,9 +1,10 @@
+<link rel="stylesheet" media="screen" href="/assets/carts-4e69d6e04a1c5b1b0842b99f82713287273d8df1c4969c5a00cffd5fe0f29cfb.css">
 <main role="main" class="responsive my-hm">
 		<div class="wrapper">
 			<nav class="breadcrumbs">
 				<ul>
 					<li>
-						<a href="#">Yourhm.com.ua</a>
+						<a href="/">Yourhm.com.ua</a>
 					</li>
 
 					<li class="">
@@ -40,14 +41,27 @@
 						<%= semantic_form_for @addresses, :url => users_address_update_path(@addresses) do |f| %>
 						<div class="inputwrapper">
 							<label class="label" for="myhm-email">Адрес</label>
-							<%= f.text_field :city, class: 'text-input field' %>
+							<div class="field">
+								<% if @addresses.city %>
+								<%= f.select(:city, [[@addresses.city , @addresses.city ]], {} ,{ :class => "chosen-select"}) %>
+								<% elsif %>
+								<%= f.select(:city, [['Ваш адрес' , '' ]], {} ,{ :class => "chosen-select"}) %>
+								<% end %>
+							</div>
 							<span class="static ng-binding"><%= @addresses.city%></span>
 							<div class="input-info ng-hide">Указывайте полный адрес(область, район, населенный пункт)</div>
 						</div>
 
 						<div class="inputwrapper required">
 							<label class="label" for="checkout.firstName">Отделение Новой почты</label>
-							<%= f.text_field :post_index, class: 'text-input field' %>
+							<div class="field">
+								<% if @addresses.post_index %>
+								<%= f.select(:post_index, [[@addresses.post_index , @addresses.post_index ]], {} ,{ :class => "chosen-select-addrr"}) %>
+								<% elsif %>
+								<%= f.select(:post_index, [['Отделение Новой Почты' , '' ]], {} ,{ :class => "chosen-select-addrr"}) %>
+								<% end %>
+							</div>
+
 							<span class="static ng-binding"><%= @addresses.post_index%></span>
 							<div class="input-info ng-hide"></div>
 						</div>
@@ -62,7 +76,7 @@
 				</div>
 			</div>
 			<% elsif %>
-			<div class="layout layout-eight ng-scope">
+			<!-- <div class="layout layout-eight ng-scope">
 				<div class="form-section agile-form">
 					<fieldset class="form-part">
 						<legend class="heading">Адресная книга</legend>
@@ -83,10 +97,16 @@
 					</div>
 					<% end %>
 				</div>
-			</div>
+			</div> -->
 			<% end %>
 		</div>
 	</main>
+<!-- 	<select class="chosen-select" id="city" data-placeholder="Ваш адрес">
+    <option value="">адрес</option>
+  </select>
+  <select class="chosen-select-addrr" id="addrr" data-placeholder="Отделение Новой почты">
+    <option value="">Отделение Новой Почты</option>
+  </select> -->
 	<% content_for :javascript do %>
 	<script>
 		$(document).ready(function(){
@@ -94,6 +114,59 @@
 				$('#profile').toggleClass('disabled-form');
 				$('.change_button').toggle();
 			});
+			// novapost_request
+			// $('.chosen-container').addClass('field');
+		    $(".chosen-search input").keyup(function(){
+		      // console.log($(this).val());
+		      var letterVal = $(this).val();
+		      var nova = {
+		        "modelName": "Address",
+		        "calledMethod": "searchSettlements",
+		        "methodProperties": {
+		            "CityName": $(this).val()
+		        },
+		        "apiKey": "993750c8658bf925309d3c781906709e"
+		      }
+		      nova = JSON.stringify(nova);
+		      $.ajax('https://api.novaposhta.ua/v2.0/json/', {type: 'POST', data: nova,  success: function(req){
+		        // console.log(req.responseText)
+		        $('.chosen-select option').remove();
+		        $.each(req.data[0].Addresses, function(index){
+		          console.log(this['DeliveryCity']);
+		          $('.chosen-results').append('<li class="active-result" data-option-array-index="' + index + '">' + this['MainDescription'] + ' ' + this['Region'] + ' район ' + this['Area'] + ' область' + '</li>');
+		          $('.chosen-select').append('<option data-city-ref="' + this['DeliveryCity'] + '">' + this['MainDescription'] + ' ' + this['Region'] + ' район ' + this['Area'] + ' область' + '</option>');
+		        });
+		        // console.log(req.data[0].Addresses);
+		        $('.chosen-select').trigger('chosen:updated');
+		        $('.chosen-search input').val(letterVal);
+		       }}
+		      );
+		    });
+		    $(".chosen-select-addrr").chosen({width: "100%"});
+		    $('.chosen-select').on('change', function() {
+		        $('.chosen-select-addrr option').remove();
+		        var c_ref = $('#address_city option').filter(':selected').attr('data-city-ref');
+		        console.log(c_ref);
+		        var nova_addrr = {
+		          "modelName": "AddressGeneral",
+		          "calledMethod": "getWarehouses",
+		          "methodProperties": {
+		               "CityRef": c_ref
+		          },
+		          "apiKey": "993750c8658bf925309d3c781906709e"
+		        }
+		      nova_addrr = JSON.stringify(nova_addrr);
+		      $.ajax('https://api.novaposhta.ua/v2.0/json/', {type: 'POST', data: nova_addrr,  success: function(addrrReq){
+		        console.log(addrrReq);
+		         $.each(addrrReq.data, function(index){
+		          console.log(this['Description']);
+		          $('#address_post_index .chosen-results').append('<li class="active-result" data-option-array-index="' + index + '">' + this['Description'] + '</li>');
+		          $('.chosen-select-addrr').append('<option>' + this['Description'] + '</option>');
+		        })
+		         $('.chosen-select-addrr').trigger('chosen:updated');
+		      }});
+		      });
+		    // end
 		});
 	</script>
 	<% end %>

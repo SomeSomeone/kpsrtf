@@ -60,6 +60,14 @@
                         </div>
                     </div>
                     <div class="form-group">
+                    <%= f.label  :baner_id , "Банер" , class: "col-lg-12"%>
+                        <div class="col-lg-12">
+                          <%= f.select(:baner_id, @baners.collect { |p| [ p.name, p.id ] }, { include_blank: true },{ :class => "form-control m-b"}) %>
+                          <span class="help-block m-b-none">Введите банер</span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
                         <div class="col-lg-12">
                           <%= f.submit  "Создать категорию" , :class => "btn btn-sm btn-primary"  %>
                         </div>

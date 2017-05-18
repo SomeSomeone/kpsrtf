@@ -26,6 +26,7 @@
     <th>Обновить</th>
     <th>Удалить</th>
     <th>Заказ</th>
+    <th>Коментарий</th>
 </tr>
 </thead>
 <tbody>
@@ -42,71 +43,35 @@
     	<%= order.user.first_name%> <%=order.user.second_name%> <%=order.user.father%><br>
     	<a href="tel:<%= order.user.tel %>"><%= order.user.tel %></a></p>
     </td>
-    <td><%= order.sum %></td>
+    <td><%= order.sum %> Грн / <%=order.polka_sum%> Злот</td>
     <td><%= order.cash_back %></td>
     <td><%= order.status %></td>
     <td><%= order.created_at.to_s(:db) %></td>
     <td><%= link_to 'Обновить', admin_order_edit_path(order) %></td>
     <td class="center"><%= link_to 'Удалить', admin_order_destroy_path(order) , :method => 'delete', data: { confirm: 'Точно?' } %></td>
-    <td><% order.orders_product_data.each do |opd| %><% end %></td>
-
-                <% if order.orders_product_data %>
-                
-                            <ul class="order-products product-detail-list responsive">
-                                <% order.orders_product_data.each do |opd| %>
-                                <li>
-                                    <a href=><%=opd.product_datum.price%> Грн</a>
-                                    <h3 ><%=opd.product_datum.product.name%></h3>
-                                            <p class="product-detail-list-item-total-price">
-                                                Итого:
-                                                <span class="amount"><%= opd.product_datum.price*opd.count%> Грн</span>
-                                            </p>
-                                    
-                                        <p class="product-detail-price"></p>
-                                        <p class="product-detail-price"></p>
-                                        <p></p>
-
-                                        <dl class="product-detail-list-item-details-list">
-
-                                            <dt>№ арт.:</dt>
-                                            <dd><%=opd.product_datum.article%></dd>
-
-                                            <dt>Цвет:</dt>
-                                            <dd><%=opd.product_datum.color.name%></dd>
-
-                                            <dt>Количество:</dt>
-                                            <dd><%= opd.count %></dd>
-
-                                            <dt>Размер:</dt>
-                                            <dd><%=opd.product_size.size%></dd>
-
-                                        </dl>
-                                    </div>
-                                </li>
-                                <% end %>
-                            </ul>
-                <% end %>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    <td>
+        <% if order.orders_product_data %>
+                <ul class="order-products product-detail-list responsive">
+                    <% order.orders_product_data.each do |opd| %>
+                    <li>
+                        <%if opd.product_datum %>
+                            <a href="http://www2.hm.com/pl_pl/productpage.<%=opd.product_datum.article%>.html"  target="_blank" ><%=opd.product_datum.product.name%></a>
+                            <h3 ></h3>
+                            <p>№ арт.: <%=opd.product_datum.article%></p>
+                            <p>Цвет: <%=opd.product_datum.color.name%></p>
+                            <p>Размер: <%=opd.product_size.size%><p>
+                            <p>Цена: <%=opd.product_datum.price%> Грн</p>
+                            <p>Количество: <%=opd.count%></p>
+                            <p><b>Итого:</b><%= (opd.product_datum.price*opd.count).round(2)%> Грн</span></p>
+                            </div>
+                        <% end %>
+                    </li>
+                    <hr>
+                    <% end %>
+                </ul>
+        <% end %>
+    </td>
+    <td><%= order.about %></td>
 </tr>
 <% end %>
 </tbody>
@@ -122,6 +87,7 @@
     <th>Обновить</th>
     <th>Удалить</th>
     <th>Заказ</th>
+    <th>Коментарий</th>
 </tr>
 </tfoot>
 </table>
