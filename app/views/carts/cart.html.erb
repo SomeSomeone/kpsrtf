@@ -35,12 +35,27 @@
 								<table class="order-total">
 									<tbody>
 										<tr>
-
 											<th scope="row">СТОИМОСТЬ ЗАКАЗА:</th>
 											<td>
 												<span id="newPriceSubtotal" class="ng-binding">0 Грн</span>
 											</td>
 										</tr>
+										<% if @user %>
+											<% if @user.money %>
+											<tr>
+												<th scope="row">ТЕКУЩИЙ БАЛАНС</th>
+												<td>
+													<span><%=@user.money %> Грн</span>
+												</td>
+											</tr>
+											<tr>
+												<th scope="row">ИТОГОВАЯ СТОИМОСТЬ</th>
+												<td>
+													<span id="itog_price">0 Грн</span>
+												</td>
+											</tr>
+											<% end %>
+										<% end %>
 									</tbody>
 								</table>
 								<a href="/diver"><button class="button button-big">ПЕРЕЙТИ К ОФОРМЛЕНИЮ ЗАКАЗА</button></a>
@@ -139,6 +154,12 @@
 					// console.log(price_of_item);
 				});
 				$('#newPriceSubtotal').text(price_of_item + ' Грн');
+				<% if @user %>
+					<% if @user.money %>
+						price_of_item = price_of_item - <%= @user.money %>;
+					<% end %>
+				<% end %>
+				$('#itog_price').text(price_of_item + ' Грн');
 				// $('#total_price_of_basket').text(price_of_item  + ' Грн');
 			}
 	    $('.icon-trash').click(function(){

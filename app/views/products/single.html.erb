@@ -56,8 +56,8 @@
           
           <% product_data.photos.each do  |photo|  %>
           {
-          'thumbnail': '<%= photo.img.url(:original) %>',
-          'image': '<%= photo.img.url(:original) %> ',
+          'thumbnail': '<%= photo.img.url(:thumbnail) %>',
+          'image': '<%= photo.img.url(:medium) %> ',
           'zoom': '<%= photo.img.url(:original) %>'
           },
           <%end%>
@@ -191,8 +191,8 @@
 								</div>
 								<% @product_datas.each do |product_data| %>
 									<ul class="inputlist clearfix" data-sizelist="<%= product_data.article %>0000">
-										<% if (product_data.product_product_sizes) %>
-											<% product_data.product_product_sizes.each_with_index do |product_product_size, k| %>
+										<% if @product_sizes %>
+											<% @product_sizes.each_with_index do |product_product_size, k| %>
 												<li class="one_size">
 													<label for="filter-size-<%= product_data.article %>00<%= k %>">
 														<input type="radio" name="product-size" value="<%= product_product_size.product_size.size %>" data-size="001" id="filter-size-<%= product_data.article %>00<%= k %>" <%if ! product_product_size.has%> disabled <% end %>>
@@ -220,7 +220,7 @@
 					</div>
 					<div class="product-detail-details">
 						<div class="product-detail-availability">
-							Доставка через: 2-14 рабочих дней (Больший срок для отдаленных районов. Проверьте страницу Службы поддержки покупателей для подробной информации)
+							Доставка 7-10 рабочих дней. Стоимость доставки согласно тарифам Новой Почты. При заказе от 1000 грн доставка по Украине БЕСПЛАТНО.
 						</div>
 						<button class="button button-big button-buy product-details-favorite button-disabled" data-not-added-text="Вы должны выбрать имеющийся в наличии размер" data-added-text="Товар добавлен" data-shopping-bag-text="Корзина" data-shopping-bag-failed-text="При добавлении товара в корзину произошла ошибка" data-quantity-text="Количество" data-color-text="Цвет" data-size-text="Размер" data-default-quantity="1" data-sold-out-text="Распродано" data-not-added-sold-out-text="Изделие данного цвета распродано во всех размерах">Добавить в корзину</button>
 

@@ -1,5 +1,7 @@
 class ProductsController < ApplicationController
+
 	include ProductsHelper
+	require 'will_paginate/array'
 	def single
 		
 		@product_data=ProductDatum.find_by(article: params[:article])
@@ -10,7 +12,7 @@ class ProductsController < ApplicationController
 		end
 
 		@product_datas = @product.product_datum
-		@product_sizes = @product_data.product_product_sizes
+		@product_sizes = @product_data.product_product_sizes.sort_by{|ps| ps.size}
 		color_id=@product_datas.collect(&:color_id)
 		if color_id != [nil]
 			@colors = Color.find(color_id)

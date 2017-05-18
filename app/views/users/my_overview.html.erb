@@ -231,10 +231,11 @@
 		});
 		$('.i_pay').click(function(){
 			var o_id = $(this).attr('n-data');
-			console.log(o_id);
-			$.get("/order_activate/" + o_id, function(data) {
+			// console.log(o_id);
+			$.ajax("/order_activate/" + o_id, {type: 'GET', success:function(data) {
 				console.log(data);
-	  		});
+	  		}});
+	  		alert('Спасибо за оплату. В ближайшее рабочее время с Вами свяжется менеджер для уточнения деталей платежа.')
 		});
 	});
 </script>

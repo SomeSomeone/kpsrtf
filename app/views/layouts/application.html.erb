@@ -69,19 +69,25 @@
         <!-- Services menu -->
 
         <div class="linklist parbase linklist1">
-<!--
+
           <ul class="list">
 
             <li class="item">
               <a class="link" href="#">Обслуживание</a>
             </li>
-
-            <li class="item">
+            <%if @user%>
+              <% if @user.money %>
+                <li class="item">
+                  <a class="link" href="javascript:void(0)">Баланс: <%=@user.money%></a>
+                </li>
+              <% end %>
+            <% end %>
+           <!--  <li class="item">
               <a class="link" href="#">Новостная рассылка</a>
-            </li>
+            </li> -->
 
           </ul>
-          -->
+          
         </div>
 
       </nav>

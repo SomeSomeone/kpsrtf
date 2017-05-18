@@ -198,9 +198,13 @@
               padding: 8px 20px;
             }
             </style>
-          <%= semantic_form_for @order, :url => carts_order_create_path(@order) do |f| %>
-          Введите скидочный код:
-          <%= f.text_field :campaign_code, class: 'form-control' %>
+          <section class="box checkout-section checkout-delivery-section responsive">
+            <header class="box-headline checkout-delivery-section-header">
+                <%= semantic_form_for @order, :url => carts_order_create_path(@order) do |f| %>
+                код на скидку: 
+                <%= f.text_field :campaign_code, class: 'form-control' %>
+            </header>
+          </section>
           <section class="box checkout-section checkout-payment-section responsive">
             <header class="box-headline checkout-payment-section-header">
               <h1 class="heading">Способ оплаты</h1>
@@ -241,6 +245,22 @@
                     <th scope="row">СТОИМОСТЬ ЗАКАЗА:</th>
                     <td id="total_price_of_basket">0 Грн</td>
                   </tr>
+                  <% if @user %>
+                    <% if @user.money %>
+                    <tr>
+                      <th scope="row">ТЕКУЩИЙ БАЛАНС</th>
+                      <td>
+                        <span><%=@user.money %> Грн</span>
+                      </td>
+                    </tr>
+                    <tr>
+                      <th scope="row">ИТОГОВАЯ СТОИМОСТЬ</th>
+                      <td>
+                        <span id="itog_price">0 Грн</span>
+                      </td>
+                    </tr>
+                    <% end %>
+                  <% end %>
                 </tfoot>
               </table>
               <p class="fine-print">
@@ -348,6 +368,12 @@
           ')
       });
       $('#total_price_of_basket').text(all_price + ' Грн');
+      <% if @user %>
+        <% if @user.money %>
+          all_price = all_price - <%= @user.money %>;
+        <% end %>
+      <% end %>
+      $('#itog_price').text(all_price + ' Грн');
     }
     // console.log(user);
 

@@ -12,7 +12,7 @@ class ApplicationController < ActionController::Base
 		end
 	end
 	def get_categories
-		@mainCat=Category.where(category_id:nil)
+		@mainCat=Category.where(category_id:nil).order(:id)
 	end
 	def footer_sections_init
 		if @user

@@ -211,6 +211,11 @@
           <div class="left-bottom parsys"></div>
         </aside>
         <div class="parsys main parsys-width-90">
+          <%if @current_cat.baner%>
+          <section class="segment section singleteasercontainer">
+              <%= @current_cat.baner.text.html_safe %>
+          </section>
+          <%end%>
           <% if @current_cat %>
           <div class="heading parbase section text">
             <h1 class=""><%=@current_cat.name%></h1>
@@ -242,11 +247,11 @@
                               <div class="cols clearfix">
                                 <div class="col">
                                   <h4>Цвет</h4>
-                                  <ul class="inputlist grid" data-filter-param-name="colorWithNames[]">
+                                  <ul class="inputlist grid" ">
                                   <% @PossibleColors.each do |c|%>
                                         <li>
-                                          <a href="/bodies" title="<%= c.name %>" class="filter-option <% if @ChoizenColor.include?(c.name) %> active <% end %>" data-value="<%= c.name %>">
-                                            <span class="pattern" style="background:#000000;"></span>
+                                          <a data-filter-param-name="colorWithNames[]" href="javascript:void(0)" title="<%= c.name %>" class="filter-option <% if @ChoizenColor.include?(c.name) %> active <% end %>" data-value="<%= c.name %>">
+                                            <span class="pattern" style="background:<%=c.hex%>;"></span>
                                             <%= c.name %>
                                           </a>
                                         </li>
@@ -259,10 +264,10 @@
                                   <ul class="inputlist row-cols">
                                     <% @PossibleSizes.each_with_index do |c, k|%>
                                       <li class="row-col">
-                                        <ul data-filter-param-name="sizes[]" class="inputlist rows">
+                                        <ul class="inputlist rows">
                                           <li>
                                             <label for="filter-size-<%= c.size %>">
-                                              <input id="filter-size-<%= c.size %>" type="checkbox" value="<%= c.size %>" <% if @ChoizenSize.include?(c.size) %> checked="checked" <% end %>>
+                                              <input data-filter-param-name="sizes[]" id="filter-size-<%= c.size %>" type="checkbox" value="<%= c.size %>" <% if @ChoizenSize.include?(c.size) %> checked="checked" <% end %>>
                                               <div class="detailbox detailbox-value">
                                                 <span><%= c.size %></span>
                                               </div>
@@ -278,7 +283,7 @@
 
                             <div class="row clearfilters">
                               <button class="button button-secondary js-filters-clear" disabled="disabled">СБРОСИТЬ ФИЛЬТР</button>
-                              <a class="button js-filters-close" href="javascript:;">Закрыть</a>
+                              <a class="button js-filters-close" href="javascript:;">ПРИМЕНИТЬ ФИЛЬТР</a>
                             </div>
                             <!-- <input type="hidden" name="image" value="stillLife" class="filter-toggle-images-value" data-filter-param-name="image"></form> -->
                         </div>
@@ -290,13 +295,13 @@
                         <div class="expandtarget js-expandtarget sort">
                           <ul class="menu toggleCurrent">
                             <li class="menu-sub-item current">
-                              <span class="menu-link" data-value="best">Лучшее</span>
+                              <a data-filter-param-name="sort" class="menu-link" data-value="best">Лучшее</a>
                             </li>
                             <li class="menu-sub-item">
-                              <span class="menu-link" data-value="PriceAsc">Самая низкая цена</span>
+                              <a data-filter-param-name="sort" class="menu-link" data-value="PriceAsc">Самая низкая цена</a>
                             </li>
                             <li class="menu-sub-item">
-                              <span class="menu-link" data-value="PriceDesc">Самая высокая цена</span>
+                              <a data-filter-param-name="sort" class="menu-link" data-value="PriceDesc">Самая высокая цена</a>
                             </li>
                           </ul>
                         </div>
@@ -466,7 +471,30 @@
       //     });
       //   }
       // });
+
+      //colorWithNames size sort
       $(document).ready(function(){
+        $("html").on("click" , "*[data-filter-param-name]" , function () {
+          url=window.location.href.split('?')[0];
+          helper=false
+          $(this).toggleClass("active")
+          $("input[data-filter-param-name]").each(function(index) {
+            if($(this).prop( "checked" )){
+              helper? url+="&":url+="?"
+              url+=$(this).attr("data-filter-param-name")+"="+$(this).val()
+              helper=true
+            }
+          })
+          $("a[data-filter-param-name]").each(function(index) {
+            if($(this).hasClass( "active" )){
+              helper? url+="&":url+="?"
+              url+=$(this).attr("data-filter-param-name")+"="+$(this).attr('data-value')
+              helper=true
+            }
+          })
+
+          $(".js-filters-close").attr("href" , url)
+        })
       $(".ladies-side-bar-label").click(function(){
         $(".ladies-side-bar").toggleClass("active");
         $(".ladies-side-bar-label").toggleClass("active")
