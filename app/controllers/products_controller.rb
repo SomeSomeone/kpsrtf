@@ -8,7 +8,7 @@ class ProductsController < ApplicationController
 		@product = @product_data.product
 
 		if @product.categories != []
-			@pop=@product.categories[0].pop
+			@pop=@product.get_pop
 		end
 
 		@product_datas = @product.product_datum
@@ -233,6 +233,19 @@ class ProductsController < ApplicationController
 	    	:promotional_price => product_datum.get_promotional_price ,
 	    	:article => product_datum.article ,
 	    	:color => color.name,
+	    	:sizes => sizes
+	    }
+	    format.json  { render :json => msg }
+	  end
+	end
+	def sizes
+	  respond_to do |format|
+	  	product_datum = ProductDatum.find(params[:id])
+	    sizes = ProductSize.where( id: product_datum.product_product_sizes.where(has: true).collect(&:product_size_id)).collect(&:size)
+	    msg = {
+	    	:status => "ok",
+	    	:message => "Success!",
+	    	:html => "<b>...</b>",
 	    	:sizes => sizes
 	    }
 	    format.json  { render :json => msg }

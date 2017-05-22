@@ -66,6 +66,13 @@
                           <span class="help-block m-b-none">Введите банер</span>
                         </div>
                     </div>
+                    <div class="form-group">
+                    <%= f.label  :sale_id , "Акция" , class: "col-lg-12"%>
+                        <div class="col-lg-12">
+                          <%= f.select(:sale_id, @sales.collect { |p| [ p.name, p.id ] }, { include_blank: true },{ :class => "form-control m-b"}) %>
+                          <span class="help-block m-b-none">Выберите акцию</span>
+                        </div>
+                    </div>
 
                     <div class="form-group">
                         <div class="col-lg-12">

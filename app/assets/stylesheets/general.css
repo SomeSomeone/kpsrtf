@@ -569,6 +569,21 @@ div.shopping-bag-empty{
 #cartPage-items:empty + div.shopping-bag-empty{
     display: block;
 }
+.shopping-bag-total a[href = "javascript:void(0)"] button{
+    background-color: #696969;
+    border: #696969;
+}
+#get_a_sale{
+    cursor: pointer;
+    font-size: 15px;
+    background: #000;
+    color: #fff;
+    padding: 11px 10px;
+    margin-left: 5px;
+}
+.save_new_data{
+    cursor: pointer;
+}
 
 @media screen and (min-width:768px) {
     html, body, body > .wrapper {
@@ -1006,7 +1021,7 @@ label.invalid.button-validation-message, .input-info.invalid.button-validation-m
 
 @media only screen and (-webkit-min-device-pixel-ratio:1.3), only screen and (min--moz-device-pixel-ratio:1.3), only screen and (-o-min-device-pixel-ratio:1.3 / 1), only screen and (min-resolution:1.3dppx) {
     .input-wrapper.invalid:before {
-        background-image: url("/assets/invalid@2x.png");
+        background-image: url("/assets/invalid.png");
         background-size: 16px 16px
     }
 }
@@ -1027,7 +1042,7 @@ label.invalid.button-validation-message, .input-info.invalid.button-validation-m
 
 @media only screen and (-webkit-min-device-pixel-ratio:1.3), only screen and (min--moz-device-pixel-ratio:1.3), only screen and (-o-min-device-pixel-ratio:1.3 / 1), only screen and (min-resolution:1.3dppx) {
     .input-fields-info:before {
-        background-image: url("/assets/checkout-info@2x.png");
+        background-image: url("/assets/checkout-info.png");
         background-size: 20px 20px
     }
 }
@@ -1045,7 +1060,7 @@ label.invalid.button-validation-message, .input-info.invalid.button-validation-m
 
 @media only screen and (-webkit-min-device-pixel-ratio:1.3), only screen and (min--moz-device-pixel-ratio:1.3), only screen and (-o-min-device-pixel-ratio:1.3 / 1), only screen and (min-resolution:1.3dppx) {
     .input-field-info {
-        background-image: url("/assets/checkout-info@2x.png");
+        background-image: url("/assets/checkout-info.png");
         background-size: 20px 20px
     }
 }
@@ -1185,7 +1200,7 @@ label.invalid.button-validation-message, .input-info.invalid.button-validation-m
 
 @media only screen and (-webkit-min-device-pixel-ratio:1.3), only screen and (min--moz-device-pixel-ratio:1.3), only screen and (-o-min-device-pixel-ratio:1.3 / 1), only screen and (min-resolution:1.3dppx) {
     .lable-cc-images li.lable-cc-visa {
-        background-image: url("/assets/credit-card-visa@2x.png");
+        background-image: url("/assets/credit-card-visa.png");
         background-size: 30px 20px
     }
 }
@@ -1198,7 +1213,7 @@ label.invalid.button-validation-message, .input-info.invalid.button-validation-m
 
 @media only screen and (-webkit-min-device-pixel-ratio:1.3), only screen and (min--moz-device-pixel-ratio:1.3), only screen and (-o-min-device-pixel-ratio:1.3 / 1), only screen and (min-resolution:1.3dppx) {
     .lable-cc-images li.lable-cc-master-card, .wpwl-brand-MASTER {
-        background-image: url("/assets/credit-card-mastercard@2x.png");
+        background-image: url("/assets/credit-card-mastercard.png");
         background-size: 30px 20px
     }
 }
@@ -3219,7 +3234,7 @@ input[type=submit].button-buy:before, input[type=button].button-buy:before,
 @media only screen and (-webkit-min-device-pixel-ratio:1.3), only screen and (min--moz-device-pixel-ratio:1.3), only screen and (-o-min-device-pixel-ratio:1.3 / 1), only screen and (min-resolution:1.3dppx) {
     input[type=submit].button-buy:before, input[type=button].button-buy:before,
     .button.button-buy:before, .story-item.story-item-no-ribbon .button-buy.story-item-link:before {
-        background-image: url("/assets/shopping-bag-inverted@2x.png");
+        background-image: url("/assets/shopping-bag-inverted.png");
         background-size: 13px 14px
     }
 }
@@ -4659,7 +4674,7 @@ input.placeholder {
     .story-item.story-item-no-ribbon .responsive .spinner.story-item-link:after,
     .responsive .button.spinner:disabled:after, .responsive .story-item.story-item-no-ribbon .spinner.story-item-link:disabled:after,
     .story-item.story-item-no-ribbon .responsive .spinner.story-item-link:disabled:after {
-        background-image: url("/assets/loader_black@2x.gif");
+        background-image: url("/assets/loader_black.gif");
         background-size: 14px 14px
     }
 }
@@ -4698,7 +4713,7 @@ input.placeholder {
     .story-item.story-item-no-ribbon .responsive .spinner.secondary.story-item-link:after,
     .responsive .button.spinner:disabled.secondary:after, .responsive .story-item.story-item-no-ribbon .spinner.story-item-link:disabled.secondary:after,
     .story-item.story-item-no-ribbon .responsive .spinner.story-item-link:disabled.secondary:after {
-        background-image: url("/assets/loader@2x.gif");
+        background-image: url("/assets/loader.gif");
         background-size: 14px 14px
     }
 }
@@ -4727,7 +4742,7 @@ input.placeholder {
     .story-item.story-item-no-ribbon .responsive .spinner[type="submit"].story-item-link,
     .responsive .button.spinner:disabled[type="submit"], .responsive .story-item.story-item-no-ribbon .spinner.story-item-link:disabled[type="submit"],
     .story-item.story-item-no-ribbon .responsive .spinner.story-item-link:disabled[type="submit"] {
-        background-image: url("/assets/loader_black@2x.gif");
+        background-image: url("/assets/loader_black.gif");
         background-size: 14px 14px
     }
 }
@@ -5113,7 +5128,7 @@ input.placeholder {
 
 @media only screen and (-webkit-min-device-pixel-ratio:1.3), only screen and (min--moz-device-pixel-ratio:1.3), only screen and (-o-min-device-pixel-ratio:1.3 / 1), only screen and (min-resolution:1.3dppx) {
     .filter-option.unavailable:after {
-        background-image: url("/assets/unavail@2x.png");
+        background-image: url("/assets/unavail.png");
         background-size: 24px 24px
     }
 }
@@ -5242,7 +5257,7 @@ input.placeholder {
 
 @media only screen and (min-width:768px) and (-webkit-min-device-pixel-ratio:1.3), only screen and (min-width:768px) and (min--moz-device-pixel-ratio:1.3), only screen and (min-width:768px) and (-o-min-device-pixel-ratio:1.3 / 1), only screen and (min-width:768px) and (min-resolution:1.3dppx) {
     .page-notification .close {
-        background-image: url("/assets/close-inverted@2x.png");
+        background-image: url("/assets/close-inverted.png");
         background-size: 17px 16px
     }
 }
@@ -6739,8 +6754,8 @@ input.placeholder {
 
 .footer-logotype {
     display: block;
-    height: 39px;
-    width: 58px;
+    height: 42px;
+    width: 65px;
     margin: 30px auto 0
 }
 
@@ -8978,7 +8993,7 @@ input.placeholder {
 
 @media only screen and (-webkit-min-device-pixel-ratio:1.3), only screen and (min--moz-device-pixel-ratio:1.3), only screen and (-o-min-device-pixel-ratio:1.3 / 1), only screen and (min-resolution:1.3dppx) {
     .responsive .booking-details.form-section .form-part.spinner:before {
-        background-image: url("/assets/loader@2x.gif");
+        background-image: url("/assets/loader.gif");
         background-size: 14px 14px
     }
 }
@@ -9128,7 +9143,7 @@ input.placeholder {
     background-color: white;
     z-index: 1003;
     padding: 0;
-    margin: 0 auto;
+    margin: 0;
     width: 100%;
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
@@ -9265,7 +9280,7 @@ input.placeholder {
 
 @media only screen and (-webkit-min-device-pixel-ratio:1.3), only screen and (min--moz-device-pixel-ratio:1.3), only screen and (-o-min-device-pixel-ratio:1.3 / 1), only screen and (min-resolution:1.3dppx) {
     .responsive .modal-wrapper.spinner::after {
-        background-image: url("/assets/loader@2x.gif");
+        background-image: url("/assets/loader.gif");
         background-size: 14px 14px
     }
 }
@@ -9590,7 +9605,7 @@ input.placeholder {
 
 @media only screen and (min-width:768px) and (-webkit-min-device-pixel-ratio:1.3), only screen and (min-width:768px) and (min--moz-device-pixel-ratio:1.3), only screen and (min-width:768px) and (-o-min-device-pixel-ratio:1.3 / 1), only screen and (min-width:768px) and (min-resolution:1.3dppx) {
     .responsive .modal.modal-wide > .modalclose {
-        background-image: url("/assets/layerclose-big@2x.png");
+        background-image: url("/assets/layerclose-big.png");
         background-size: 17px 16px
     }
 }
@@ -10670,7 +10685,7 @@ input.placeholder {
 
 @media only screen and (-webkit-min-device-pixel-ratio:1.3), only screen and (min--moz-device-pixel-ratio:1.3), only screen and (-o-min-device-pixel-ratio:1.3 / 1), only screen and (min-resolution:1.3dppx) {
     .life-article-play-btn-white {
-        background-image: url("/assets/sprites-life@2x.png");
+        background-image: url("/assets/sprites-life.png");
         background-size: 260px 100px
     }
 }
@@ -10681,7 +10696,7 @@ input.placeholder {
 
 @media only screen and (-webkit-min-device-pixel-ratio:1.3), only screen and (min--moz-device-pixel-ratio:1.3), only screen and (-o-min-device-pixel-ratio:1.3 / 1), only screen and (min-resolution:1.3dppx) {
     .life-article-play-btn-black {
-        background-image: url("/assets/life_play_btn_black@2x.png");
+        background-image: url("/assets/life_play_btn_black.png");
         background-size: 87px 91px
     }
 }
@@ -11935,7 +11950,7 @@ a:hover .life-most-read-item-image {
 
 @media only screen and (-webkit-min-device-pixel-ratio:1.3), only screen and (min--moz-device-pixel-ratio:1.3), only screen and (-o-min-device-pixel-ratio:1.3 / 1), only screen and (min-resolution:1.3dppx) {
     .loader-layer .loader-content.favorite-list-loader:before, .favorite-list-loader.favorite-list-loader:before {
-        background-image: url("/assets/loader@2x.gif");
+        background-image: url("/assets/loader.gif");
         background-size: 24px 24px
     }
 }
@@ -11979,7 +11994,7 @@ a:hover .life-most-read-item-image {
 
 @media only screen and (-webkit-min-device-pixel-ratio:1.3), only screen and (min--moz-device-pixel-ratio:1.3), only screen and (-o-min-device-pixel-ratio:1.3 / 1), only screen and (min-resolution:1.3dppx) {
     .loader-layer-logo-text.spinner:before {
-        background-image: url("/assets/loader@2x.gif");
+        background-image: url("/assets/loader.gif");
         background-size: 14px 14px
     }
 }
@@ -12201,7 +12216,7 @@ a:hover .life-most-read-item-image {
     font-weight: normal;
     text-transform: none;
     margin: 0;
-    padding: 0 0 0 21px;
+    padding: 0;
 }
 
 .responsive .product-detail-list-item-details .product-detail-selection {
@@ -12373,7 +12388,7 @@ a:hover .life-most-read-item-image {
 
 @media screen and (min-width:768px) {
     .responsive.product-detail-list {
-        margin-top: 0
+        margin-top: -1px;
     }
 
     .responsive.product-detail-list .product-detail-list-item {
@@ -12579,15 +12594,15 @@ a:hover .life-most-read-item-image {
 }
 
 .responsive .favorite-add-to-bag:after {
-    display: none
+    display: none;
 }
 
 .responsive .out-of-stock .favorite-add-to-bag select {
-    cursor: default
+    cursor: default;
 }
 
 .responsive .out-of-stock .favorite-add-to-bag:before {
-    background-color: #8d8d8d
+    background-color: #8d8d8d;
 }
 
 @media screen and (min-width:768px) {
@@ -12609,14 +12624,14 @@ a:hover .life-most-read-item-image {
         -webkit-box-sizing: border-box;
         -moz-box-sizing: border-box;
         box-sizing: border-box;
-        padding: 0
+        padding: 0;
     }
 
     .responsive .responsive.status-message.favorites-message .message {
         padding: 0;
         font-weight: 300;
         text-align: center;
-        max-width: none
+        max-width: none;
     }
 
     .responsive .favorite-items-quantity {
@@ -17440,7 +17455,7 @@ html[lang=ko] * , html[lang=ko_KR] * {
 
 @media only screen and (-webkit-min-device-pixel-ratio:1.3), only screen and (min--moz-device-pixel-ratio:1.3), only screen and (-o-min-device-pixel-ratio:1.3 / 1), only screen and (min-resolution:1.3dppx) {
     .button.button-chat:before, .story-item.story-item-no-ribbon .button-chat.story-item-link:before {
-        background-image: url("/assets/chat-icon@2x.png");
+        background-image: url("/assets/chat-icon.png");
         background-size: 17px 11px
     }
 }
@@ -17549,7 +17564,7 @@ html[lang=zh] .button.button-chat > span, html[lang=zh] .story-item.story-item-n
 
 @media only screen and (-webkit-min-device-pixel-ratio:1.3), only screen and (min--moz-device-pixel-ratio:1.3), only screen and (-o-min-device-pixel-ratio:1.3 / 1), only screen and (min-resolution:1.3dppx) {
     .swipe-navigation-prev:before {
-        background-image: url("/assets/sprites@2x.png");
+        background-image: url("/assets/sprites.png");
         background-size: 380px 42px
     }
 }
@@ -17590,7 +17605,7 @@ html[lang=zh] .button.button-chat > span, html[lang=zh] .story-item.story-item-n
 
 @media only screen and (-webkit-min-device-pixel-ratio:1.3), only screen and (min--moz-device-pixel-ratio:1.3), only screen and (-o-min-device-pixel-ratio:1.3 / 1), only screen and (min-resolution:1.3dppx) {
     .swipe-navigation-next:before {
-        background-image: url("/assets/sprites@2x.png");
+        background-image: url("/assets/sprites.png");
         background-size: 380px 42px
     }
 }
@@ -17685,7 +17700,7 @@ html[lang=zh] .button.button-chat > span, html[lang=zh] .story-item.story-item-n
 
 @media only screen and (-webkit-min-device-pixel-ratio:1.3), only screen and (min--moz-device-pixel-ratio:1.3), only screen and (-o-min-device-pixel-ratio:1.3 / 1), only screen and (min-resolution:1.3dppx) {
     #search-field .magnify {
-        background-image: url("/assets/sprites@2x.png");
+        background-image: url("/assets/sprites.png");
         background-size: 380px 42px
     }
 }
@@ -17718,6 +17733,9 @@ html[lang=zh] .button.button-chat > span, html[lang=zh] .story-item.story-item-n
     text-transform: uppercase;
     background-color: white;
     color: #0d0d0d
+}
+.flexy-wrapsy .detailbox.detailbox-value{
+    font-size: 7px;
 }
 
 .detailbox.detailbox-value.unavailable > span {
@@ -17804,7 +17822,7 @@ html[lang=zh] .button.button-chat > span, html[lang=zh] .story-item.story-item-n
 
 @media only screen and (-webkit-min-device-pixel-ratio:1.3), only screen and (min--moz-device-pixel-ratio:1.3), only screen and (-o-min-device-pixel-ratio:1.3 / 1), only screen and (min-resolution:1.3dppx) {
     .detailbox.unavailable:after {
-        background-image: url("/assets/unavail@2x.png");
+        background-image: url("/assets/unavail.png");
         background-size: 24px 24px
     }
 }
@@ -17819,7 +17837,7 @@ html[lang=zh] .button.button-chat > span, html[lang=zh] .story-item.story-item-n
 
 @media only screen and (-webkit-min-device-pixel-ratio:1.3), only screen and (min--moz-device-pixel-ratio:1.3), only screen and (-o-min-device-pixel-ratio:1.3 / 1), only screen and (min-resolution:1.3dppx) {
     .detailbox.unavailable.detailbox-flexible:after {
-        background-image: url("/assets/unavail@2x.png");
+        background-image: url("/assets/unavail.png");
         background-size: 100% 24px
     }
 }
@@ -18006,7 +18024,7 @@ input:checked + .detailbox-flexible.unavailable > span > span, input:checked + .
 
 @media only screen and (-webkit-min-device-pixel-ratio:1.3), only screen and (min--moz-device-pixel-ratio:1.3), only screen and (-o-min-device-pixel-ratio:1.3 / 1), only screen and (min-resolution:1.3dppx) {
     .product-filters .filterlogo {
-        background-image: url("/assets/logotype@2x.png");
+        background-image: url("/assets/logotype.png");
         background-size: 36px 24px
     }
 }
@@ -19590,7 +19608,7 @@ input:checked + .detailbox-flexible.unavailable > span > span, input:checked + .
 
 @media only screen and (-webkit-min-device-pixel-ratio:1.3), only screen and (min--moz-device-pixel-ratio:1.3), only screen and (-o-min-device-pixel-ratio:1.3 / 1), only screen and (min-resolution:1.3dppx) {
     .product-detail-thumbnail:before {
-        background-image: url("/assets/loader@2x.gif");
+        background-image: url("/assets/loader.gif");
         background-size: 14px 14px
     }
 }
@@ -19694,7 +19712,7 @@ input:checked + .detailbox-flexible.unavailable > span > span, input:checked + .
 
 @media only screen and (-webkit-min-device-pixel-ratio:1.3), only screen and (min--moz-device-pixel-ratio:1.3), only screen and (-o-min-device-pixel-ratio:1.3 / 1), only screen and (min-resolution:1.3dppx) {
     .product-detail-main-image .product-detail-full-screen-image-link {
-        background-image: url("/assets/fullscreen-inverted@2x.png");
+        background-image: url("/assets/fullscreen-inverted.png");
         background-size: 30px 28px
     }
 }
@@ -19790,7 +19808,7 @@ input:checked + .detailbox-flexible.unavailable > span > span, input:checked + .
 
 @media only screen and (-webkit-min-device-pixel-ratio:1.3), only screen and (min--moz-device-pixel-ratio:1.3), only screen and (-o-min-device-pixel-ratio:1.3 / 1), only screen and (min-resolution:1.3dppx) {
     .js .product-detail-meta .product-colors .inputlist:before, .js .product-detail-meta .product-sizes .inputlist:before {
-        background-image: url("/assets/loader@2x.gif");
+        background-image: url("/assets/loader.gif");
         background-size: 14px 14px
     }
 }
@@ -20167,10 +20185,10 @@ input:checked + .detailbox-flexible.unavailable > span > span, input:checked + .
 }
 
 @media only screen and (-webkit-min-device-pixel-ratio:1.3), only screen and (min--moz-device-pixel-ratio:1.3), only screen and (-o-min-device-pixel-ratio:1.3 / 1), only screen and (min-resolution:1.3dppx) {
-    .weibo-share {
-        background-image: url("/assets/share-weibo@2x.png");
+    /*.weibo-share {
+        background-image: url("/assets/share-weibo.png");
         background-size: 74px 25px
-    }
+    }*/
 }
 
 .renren-share {
@@ -20182,7 +20200,7 @@ input:checked + .detailbox-flexible.unavailable > span > span, input:checked + .
 
 @media only screen and (-webkit-min-device-pixel-ratio:1.3), only screen and (min--moz-device-pixel-ratio:1.3), only screen and (-o-min-device-pixel-ratio:1.3 / 1), only screen and (min-resolution:1.3dppx) {
     .renren-share {
-        background-image: url("/assets/share-renren@2x.png");
+        background-image: url("/assets/share-renren.png");
         background-size: 84px 18px
     }
 }
@@ -20216,17 +20234,17 @@ input:checked + .detailbox-flexible.unavailable > span > span, input:checked + .
 }
 
 .header-global .logotype {
-    background-image: url("/assets/sprites.png");
-    background-repeat: no-repeat;
+    /*background-image: url("/assets/hm.svg");*/
+    /*background-repeat: no-repeat;*/
     display: block;
-    height: 42px;
+    height: 45px;
     margin: 0 auto;
-    width: 63px
+    width: 70px
 }
 
 @media only screen and (-webkit-min-device-pixel-ratio:1.3), only screen and (min--moz-device-pixel-ratio:1.3), only screen and (-o-min-device-pixel-ratio:1.3 / 1), only screen and (min-resolution:1.3dppx) {
     .header-global .logotype {
-        background-image: url("/assets/sprites@2x.png");
+        background-image: url("/assets/sprites.png");
         background-size: 380px 42px
     }
 }
@@ -20740,13 +20758,6 @@ input:checked + .detailbox-flexible.unavailable > span > span, input:checked + .
     position: absolute;
     width: 13px;
     top: 0
-}
-
-@media only screen and (-webkit-min-device-pixel-ratio:1.3), only screen and (min--moz-device-pixel-ratio:1.3), only screen and (-o-min-device-pixel-ratio:1.3 / 1), only screen and (min-resolution:1.3dppx) {
-    .goto-shopping-bag:before {
-        background-image: url("/assets/sprites@2x.png");
-        background-size: 380px 42px
-    }
 }
 
 .goto-shopping-bag:hover {
@@ -21672,7 +21683,7 @@ input:checked + .detailbox-flexible.unavailable > span > span, input:checked + .
 
 @media only screen and (-webkit-min-device-pixel-ratio:1.3), only screen and (min--moz-device-pixel-ratio:1.3), only screen and (-o-min-device-pixel-ratio:1.3 / 1), only screen and (min-resolution:1.3dppx) {
     .choose-region .has-shopping:before {
-        background-image: url("/assets/shopping-bag@2x.png");
+        background-image: url("/assets/shopping-bag.png");
         background-size: 13px 13px
     }
 }
@@ -21987,7 +21998,7 @@ input:checked + .detailbox-flexible.unavailable > span > span, input:checked + .
 
 @media only screen and (-webkit-min-device-pixel-ratio:1.3), only screen and (min--moz-device-pixel-ratio:1.3), only screen and (-o-min-device-pixel-ratio:1.3 / 1), only screen and (min-resolution:1.3dppx) {
     .quick-buy-modal .close {
-        background-image: url("/assets/layerclose@2x.png");
+        background-image: url("/assets/layerclose.png");
         background-size: 11px 11px
     }
 }
@@ -22421,7 +22432,7 @@ input:checked + .detailbox-flexible.unavailable > span > span, input:checked + .
     .life-large-carousel .swipe-navigation-inner .swipe-navigation-prev:after,
     .life-large-carousel .swipe-navigation-inner .swipe-navigation-next:before,
     .life-large-carousel .swipe-navigation-inner .swipe-navigation-next:after {
-        background-image: url("/assets/sprites-life@2x.png");
+        background-image: url("/assets/sprites-life.png");
         background-size: 260px 100px
     }
 }
@@ -22867,7 +22878,7 @@ input:checked + .detailbox-flexible.unavailable > span > span, input:checked + .
 
 @media only screen and (-webkit-min-device-pixel-ratio:1.3), only screen and (min--moz-device-pixel-ratio:1.3), only screen and (-o-min-device-pixel-ratio:1.3 / 1), only screen and (min-resolution:1.3dppx) {
     .life-article-carousel .swipe-navigation-prev, .life-article-carousel .swipe-navigation-next {
-        background-image: url("/assets/sprites-life@2x.png");
+        background-image: url("/assets/sprites-life.png");
         background-size: 260px 100px
     }
 }
@@ -22937,7 +22948,7 @@ input:checked + .detailbox-flexible.unavailable > span > span, input:checked + .
 
 @media only screen and (-webkit-min-device-pixel-ratio:1.3), only screen and (min--moz-device-pixel-ratio:1.3), only screen and (-o-min-device-pixel-ratio:1.3 / 1), only screen and (min-resolution:1.3dppx) {
     .life-social-links a {
-        background-image: url("/assets/sprites-life@2x.png");
+        background-image: url("/assets/sprites-life.png");
         background-size: 260px 100px
     }
 }
@@ -22997,7 +23008,7 @@ input:checked + .detailbox-flexible.unavailable > span > span, input:checked + .
 
 @media only screen and (-webkit-min-device-pixel-ratio:1.3), only screen and (min--moz-device-pixel-ratio:1.3), only screen and (-o-min-device-pixel-ratio:1.3 / 1), only screen and (min-resolution:1.3dppx) {
     .life-social-links a.life-social-link-weibo {
-        background-image: url("/assets/life_social_weibo@2x.png");
+        background-image: url("/assets/life_social_weibo.png");
         background-size: 15px 15px
     }
 }
@@ -23009,7 +23020,7 @@ input:checked + .detailbox-flexible.unavailable > span > span, input:checked + .
 
 @media only screen and (-webkit-min-device-pixel-ratio:1.3), only screen and (min--moz-device-pixel-ratio:1.3), only screen and (-o-min-device-pixel-ratio:1.3 / 1), only screen and (min-resolution:1.3dppx) {
     .life-social-links a.life-social-link-renren {
-        background-image: url("/assets/life_social_renren@2x.png");
+        background-image: url("/assets/life_social_renren.png");
         background-size: 15px 15px
     }
 }
@@ -23021,7 +23032,7 @@ input:checked + .detailbox-flexible.unavailable > span > span, input:checked + .
 
 @media only screen and (-webkit-min-device-pixel-ratio:1.3), only screen and (min--moz-device-pixel-ratio:1.3), only screen and (-o-min-device-pixel-ratio:1.3 / 1), only screen and (min-resolution:1.3dppx) {
     .life-social-links a.life-social-link-youku {
-        background-image: url("/assets/life_social_youku@2x.png");
+        background-image: url("/assets/life_social_youku.png");
         background-size: 15px 15px
     }
 }
@@ -23064,7 +23075,7 @@ input:checked + .detailbox-flexible.unavailable > span > span, input:checked + .
 
 @media only screen and (-webkit-min-device-pixel-ratio:1.3), only screen and (min--moz-device-pixel-ratio:1.3), only screen and (-o-min-device-pixel-ratio:1.3 / 1), only screen and (min-resolution:1.3dppx) {
     .life-loadmore span:before {
-        background-image: url("/assets/sprites-life@2x.png");
+        background-image: url("/assets/sprites-life.png");
         background-size: 260px 100px
     }
 }
@@ -23165,7 +23176,7 @@ input:checked + .detailbox-flexible.unavailable > span > span, input:checked + .
 
 @media only screen and (-webkit-min-device-pixel-ratio:1.3), only screen and (min--moz-device-pixel-ratio:1.3), only screen and (-o-min-device-pixel-ratio:1.3 / 1), only screen and (min-resolution:1.3dppx) {
     .life-shop-the-story-prev {
-        background-image: url("/assets/life_arrow_prev_small@2x.png");
+        background-image: url("/assets/life_arrow_prev_small.png");
         background-size: 19px 37px
     }
 }
@@ -23181,7 +23192,7 @@ input:checked + .detailbox-flexible.unavailable > span > span, input:checked + .
 
 @media only screen and (-webkit-min-device-pixel-ratio:1.3), only screen and (min--moz-device-pixel-ratio:1.3), only screen and (-o-min-device-pixel-ratio:1.3 / 1), only screen and (min-resolution:1.3dppx) {
     .life-shop-the-story-next {
-        background-image: url("/assets/life_arrow_next_small@2x.png");
+        background-image: url("/assets/life_arrow_next_small.png");
         background-size: 19px 37px
     }
 }
@@ -23253,7 +23264,7 @@ input:checked + .detailbox-flexible.unavailable > span > span, input:checked + .
 
 @media only screen and (-webkit-min-device-pixel-ratio:1.3), only screen and (min--moz-device-pixel-ratio:1.3), only screen and (-o-min-device-pixel-ratio:1.3 / 1), only screen and (min-resolution:1.3dppx) {
     .life-back-to-feed:before {
-        background-image: url("/assets/life_article_back@2x.png");
+        background-image: url("/assets/life_article_back.png");
         background-size: 19px 30px
     }
 }
@@ -23273,7 +23284,7 @@ input:checked + .detailbox-flexible.unavailable > span > span, input:checked + .
 
 @media only screen and (-webkit-min-device-pixel-ratio:1.3), only screen and (min--moz-device-pixel-ratio:1.3), only screen and (-o-min-device-pixel-ratio:1.3 / 1), only screen and (min-resolution:1.3dppx) {
     .life-back-to-top:before {
-        background-image: url("/assets/life_back_to_top@2x.png");
+        background-image: url("/assets/life_back_to_top.png");
         background-size: 32px 20px
     }
 }
@@ -23785,7 +23796,7 @@ input:checked + .detailbox-flexible.unavailable > span > span, input:checked + .
 
 @media only screen and (-webkit-min-device-pixel-ratio:1.3), only screen and (min--moz-device-pixel-ratio:1.3), only screen and (-o-min-device-pixel-ratio:1.3 / 1), only screen and (min-resolution:1.3dppx) {
     .checkout-payment-section .select-card-type label span {
-        background-image: url("/assets/credit-cards-radios@2x.png");
+        background-image: url("/assets/credit-cards-radios@.png");
         background-size: 109px 23px
     }
 }
@@ -23851,7 +23862,7 @@ input:checked + .detailbox-flexible.unavailable > span > span, input:checked + .
 
 @media only screen and (-webkit-min-device-pixel-ratio:1.3), only screen and (min--moz-device-pixel-ratio:1.3), only screen and (-o-min-device-pixel-ratio:1.3 / 1), only screen and (min-resolution:1.3dppx) {
     .checkout-payment-section .credit-cards {
-        background-image: url("/assets/credit-cards@2x.png");
+        background-image: url("/assets/credit-cards.png");
         background-size: 66px 18px
     }
 }
@@ -23999,7 +24010,7 @@ input:checked + .detailbox-flexible.unavailable > span > span, input:checked + .
 
 @media only screen and (-webkit-min-device-pixel-ratio:1.3), only screen and (min--moz-device-pixel-ratio:1.3), only screen and (-o-min-device-pixel-ratio:1.3 / 1), only screen and (min-resolution:1.3dppx) {
     .checkout-encryption-info:before {
-        background-image: url("/assets/encrypted@2x.png");
+        background-image: url("/assets/encrypted.png");
         background-size: 10px 13px
     }
 }

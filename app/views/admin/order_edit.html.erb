@@ -38,3 +38,130 @@
         </div>
     </div>
 </div>
+<a data-toggle="modal" class="btn btn-primary" href="#modal-form">Сформировать накладную</a>
+<div id="modal-form" class="modal fade" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-sm-12 b-r"><h3 class="m-t-none m-b">Сформировать накладную</h3>
+                        <!-- <form role="form"> -->
+                            <div class="form-group"><label>Вес(кг)</label> <input type="text" id="order_weight" class="form-control" value="1"></div>
+                            <div class="form-group"><label>Объем(м3)</label> <input type="text" id="order_volume" class="form-control" value="0.0004"></div>
+                            <div class="form-group"><label>Мест</label> <input type="text" id="order_sets" class="form-control" value="1"></div>
+                            <div class="form-group"><label>Описание</label> <input type="text" id="order_desc" class="form-control" value="Одежда"></div>
+                            <input type="submit" id="submit_ttn" value="Сформировать">
+                        <!-- </form> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- <a data-toggle="modal" class="btn btn-primary" href="#modal-form_ttn">Отчет</a> -->
+<div id="modal-form_ttn" class="modal fade" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-sm-12 b-r"><h3 class="m-t-none m-b">Накладная сформирована</h3>
+                        <!-- <form role="form"> -->
+                            <div class="form-group" id="end_ttn">
+                              
+                            </div>
+                            <input type="hidden" id="ttn_to_send" value="">  
+                            <input type="submit" id="send_sms" value="Уведомить получателя при помощи смс">
+                            <button id="all_close">Закрыть</button>
+                        <!-- </form> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<% content_for :javascript do %>
+<script>
+  $(document).ready(function(){
+
+    var address = {
+      "modelName": "Address",
+      "calledMethod": "searchSettlements",
+      "methodProperties": {
+          "CityName": '<%= @order.address_city %>'
+      },
+      "apiKey": "993750c8658bf925309d3c781906709e"
+    }
+    address = JSON.stringify(address);
+    $.ajax('https://api.novaposhta.ua/v2.0/json/', {type: 'POST', data: address,  success: function(req){
+      var CityRef = req.data[0].Addresses[0].DeliveryCity;
+      var conragent = {
+        "modelName": "Counterparty",
+        "calledMethod": "save",
+        "methodProperties": {
+            "CityRef": CityRef,
+            "FirstName": "<%= @order.user.first_name %>",
+            "LastName": "<%= @order.user.second_name %>",
+            "Phone": "<%= @order.user.tel %>",
+            "Email": "<%= @order.user.email %>",
+            "CounterpartyType": "PrivatePerson",
+            "CounterpartyProperty": "Recipient"
+        },
+        "apiKey": "993750c8658bf925309d3c781906709e"
+      }
+      console.log(conragent)
+      conragent = JSON.stringify(conragent);
+      $.ajax('https://api.novaposhta.ua/v2.0/json/', {type: 'POST', data: conragent,  success: function(contr){
+          console.log(contr);
+          console.log(contr.data[0].ContactPerson[0].Ref)
+      }});
+    }}); 
+    $('#submit_ttn').click(function(){
+      var save = {
+        "modelName": "InternetDocument",
+        "calledMethod": "save",
+        "methodProperties": {
+        "PayerType": "Sender",
+        "PaymentMethod": "Cash",
+        "DateTime": "<%= Time.now.strftime("%d.%m.%Y")%>",
+        "CargoType": "Cargo",
+        "VolumeGeneral": '0.001',
+        "Weight": $('#order_volume').val(),
+        "ServiceType": "WarehouseDoors",
+        "SeatsAmount": $('#order_sets').val(),
+        "Description": $('#order_desc').val(),
+        "Cost": $('#order_sets').val(),
+        "CitySender": "db5c88d0-391c-11dd-90d9-001a92567626",
+        "Sender": "aa2e6558-38e1-11e7-8ba8-005056881c6b",
+        "SenderAddress": "169227dc-e1c2-11e3-8c4a-0050568002cf",
+        "ContactSender": "aa31b0cb-38e1-11e7-8ba8-005056881c6b",
+        "SendersPhone": "380939522460",
+        "CityRecipient": "db5c88d0-391c-11dd-90d9-001a92567626",
+        "Recipient": "aa333c56-38e1-11e7-8ba8-005056881c6b",
+        "RecipientAddress": "4049833b-e1c2-11e3-8c4a-0050568002cf",
+        "ContactRecipient": "41bf7dec-3e41-11e7-8ba8-005056881c6b",
+        "RecipientsPhone": "380631112223"
+        },
+        "apiKey": "993750c8658bf925309d3c781906709e"
+      }
+      save = JSON.stringify(save);
+      $.ajax('https://api.novaposhta.ua/v2.0/json/', {type: 'POST', data: save,  success: function(ttn){
+          console.log(ttn);
+          console.log(ttn.data[0].IntDocNumber);
+          $('#modal-form_ttn').addClass('in').show();
+          $('#modal-form, .modal-backdrop').removeClass('in').hide();
+          var sms = 'Накладная сформирована и направлена в личный кабинет НП. Номер ТТН - ' + ttn.data[0].IntDocNumber + '';
+          var myttn = ttn.data[0].IntDocNumber;
+          $('#ttn_to_send').val(myttn);
+          $('#end_ttn').text(sms)
+      }});
+      $('#send_sms').click(function(){
+        var myttn = $('#ttn_to_send').val();
+        $.ajax('http://app.bsg.hk/sendsms?user=inbrogues1@gmai&pwd=bqfD2k6b&sadr=testsms&dadr=380939522460&text=Ваш заказ на сайте yourhm.com.ua отправлен. Номер ТТН ' + myttn + '', {type: 'GET', success: function(smssend){
+        }})
+        alert('Смс отправлено!');
+      });
+    });
+  });
+</script>
+<% end %>

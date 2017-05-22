@@ -1,0 +1,43 @@
+
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5>Создание новой категории</h5>
+                <div class="ibox-tools">
+                    <a class="collapse-link">
+                        <i class="fa fa-chevron-up"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="ibox-content">
+                <%= semantic_form_for @sale, :url => admin_sale_create_path(@sale) , :html => { :class => "form-horizontal"} do |f| %>
+                    <p>Введите пустые поля</p>
+                    <div class="form-group">
+                    <%= f.label  :name , "Имя" , class: "col-lg-12"%>
+                        <div class="col-lg-12"><%= f.text_field :name, class: 'form-control' %><span class="help-block m-b-none">Введите имя</span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                    <%= f.label  :value , "Процент скидки" , class: "col-lg-12"%>
+                        <div class="col-lg-12"><%= f.number_field :value, in: 0.0..100.0, step: 0.1, class: 'form-control' %><span class="help-block m-b-none">Введите процент скидки</span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                    <%= f.label  :term , "Срок" , class: "col-lg-12"%>
+                        <div class="col-lg-12"><%= f.datetime_select :term, class: 'form-control' %><span class="help-block m-b-none">Срок до которого действует акция</span>
+                        </div>
+                    </div>
+                
+
+                    <div class="form-group">
+                        <div class="col-lg-12">
+                          <%= f.submit  "Создать категорию" , :class => "btn btn-sm btn-primary"  %>
+                        </div>
+                    </div>
+                <% end %>
+            </div>
+        </div>
+    </div>
+</div>

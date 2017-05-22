@@ -16,7 +16,7 @@
 			<h1>КОРЗИНА</h1>
 		</header>
 		<div class="row sticky-wrapper ng-scope flex-mother" ng-controller="CartContextController">
-			<div class="grid col-8 empty_cart">
+			<div class="grid col-8 empty_cart cart-width-95">
 				<h2 class="visuallyhidden">Товары в корзине</h2>
 				<ul class="product-detail-list responsive ng-scope too-empty" id="cartPage-items"></ul>
 				<div class="box-content shopping-bag-empty">
@@ -37,28 +37,28 @@
 										<tr>
 											<th scope="row">СТОИМОСТЬ ЗАКАЗА:</th>
 											<td>
-												<span id="newPriceSubtotal" class="ng-binding">0 Грн</span>
+												<span id="newPriceSubtotal" class="ng-binding">0 грн</span>
 											</td>
 										</tr>
 										<% if @user %>
-											<% if @user.money %>
+											<% if @user.money != 0 %>
 											<tr>
 												<th scope="row">ТЕКУЩИЙ БАЛАНС</th>
 												<td>
-													<span><%=@user.money %> Грн</span>
+													<span><%=@user.money %> грн</span>
 												</td>
 											</tr>
 											<tr>
 												<th scope="row">ИТОГОВАЯ СТОИМОСТЬ</th>
 												<td>
-													<span id="itog_price">0 Грн</span>
+													<span id="itog_price">0 грн</span>
 												</td>
 											</tr>
 											<% end %>
 										<% end %>
 									</tbody>
 								</table>
-								<a href="/diver"><button class="button button-big">ПЕРЕЙТИ К ОФОРМЛЕНИЮ ЗАКАЗА</button></a>
+								<a href="/div"><button class="button button-big">ПЕРЕЙТИ К ОФОРМЛЕНИЮ ЗАКАЗА</button></a>
 							</div>
 							<p class="fine-print">
 								Цены и стоимость доставки являются неподтвержденными до перехода к разделу оформления заказа.
@@ -84,11 +84,11 @@
 		if(cartsItems){
 	    	$.each(cartsItems, function(){
 	    		if(this.promotional_price){
-	    			promo = '<p class="product-detail-price ng-binding sale-price">' + this.promotional_price + ' Грн<span class="original-price">' + this.price + ' Грн </span></p>';
+	    			promo = '<p class="product-detail-price ng-binding sale-price">' + this.promotional_price + ' грн<span class="original-price">' + this.price + ' грн </span></p>';
 	    			item_summ = this.promotional_price * this.count;
 	    		}
 	    		else{
-	    			promo = '<p class="product-detail-price ng-binding">' + this.price + ' Грн</p>'
+	    			promo = '<p class="product-detail-price ng-binding">' + this.price + ' грн</p>'
 	    			item_summ = this.price * this.count;
 	    		}
 	    		var all_summ;
@@ -114,7 +114,7 @@
 							<div class="product-detail-list-item-price-info">\
 								<p class="product-detail-list-item-total-price">\
 									Итого:\
-									<span class="entry_new_price ng-binding">' + item_summ + ' Грн</span>\
+									<span class="entry_new_price ng-binding">' + item_summ + ' грн</span>\
 								</p>\
 							</div>\
 							<h3 class="sub-sub-heading ng-binding">' + this.name + '</h3>\
@@ -147,19 +147,32 @@
 		    // 	$('#total_price_of_basket').text(item_summ + 99 + ' Грн');
 		    // }
 	    }
+	    function ifCartEmpty(){
+	    	car = JSON.parse(localStorage.getItem('myCart'));
+			if(car == 0){
+				$('.shopping-bag-total > a').attr('href', 'javascript:void(0)');
+				$('.shopping-bag-empty').show();
+			}
+			else{
+				$('.shopping-bag-total > a').attr('href', '/diver');
+			}
+		};
 	    function calcPrice(){
 		    var price_of_item = 0;
 				$('.entry_new_price').each(function(){
 					price_of_item = parseInt($(this).text()) + price_of_item;
 					// console.log(price_of_item);
 				});
-				$('#newPriceSubtotal').text(price_of_item + ' Грн');
+				$('#newPriceSubtotal').text(price_of_item + ' грн');
 				<% if @user %>
 					<% if @user.money %>
 						price_of_item = price_of_item - <%= @user.money %>;
 					<% end %>
 				<% end %>
-				$('#itog_price').text(price_of_item + ' Грн');
+				if(price_of_item < 0){
+					price_of_item = 0;
+				}
+				$('#itog_price').text(price_of_item + ' грн');
 				// $('#total_price_of_basket').text(price_of_item  + ' Грн');
 			}
 	    $('.icon-trash').click(function(){
@@ -175,6 +188,7 @@
       	});
       	calcPrice();
       	cartCount();
+      	ifCartEmpty();
     	});
 
     	$('.icon-move-favorite').click(function(){
@@ -192,12 +206,18 @@
     		console.log(index_of_block);
     		cartsItems = JSON.parse(localStorage.getItem('myCart'));
     		cartsItems[index_of_block].count = change_count;
-    		console.log(cartsItems);
-    		$($(this).parent().parent().parent()).find('.entry_new_price').text(change_count * cartsItems[index_of_block].price + ' Грн')
+    		// console.log(cartsItems);
+    		if(cartsItems[index_of_block].promotional_price){
+    			$($(this).parent().parent().parent()).find('.entry_new_price').text(change_count * cartsItems[index_of_block].promotional_price + ' грн');
+    		}
+    		else{
+    			$($(this).parent().parent().parent()).find('.entry_new_price').text(change_count * cartsItems[index_of_block].price + ' грн');
+    		}
     		localStorage.setItem('myCart', JSON.stringify(cartsItems));
     		calcPrice();
     	});
     	calcPrice();
+    	ifCartEmpty();
 		});
 </script>
 <% end %>

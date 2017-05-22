@@ -17,7 +17,6 @@
 <tr>
     <th>id</th>
     <th>Имя</th>
-    <th>Текст</th>
     <th>Обновить</th>
     <th>Удалить</th>
 </tr>
@@ -27,7 +26,6 @@
 <tr class="gradeX">
     <td><%=pop.id %></td>
     <td><%=pop.name %></td>
-    <td><%=pop.text.html_safe %></td>
     <td><%= link_to 'Обновить', admin_pop_edit_path(pop) %></td>
     <td class="center"><%= link_to 'Удалить', admin_pop_destroy_path(pop) , :method => 'delete', data: { confirm: 'Точно?' } %></td>
 </tr>
@@ -37,7 +35,6 @@
 <tr>
     <th>id</th>
     <th>Имя</th>
-    <th>Текст</th>
     <th>Обновить</th>
     <th>Удалить</th>
 </tr>

@@ -39,6 +39,9 @@ class AdminController < ApplicationController
 	def campaings
 		@campaings=Campaign.all
 	end
+	def sales
+		@sales=Sale.all
+	end
 	def product_new
 		@product = Product.new
 		@product.product_datum.build
@@ -282,6 +285,7 @@ class AdminController < ApplicationController
 		@categories=Category.all
 		@pops=Pop.all
 		@baners=Baner.all
+		@sales=Sale.all
 	end
 	def category_update
 		@category = Category.find(params[:id])
@@ -300,6 +304,8 @@ class AdminController < ApplicationController
 		@category=Category.new
 		@categories=Category.all
 		@pops=Pop.all
+		@baners=Baner.all
+		@sales=Sale.all
 	end
 	def category_destroy
 		@category=Category.find(params[:id])
@@ -573,6 +579,45 @@ class AdminController < ApplicationController
 		end
 	end
 
+	def sale_new
+		@sale=Sale.new
+	end
+	def sale_create
+		@sale=Sale.new(sales_params)
+	    respond_to do |format|
+	      if @sale.save
+	        format.html {redirect_to controller:"admin", action:"sales", id:  @sale.id , notice: 'Банер был успешно создан' }
+	        format.json { render :show, status: :created, location: @sale }
+	      else
+	        format.html { render :new }
+	        format.json { render json: @sale.errors, status: :unprocessable_entity }
+	      end
+	    end
+	end
+	def sale_edit
+		@sale=Sale.find(params[:id])
+	end
+	def sale_update
+		@sale=Sale.find(params[:id])
+	    respond_to do |format|
+	      if @sale.update(sales_params)
+	        format.html {redirect_to controller:"admin", action:"sales", id:  @sale.id , notice: 'Банер был успешно обновлён' }
+	        format.json { render :show, status: :created, location: @sale }
+	      else
+	        format.html { render :edit }
+	        format.json { render json: @sale.errors, status: :unprocessable_entity }
+	      end
+	    end
+	end
+	def sale_destroy
+		@sale=Sale.find(params[:id])
+		@sale.destroy
+		respond_to do |format|
+		  format.html { redirect_to controller:"admin", action:"sales", notice: 'Банер был успешно удалён' }
+		  format.json { head :no_content }
+		end
+	end
+
 
 	def send_message
 		@order=Order.find(params[:id])
@@ -608,7 +653,7 @@ class AdminController < ApplicationController
       params.require(:main_color).permit(:name , :hex)
     end
     def category_params
-      params.require(:category).permit(:name ,:category_id ,:pop_id , :baner_id , :about ,:polka_url , :seo_text , :url , :title)
+      params.require(:category).permit(:name ,:category_id , :sale_id,:pop_id , :baner_id , :about ,:polka_url , :seo_text , :url , :title)
     end
     def photo_params
    		params.require(:photo).permit(:img)
@@ -630,6 +675,9 @@ class AdminController < ApplicationController
    	end
    	def admin_options_params
    		params.require(:admin_option).permit(:value)
+   	end
+   	def sales_params
+   		params.require(:sale).permit( :name ,:value , "term(1i)" ,"term(2i)" , "term(3i)", "term(4i)", "term(5i)")
    	end
    	def campaing_params
    		params.require(:campaign).permit(:code, :value, :number, :inf_number, "period(1i)" ,"period(2i)" , "period(3i)", "period(4i)", "period(5i)", :inf_period)   		

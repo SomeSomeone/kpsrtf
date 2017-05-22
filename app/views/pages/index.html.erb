@@ -4,11 +4,6 @@
   <div class="layout">
     <div class="parsys main">
       <div class="ghost section"></div>
-      <%if @baners[0]%>
-      <section class="segment section">
-        <%= @baners[0].text.html_safe %>
-      </section>
-      <%end%>
       <%if @baners[1]%>
       <section class="segment section singleteasercontainer">
           <%= @baners[1].text.html_safe %>
@@ -33,7 +28,7 @@
                       <%= link_to product.name,"/single/hm-#{product.product_datum[0].article}" %>
                     </h3>
                     <% if product.product_datum[0]!=nil and product.product_datum[0].price!=nil %>
-                          <%if product.product_datum[0].promotional_price!=nil and  product.product_datum[0].promotional_price>0 %>
+                          <%if product.product_datum[0].promotional_price? %>
                             <strong class="price sale-price"> <%=product.product_datum[0].get_promotional_price%> Грн
                               <span class="price original-price"><%= product.product_datum[0].get_price%> Грн</span>
                             </strong>
@@ -55,6 +50,11 @@
           </div>
         </section>
       </div>
+      <%if @baners[0]%>
+      <section class="segment section">
+        <%= @baners[0].text.html_safe %>
+      </section>
+      <%end%>
       <%if @baners[2] || @baners[3]%>
       <section class="segment section">
         <div class="two modules">
@@ -91,9 +91,9 @@
                       <%= link_to product.name,"/single/hm-#{product.product_datum[0].article}" %>
                     </h3>
                     <% if product.product_datum[0]!=nil and product.product_datum[0].price!=nil %>
-                          <%if product.product_datum[0].promotional_price!=nil and  product.product_datum[0].promotional_price>0 %>
+                          <%if product.product_datum[0].promotional_price? %>
                             <strong class="price sale-price"> <%=product.product_datum[0].get_promotional_price%> Грн
-                              <span class="price original-price"><%= product.product_datum[0].get_rice%> Грн</span>
+                              <span class="price original-price"><%= product.product_datum[0].get_price%> Грн</span>
                             </strong>
                           <%else%>
                           <strong class="price"><%= product.product_datum[0].get_price%> Грн</strong>

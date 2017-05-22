@@ -19,14 +19,15 @@
     <th>id</th>
     <th>Адресс</th>
     <th>Клиент</th>
-    <th>Сумма</th>
+    <th>Сумма<br>ГРН</th>
+    <th>Сумма<br>Злот</th>
     <th>Сумма возврат</th>
     <th>Статус</th>
     <th>Дата заказа</th>
+    <th>Коментарий</th>
     <th>Обновить</th>
     <th>Удалить</th>
-    <th>Заказ</th>
-    <th>Коментарий</th>
+
 </tr>
 </thead>
 <tbody>
@@ -40,17 +41,21 @@
     <td><%= order.address %></td>
     <td>
     	<p><a href="mailto:<%= order.user.email %>"><%= order.user.email %></a><br>
-    	<%= order.user.first_name%> <%=order.user.second_name%> <%=order.user.father%><br>
+    	<%= order.user.first_name%> <%=order.user.second_name%><br>
     	<a href="tel:<%= order.user.tel %>"><%= order.user.tel %></a></p>
     </td>
-    <td><%= order.sum %> Грн / <%=order.polka_sum%> Злот</td>
+    <td><%= order.sum %></td>
+    <td><%=order.polka_sum%></td>
     <td><%= order.cash_back %></td>
     <td><%= order.status %></td>
     <td><%= order.created_at.to_s(:db) %></td>
+    <td><%= order.about %></td>
     <td><%= link_to 'Обновить', admin_order_edit_path(order) %></td>
     <td class="center"><%= link_to 'Удалить', admin_order_destroy_path(order) , :method => 'delete', data: { confirm: 'Точно?' } %></td>
+</tr>
+<tr class="gradeX" >
     <td>
-        <% if order.orders_product_data %>
+    <% if order.orders_product_data %>
                 <ul class="order-products product-detail-list responsive">
                     <% order.orders_product_data.each do |opd| %>
                     <li>
@@ -71,8 +76,8 @@
                 </ul>
         <% end %>
     </td>
-    <td><%= order.about %></td>
 </tr>
+
 <% end %>
 </tbody>
 <tfoot>
@@ -80,14 +85,14 @@
     <th>id</th>
     <th>Адресс</th>
     <th>Клиент</th>
-    <th>Сумма</th>
+    <th>Сумма<br>ГРН</th>
+    <th>Сумма<br>Злот</th>
     <th>Сумма возврат</th>
     <th>Статус</th>
     <th>Дата заказа</th>
     <th>Обновить</th>
-    <th>Удалить</th>
-    <th>Заказ</th>
     <th>Коментарий</th>
+    <th>Удалить</th>
 </tr>
 </tfoot>
 </table>

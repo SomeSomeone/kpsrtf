@@ -16,7 +16,8 @@ class CartsController < ApplicationController
 	      	@address.user=@order.user
 	      	@address.save
 	      	@order.address_ref = @address
-	      	
+	      	@order.address_city = @address.city
+	      	@order.address_post_index = @address.post_index
 	      	@order.address=@address.city+" "+@address.post_index
 
 	    respond_to do |format|
@@ -31,13 +32,18 @@ class CartsController < ApplicationController
 		      		a.product_datum_id=d['id']
 		      		a.product_size=ProductSize.find_by(size: d['size'])
 		      		pd = ProductDatum.find(d['id'])
-		      		if pd.get_promotional_price and pd.get_promotional_price>0
+		      		if pd.promotional_price?
 		      			@order.sum += pd.get_promotional_price*a.count
-		      			@order.polka_sum+=pd.promotional_price*a.count
 		      		else
 		      			@order.sum += pd.get_price*a.count
+		      		end
+		      		if pd.promotional_price>0
+		      			@order.polka_sum+= pd.promotional_price*a.count
+		      		else
 		      			@order.polka_sum+= pd.price*a.count
 		      		end
+	      			
+
 		      		
 		      		a.save
 		      	}
@@ -50,10 +56,20 @@ class CartsController < ApplicationController
       			@order.campaign_id=persent.id
 	      	end
 
-	      	@order.save        
+	      	if @user.money>0
+	      		if @user.money-3>@order.sum
+	      			@user.money-=@order.sum
+	      			@order.sum=0
+	      			@order.status="Принят"
+	      		else
+	      			@order.sum-=@user.money
+	      			@user.money=0
+	      		end
+	      	end
+	      	@order.save
 
 	      	RootMailer.cart_email(@user , @order).deliver_now
-	      	if params[:money][:money]=="liqpay"
+	      	if params[:money][:money]=="liqpay" and @order.sum>0
 		        format.html {redirect_to controller:"carts", action:"liqpay_request", id:  @order.id , notice: 'Color was successfully created.' }
 		        format.json { render :show, status: :created, location: @order }
 	      	else
@@ -105,14 +121,39 @@ class CartsController < ApplicationController
 		@order.address_ref=@address
 	end
 	def order_activate
-		@order=Order.find(params[:id])
-		@order.bool_factor=true
-		@order.save
-		 msg = { 
-	    	:status => "ok",
-	    	:message => "Success!"
-	    }
+		respond_to do |format|
+			@order=Order.find(params[:id])
+			@order.bool_factor=true
+			@order.save
+			 msg = { 
+		    	:status => "ok",
+		    	:message => "Success!",
+		    	:html => "<b>...</b>"
+		    }
+		    format.json  { render :json => msg }
+		end
+	end
+	def test
+	  respond_to do |format|
+      	persent=Campaign.find_by(code: params[:campaign_code])
+
+      	if persent and persent.actual? and (Order.find_by(user: @user , campaign_id: persent.id)).nil?
+		    msg = { 
+		    	:status => "ok",
+		    	:message => "Success!",
+		    	:html => "<b>...</b>",
+		    	:value => persent.value
+		    }
+		else
+		    msg = { 
+		    	:status => "ok",
+		    	:message => "Error",
+		    	:html => "<b>...</b>"
+		    }
+		end
 	    format.json  { render :json => msg }
+
+	  end
 	end
 	def order_params
    		params.require(:order).permit(:json , :campaign_code)

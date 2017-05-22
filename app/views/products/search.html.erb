@@ -58,7 +58,7 @@
                                   <h4>Размер</h4>
                                   <ul class="inputlist row-cols">
                                     <% @PossibleSizes.each_with_index do |c, k|%>
-                                      <li class="row-col">
+                                      <li class="row-col" data-r-s="r<%= c.size %>">
                                         <ul data-filter-param-name="sizes[]" class="inputlist rows">
                                           <li>
                                             <label for="filter-size-<%= c.size %>">
@@ -149,12 +149,12 @@
                             <a href="#"><%=product.name%></a>
                           </h3>
                         <% if product.product_datum[0]!=nil and product.product_datum[0].price!=nil %>
-                          <%if product.product_datum[0].promotional_price!=nil and product.product_datum[0].promotional_price>0 %>
-                            <strong class="price sale-price"> <%=product.product_datum[0].get_promotional_price%> Грн
-                              <span class="price original-price"><%= product.product_datum[0].get_price%> Грн</span>
+                          <%if product.product_datum[0].promotional_price? %>
+                            <strong class="price sale-price"> <%=product.product_datum[0].get_promotional_price%> грн
+                              <span class="price original-price"><%= product.product_datum[0].get_price%> грн</span>
                             </strong>
                           <%else%>
-                          <strong class="price"><%= product.product_datum[0].get_price%> Грн</strong>
+                          <strong class="price"><%= product.product_datum[0].get_price%> грн</strong>
                           <%end%>
                         <%else%>
                           <strong class="price">Уточняеться</strong>

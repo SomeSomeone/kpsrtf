@@ -61,7 +61,7 @@
 				<% if order.orders_product_data %>
 					<li class="order-item">
 						<div class="order-header js-toggle-trigger">
-							<span class="order-id">ORDER&nbsp;<%= order.id %></span>
+							<span class="order-id">Заказ&nbsp;<%= order.get_order %></span>
 							<span class="order-date"><%= order.created_at %></span>
 							<span class="order-status" style='color: 
 							<% if order.status == "Ожидает платежа" %>#333
@@ -99,7 +99,7 @@
 										<li class="item">
 											<span class="label">АДРЕС ДОСТАВКИ</span>
 											<span class="static">
-												<%= order.user.first_name + ' ' + order.user.father + ' ' + order.user.second_name%>
+												<%= order.user.first_name + ' ' + order.user.second_name%>
 												<br>
 												<%= order.address %>
 											</span>
@@ -132,7 +132,7 @@
 											</div>
 
 											<h3 class="sub-sub-heading"><%=opd.product_datum.product.name%></h3>
-											<span class="original-price"><%=opd.product_datum.get_price||opd.product_datum.get_price%> Грн</span>
+											<span class="original-price"><%=opd.product_datum.get_promotional_price||opd.product_datum.get_price%> Грн</span>
 											<p class="product-detail-price"></p>
 											<p class="product-detail-price"></p>
 											<p></p>

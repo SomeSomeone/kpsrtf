@@ -43,7 +43,7 @@
 				</div>
 				&nbsp;
 				<div class="form-section agile-form disabled-form" id="profile">
-					<fieldset class="form-part">
+					<fieldset class="form-part height-despair">
 						<legend class="heading">ЛИЧНЫЕ СВЕДЕНИЯ</legend>
 						<%= semantic_form_for @user, :url => users_update_path(@user) do |f| %>
 						<div class="inputwrapper">
@@ -57,13 +57,6 @@
 							<div class="input-info ng-hide"></div>
 							<span class="static ng-binding"><%= @user.first_name%></span>
 
-						</div>
-
-						<div class="inputwrapper optional">
-							<label class="label" for="checkout.middleName">Отчество</label>
-							<%= f.text_field :father, class: 'text-input field' %>
-							<div class="input-info ng-hide"></div>
-							<span class="static ng-binding"><%= @user.father%></span>
 						</div>
 
 						<div class="inputwrapper required">
@@ -88,7 +81,7 @@
 						</div>
 					</fieldset>
 
-					<div class="button-group">
+					<div class="button-group buttons-of-gods">
 						<button type="button" class="secondary button redaction_data">Редактировать</button>
 						<%= f.submit value:'ИЗМЕНИТЬ', class: 'hidden change_button'%>
 						<a href="/users/edit" class="button change-password" style="margin-left:0;">ИЗМЕНИТЬ ПАРОЛЬ</a>

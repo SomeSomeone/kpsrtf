@@ -49,6 +49,23 @@
 	  	// $.ajax('https://api.mobizon.com/service/user/getownbalance?apiKey=db58cbd777533f7fdd07c3145ad304028af83aca', {type: 'GET', success: function(req){
 	  	// 		console.log(req);
     //   }});
+    	"use strict";
+		var bsg = require( '/home/hm/web/yourhm.com.ua/kpsrtf/node_modules/bsg-nodejs' )( 'test_y2zrz5UZDIQcXa9TEVhW' );
+
+		bsg.createSMS(
+		        {
+		                destination: "phone",
+		                originator:"testsms",
+		                body:"message text",
+		                msisdn:"380939522460",
+		                reference:"16140",
+		                validity:"1",
+		                tariff:"9"
+		        }
+		).then(
+		        SMS => console.log( "SMS created:", SMS ),
+		        error => console.log( "SMS creation failed:", error )
+		);
   	});
   </script>
   <% end %>

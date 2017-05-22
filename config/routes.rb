@@ -99,6 +99,15 @@ Rails.application.routes.draw do
   delete 'admin/campaing_destroy/:id'=> 'admin#campaing_destroy' , :as => :admin_campaing_destroy
 
 
+  get 'admin/sales'
+  get 'admin/sale_new'
+  post 'admin/sale_create'
+  get 'admin/sale_edit/:id'=> 'admin#sale_edit', :as => :admin_sale_edit
+  patch 'admin/sale_update/:id'=> 'admin#sale_update', :as => :admin_sale_update
+  delete 'admin/sale_destroy/:id'=> 'admin#sale_destroy' , :as => :admin_sale_destroy
+
+
+
 
   get 'admin/options' => 'admin#options'
   get 'admin/option_edit/:id'=> 'admin#option_edit', :as => :admin_admin_option_edit
@@ -129,6 +138,8 @@ Rails.application.routes.draw do
   get 'search/' => 'products#search'
   get 'single/hm-:article' => 'products#single'
   get 'get' => 'products#test', :defaults => { :format => 'json' }
+  get 'get_sizes' => 'products#sizes', :defaults => { :format => 'json' }
+  get 'get_code' => 'carts#test', :defaults => { :format => 'json' }
 
   get 'favourites' => 'products#favourites'
   

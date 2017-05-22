@@ -18,7 +18,6 @@ class UsersController < ApplicationController
 		@user=current_user
 		respond_to do |format|
 			@user.first_name = params["first_name"]
-			@user.father = params["father"]
 			@user.second_name=params["second_name"]
 			@user.date=params["date"]
 			@user.tel=params["tel"]
@@ -85,7 +84,7 @@ class UsersController < ApplicationController
       params.require(:address).permit(:address , :seccond_address , :city, :post_index)
     end
     def users_params
-      params.require(:user).permit(:email , :first_name , :father ,:second_name,:date ,:tel ,:country)
+      params.require(:user).permit(:email , :first_name ,:second_name,:date ,:tel ,:country)
     end
     def second_users_params
       params

@@ -6,4 +6,8 @@ class Order < ActiveRecord::Base
   accepts_nested_attributes_for :address_ref
   attr_accessor :campaign_code
   has_one :campaign
+
+  def get_order
+  	created_at.year*10000+id
+  end
 end

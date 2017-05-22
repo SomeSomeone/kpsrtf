@@ -12,7 +12,7 @@
         <div class="wrapper">
             <h1 class="favorite-heading">ЛЮБИМЫЕ МОДЕЛИ</h1>
             <div  ng-controller="FavoritesContextController" ng-cloak>
-                <ul class="product-detail-list responsive favorite-list js-favorite-list" id="favouritesPage-items">
+                <ul class="product-detail-list responsive favorite-list js-favorite-list  too-empty" id="favouritesPage-items">
                     <!-- /Wishlist item --> 
                 </ul>
                 
@@ -36,7 +36,7 @@
                         <div class="modal-text">
                             <p class="text"></p>
                         </div>
-                        <div class="sticky button-group">
+                        <div class="sticky button-group buttons-of-gods">
                             <button class="modalclose button">OK</button>
                         </div>
                     </div>
@@ -111,6 +111,17 @@
 </li>')
     })
     }
+    function ifFavEmpty(){
+        var fav = JSON.parse(localStorage.getItem('myKey'));
+        if(fav == 0){
+            $('.favorites-empty').show();
+        }
+        else{
+            $('.favorites-empty').hide();
+
+        }
+    };
+    ifFavEmpty();
     $('.secondary').click(function(){
         itemss = JSON.parse(localStorage.getItem('myKey'));
         var this_article = $(this).attr('data-article');
@@ -121,6 +132,7 @@
                 $('.secondary[data-article="' + this_article + '"]').parent().parent().remove();
             }
         });
+        ifFavEmpty();
     });
     $('.add-to-bag').on('change', function(){
         itemss = JSON.parse(localStorage.getItem('myKey'));
@@ -153,6 +165,7 @@
             }
         });
         cartCount();
+        ifFavEmpty();
     });
     // $('.product-detail-list-item-image img').attr('src', items.src);
     // $('.original-price').text(items.price);

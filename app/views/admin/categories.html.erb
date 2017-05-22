@@ -16,7 +16,6 @@
 <tr>
     <th>id</th>
     <th>Имя</th>
-    <td>Описание</td>
     <th>Отец</th>
     <th>SEO текст</th>
     <th>Ссылка</th>
@@ -24,6 +23,7 @@
     <td>Ссылка парсера</td>
     <td>Попап</td>
     <td>Банер</td>
+    <td>Акция</td>
     <th>Обновить</th>
     <th>Удалить</th>
 </tr>
@@ -34,7 +34,6 @@
 <tr class="gradeX">
     <td><%=category.id %></td>
     <td><%=category.name %></td>
-    <td><%=(category.about||"").html_safe %></td>
     <td>
     	<%if category.parent %>
     		<%=category.parent.name%>
@@ -60,6 +59,13 @@
             Не задан
         <%end%>
    </td>
+   <td>
+        <% if category.sale %>
+            <%=category.sale.name%>
+        <%else%>
+            Не задан
+        <%end%>
+   </td>
 
     <td><%= link_to 'Обновить', admin_category_edit_path(category) %></td>
     <td><%= link_to 'Удалить', admin_category_destroy_path(category) , :method => 'delete', data: { confirm: 'Точно?' } %></td>
@@ -70,14 +76,14 @@
 <tr>
     <th>id</th>
     <th>Имя</th>
-    <td>Описание</td>
     <th>Отец</th>
     <th>SEO текст</th>
     <th>Ссылка</th>
     <th>Тайтл</th>
     <td>Ссылка парсера</td>
-        <td>Попап</td>
+    <td>Попап</td>
     <td>Банер</td>
+    <td>Акция</td>
     <th>Обновить</th>
     <th>Удалить</th>
 </tr>

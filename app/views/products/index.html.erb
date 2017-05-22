@@ -1,7 +1,14 @@
 
 <% content_for :title do @current_cat.title  end %>
 <% content_for :description do @current_cat.seo_text end%>
-
+<style>
+  .section-menu-category .section-menu-subdepartment ul{
+    display: none;
+  }
+  .section-menu-category .section-menu-subdepartment.current ul{
+    display: block !important;
+  }
+</style>
 <main role="main" class="responsive segments">
   <!-- Main -->
   <!--AEMPUBPRDEU30-->
@@ -261,9 +268,9 @@
 
                                 <div class="col">
                                   <h4>Размер</h4>
-                                  <ul class="inputlist row-cols">
+                                  <ul class="inputlist row-cols flexy-wrapsy">
                                     <% @PossibleSizes.each_with_index do |c, k|%>
-                                      <li class="row-col">
+                                      <li class="row-col"  data-r-s="r<%= c.size %>">
                                         <ul class="inputlist rows">
                                           <li>
                                             <label for="filter-size-<%= c.size %>">
@@ -281,7 +288,7 @@
                               </div>
                             </div>
 
-                            <div class="row clearfilters">
+                            <div class="row clearfilters button-rage">
                               <button class="button button-secondary js-filters-clear" disabled="disabled">СБРОСИТЬ ФИЛЬТР</button>
                               <a class="button js-filters-close" href="javascript:;">ПРИМЕНИТЬ ФИЛЬТР</a>
                             </div>
@@ -352,19 +359,19 @@
                         <%= link_to "/single/hm-#{product.product_datum[0].article}" , class: "product-item-link" do %>
                           <img src="<%= product.img(:original) %>" alt="" width="222" height="333" class="product-item-image" data-altimage="<%= product.img_alt(:original) %>">
                         <%end%>
-                        <button type="button" style="z-index: 9999;" class="favorite icon icon-favorites" data-tracking-type="event" data-saved-text="СОХРАНЕНО КАК ИЗБРАННОЕ" data-not-saved-text="СОХРАНИТЬ КАК ИЗБРАННОЕ" data-id="<%= product.product_datum[0].id %>" data-article="<%= product.product_datum[0].article %>"">СОХРАНИТЬ КАК ИЗБРАННОЕ</button>
+                        <button type="button" style="z-index: 2;" class="favorite icon icon-favorites" data-tracking-type="event" data-saved-text="СОХРАНЕНО КАК ИЗБРАННОЕ" data-not-saved-text="СОХРАНИТЬ КАК ИЗБРАННОЕ" data-id="<%= product.product_datum[0].id %>" data-article="<%= product.product_datum[0].article %>"">СОХРАНИТЬ КАК ИЗБРАННОЕ</button>
 
                         <div class="product-item-details">
                           <h3 class="product-item-heading">
                             <a href="#"><%=product.name%></a>
                           </h3>
                         <% if product.product_datum[0]!=nil and product.product_datum[0].price!=nil %>
-                          <%if product.product_datum[0].promotional_price!=nil and product.product_datum[0].promotional_price>0 %>
-                            <strong class="price sale-price"> <%=product.product_datum[0].get_promotional_price%> Грн
-                              <span class="price original-price"><%= product.product_datum[0].get_price%> Грн</span>
+                          <%if product.product_datum[0].promotional_price?%>
+                            <strong class="price sale-price"> <%=product.product_datum[0].get_promotional_price%> грн
+                              <span class="price original-price"><%= product.product_datum[0].get_price%> грн</span>
                             </strong>
                           <%else%>
-                          <strong class="price"><%= product.product_datum[0].get_price%> Грн</strong>
+                          <strong class="price"><%= product.product_datum[0].get_price%> грн</strong>
                           <%end%>
                         <%else%>
                           <strong class="price">Уточняеться</strong>
@@ -386,7 +393,7 @@
                   </div>
                 </div>
               </section>
-                  <%= will_paginate @products %>
+                  <%= will_paginate @products , :previous_label => 'Назад', :next_label => 'Далее' %>
 
               <!-- /Product items -->
               <a href="#" class="hidden listing-total-count" data-total-count="66"></a>
@@ -506,6 +513,24 @@
       $('.js-clickexpand').click(function(){
         $(this).find('.expandtarget').toggle();
       });
+      // altimg
+      $('.product-item-link').hover(
+        function(){
+          if($(this).find('img').attr('src') != ''){
+            var main_img = $(this).find('img').attr('src');
+            var alt_img = $(this).find('img').attr('data-altimage');
+            $(this).find('img').attr('src', alt_img);
+            $(this).find('img').attr('data-altimage', main_img);
+          }
+        },
+        function(){
+          var alt_img = $(this).find('img').attr('src');
+          var main_img = $(this).find('img').attr('data-altimage');
+          $(this).find('img').attr('src', main_img);
+          $(this).find('img').attr('data-altimage', alt_img);
+        }
+      );
+      // end
     })
     </script>
 <% end %>
